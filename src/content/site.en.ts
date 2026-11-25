@@ -109,7 +109,7 @@ export const siteEn: SiteContent = {
   workflow: {
     tag: 'The right way to trade',
     title: 'Five stages before you risk real money',
-    subtitle: 'Most beginners jump straight to the market. Follow this order instead: learn, build a system, prove it, go live small, and secure your profit.',
+    subtitle: 'Most beginners jump straight to the market. Follow this order instead: learn, build a system, prove it, verify it live, and secure your profit.',
     stepWord: 'Step',
     hubLabel: 'Your edge',
     next: 'Next step',
@@ -134,8 +134,8 @@ export const siteEn: SiteContent = {
         description: 'Combine what you learned into one trading system with no room for guessing or mood.',
         points: [
           { label: 'Entry rules', text: 'The exact conditions that must be true before you buy or sell.' },
-          { label: 'Exit and stop loss', text: 'The level where you admit the trade is wrong and get out.' },
-          { label: 'Risk and position size', text: 'How much you risk per trade, for example 1% of your capital.' },
+          { label: 'Exit and stop loss', text: 'The price level where the trade idea is proven wrong and you get out.' },
+          { label: 'Money management', text: 'Decide before the first trade how much capital you risk per trade (for example 1%), how big each position is, and when you stop for the day.' },
         ],
       },
       {
@@ -145,17 +145,17 @@ export const siteEn: SiteContent = {
         description: 'Run your rules on historical prices in the Disatu backtest web app. Only a system that survives the numbers moves on.',
         points: [
           { label: 'Win rate and profit factor', text: 'Check that the edge comes from more than a few lucky trades.' },
-          { label: 'Maximum drawdown', text: 'See the worst losing streak you would have had to sit through.' },
+          { label: 'Maximum drawdown', text: 'See the worst losing streak you would have sat through, and whether your money management keeps it survivable.' },
           { label: 'Not profitable yet?', text: 'Go back to step 2, adjust the rules, and test again before risking a cent.' },
         ],
       },
       {
         id: 'live',
         label: 'Real market',
-        title: 'Go live, but start small',
-        description: 'Past results are no guarantee. Trade the real market with a small size and follow the system exactly.',
+        title: 'Go live and verify the system',
+        description: 'Past results are no guarantee. Trade the real market with the rules you already wrote, and compare what happens with the backtest.',
         points: [
-          { label: 'Start with small size', text: 'Let the market confirm the system before you scale up.' },
+          { label: 'Verify in real conditions', text: 'Check that fills, fees, and slippage match what the backtest assumed.' },
           { label: 'Follow the rules', text: 'No changing the plan mid-trade because of fear or excitement.' },
           { label: 'Keep a journal', text: 'Record every trade so you can compare real results with the backtest.' },
         ],
@@ -168,7 +168,7 @@ export const siteEn: SiteContent = {
         points: [
           { label: 'Scale out in levels', text: 'Take part of the position at TP1, TP2, and TP3 instead of all or nothing.' },
           { label: 'Trail your stop', text: 'Move the stop behind price so winners are protected.' },
-          { label: 'Review and repeat', text: 'Withdraw part of the profit, review the journal, and run the cycle again.' },
+          { label: 'Review and repeat', text: 'Review the journal, refine the rules where results drifted, and run the cycle again.' },
         ],
       },
     ],

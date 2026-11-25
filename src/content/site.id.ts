@@ -109,7 +109,7 @@ export const siteId: SiteContent = {
   workflow: {
     tag: 'Alur trading yang tepat',
     title: 'Lima tahap sebelum mempertaruhkan uang sungguhan',
-    subtitle: 'Kebanyakan pemula langsung masuk ke market. Ikuti urutan ini: belajar, susun sistem, buktikan, mulai kecil di market asli, lalu amankan profit.',
+    subtitle: 'Kebanyakan pemula langsung masuk ke market. Ikuti urutan ini: belajar, susun sistem, buktikan, verifikasi di market asli, lalu amankan profit.',
     stepWord: 'Langkah',
     hubLabel: 'Edge-mu',
     next: 'Langkah berikutnya',
@@ -134,8 +134,8 @@ export const siteId: SiteContent = {
         description: 'Gabungkan semua yang kamu pelajari menjadi satu sistem trading tanpa ruang untuk menebak atau ikut mood.',
         points: [
           { label: 'Aturan entry', text: 'Kondisi pasti yang harus terpenuhi sebelum kamu membeli atau menjual.' },
-          { label: 'Exit dan stop loss', text: 'Level tempat kamu mengakui trade itu salah dan keluar.' },
-          { label: 'Risiko dan ukuran posisi', text: 'Berapa yang kamu pertaruhkan per trade, misalnya 1% dari modal.' },
+          { label: 'Exit dan stop loss', text: 'Level harga yang membuktikan ide trade salah dan kamu keluar.' },
+          { label: 'Manajemen modal', text: 'Putuskan sebelum trade pertama: berapa modal yang dipertaruhkan per trade (misalnya 1%), seberapa besar tiap posisi, dan kapan berhenti di hari itu.' },
         ],
       },
       {
@@ -145,17 +145,17 @@ export const siteId: SiteContent = {
         description: 'Jalankan aturanmu pada harga masa lalu di web app backtest Disatu. Hanya sistem yang lolos hitungan yang lanjut.',
         points: [
           { label: 'Win rate dan profit factor', text: 'Pastikan keunggulan datang dari lebih dari beberapa trade yang kebetulan untung.' },
-          { label: 'Maximum drawdown', text: 'Lihat rentetan kerugian terburuk yang harus kamu tahan.' },
+          { label: 'Maximum drawdown', text: 'Lihat rentetan kerugian terburuk yang harus kamu tahan, dan apakah manajemen modalmu membuatnya masih tertahankan.' },
           { label: 'Belum profit?', text: 'Kembali ke langkah 2, perbaiki aturan, lalu uji lagi sebelum memakai uang asli.' },
         ],
       },
       {
         id: 'live',
         label: 'Market asli',
-        title: 'Masuk market asli, tapi mulai kecil',
-        description: 'Hasil masa lalu bukan jaminan. Trading di market asli dengan ukuran kecil dan jalankan sistem persis seperti rencana.',
+        title: 'Masuk market asli dan verifikasi sistemmu',
+        description: 'Hasil masa lalu bukan jaminan. Trading di market asli dengan aturan yang sudah kamu tulis, lalu bandingkan hasilnya dengan backtest.',
         points: [
-          { label: 'Mulai dengan ukuran kecil', text: 'Biarkan market membuktikan sistemmu sebelum kamu menambah modal.' },
+          { label: 'Verifikasi di kondisi nyata', text: 'Pastikan eksekusi, biaya, dan slippage sesuai asumsi backtest.' },
           { label: 'Patuhi aturan', text: 'Jangan mengubah rencana di tengah trade karena takut atau euforia.' },
           { label: 'Catat di jurnal', text: 'Catat setiap trade supaya hasil asli bisa dibandingkan dengan hasil backtest.' },
         ],
@@ -168,7 +168,7 @@ export const siteId: SiteContent = {
         points: [
           { label: 'Ambil bertahap', text: 'Ambil sebagian posisi di TP1, TP2, dan TP3, bukan semua atau tidak sama sekali.' },
           { label: 'Geser stop mengikuti harga', text: 'Naikkan stop di belakang harga agar posisi yang untung terlindungi.' },
-          { label: 'Evaluasi dan ulangi', text: 'Tarik sebagian profit, tinjau jurnal, lalu jalankan siklus dari awal.' },
+          { label: 'Evaluasi dan ulangi', text: 'Tinjau jurnal, perbaiki aturan yang hasilnya menyimpang, lalu jalankan siklus dari awal.' },
         ],
       },
     ],

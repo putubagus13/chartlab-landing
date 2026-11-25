@@ -112,23 +112,27 @@ function BacktestVisual({ step, enabled, sampleNote }: Pick<Props, 'step' | 'ena
   )
 }
 
-/** Step 4: small live position with a pulsing last price and a fixed stop. */
+/** Step 4: live results tracked against the backtest line, with a pulsing last price. */
 function LiveVisual({ step, enabled }: Pick<Props, 'step' | 'enabled'>) {
-  const d = 'M10 120 L40 110 L70 122 L100 100 L130 108 L160 90 L190 98 L220 76 L250 84 L280 66'
+  const backtest = 'M10 130 L50 118 L90 126 L130 98 L170 106 L210 80 L250 86 L290 58'
+  const live = 'M10 130 L50 121 L90 131 L130 105 L170 108 L210 90 L250 92 L290 70'
   return (
     <Frame label={step.title}>
-      <line x1="10" x2="312" y1="146" y2="146" stroke={MUTED} strokeDasharray="4 4" />
-      <text x="312" y="160" textAnchor="end" fontSize="9" fontFamily="var(--font-mono, monospace)" fill={MUTED}>
-        SL
-      </text>
-      <rect x="10" y="146" width="302" height="30" fill={MUTED} opacity="0.08" />
-      <DrawLine d={d} enabled={enabled} />
-      <circle cx="280" cy="66" r="9" fill="currentColor" opacity="0.25" className="wf-pulse" />
-      <circle cx="280" cy="66" r="4.5" fill={SURFACE} stroke="currentColor" strokeWidth="2" />
-      <g transform="translate(14,16)">
-        <rect width="58" height="22" rx="5" fill={SURFACE} stroke={LINE} />
-        <text x="29" y="15" textAnchor="middle" fontSize="10" fontFamily="var(--font-mono, monospace)" fill={INK}>
-          1% risk
+      {[40, 80, 120, 160].map((y) => (
+        <line key={y} x1="10" x2="312" y1={y} y2={y} stroke={LINE} />
+      ))}
+      <path d={backtest} fill="none" stroke={MUTED} strokeWidth="1.8" strokeDasharray="5 4" strokeLinecap="round" strokeLinejoin="round" />
+      <DrawLine d={live} enabled={enabled} />
+      <circle cx="290" cy="70" r="9" fill="currentColor" opacity="0.25" className="wf-pulse" />
+      <circle cx="290" cy="70" r="4.5" fill={SURFACE} stroke="currentColor" strokeWidth="2" />
+      <g transform="translate(12,170)" fontFamily="var(--font-mono, monospace)" fontSize="9">
+        <line x1="0" x2="16" y1="-3" y2="-3" stroke={MUTED} strokeWidth="1.8" strokeDasharray="4 3" />
+        <text x="21" y="0" fill={MUTED}>
+          BACKTEST
+        </text>
+        <line x1="86" x2="102" y1="-3" y2="-3" stroke="currentColor" strokeWidth="2.2" />
+        <text x="107" y="0" fill="currentColor">
+          LIVE
         </text>
       </g>
     </Frame>
