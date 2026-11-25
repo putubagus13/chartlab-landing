@@ -2,7 +2,8 @@ import { useContent } from '@/i18n/use-content'
 import type { BacktestFeature } from '@/content/types'
 import { LinkButton } from '@/components/ui/button'
 import { Reveal } from '@/components/motion/reveal'
-import { Brackets, SectionShell, Tag } from '@/components/ui/frame'
+import { SectionShell, Tag } from '@/components/ui/frame'
+import { BacktestVideo } from './backtest-video'
 
 const ICONS: Record<BacktestFeature['icon'], React.ReactNode> = {
   chart: <path d="M4 19V5M4 19h16M8 15l3-4 3 3 5-7" />,
@@ -32,61 +33,41 @@ function FeatureIcon({ icon }: { icon: BacktestFeature['icon'] }) {
   )
 }
 
-function BacktestVideo() {
-  const { backtest } = useContent()
-  return (
-    <figure className="m-0">
-      <div className="relative border border-border bg-[#0a0a0a]">
-        <Brackets tone="accent" />
-        {/* preload=metadata: the clip is ~20 MB, so nothing heavy downloads until someone presses play */}
-        <video
-          src={backtest.videoSrc}
-          poster={backtest.videoPoster}
-          controls
-          playsInline
-          preload="metadata"
-          aria-label={backtest.videoLabel}
-          className="block aspect-video w-full bg-[#0a0a0a]"
-        />
-      </div>
-      <figcaption className="mt-3 text-sm text-muted">{backtest.videoNote}</figcaption>
-    </figure>
-  )
-}
-
 export function BacktestSection() {
   const { backtest, ui } = useContent()
   return (
     <SectionShell id="backtest" bg="dots">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <div className="grid items-center gap-12 lg:grid-cols-2">
-          <Reveal>
-            <BacktestVideo />
-          </Reveal>
-          <Reveal delay={0.1}>
-            <Tag>{ui.freeBadge}</Tag>
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{backtest.title}</h2>
-            <p className="mt-4 text-lg text-muted">{backtest.subtitle}</p>
-            <ul className="mt-8 grid gap-5 sm:grid-cols-2">
-              {backtest.features.map((f) => (
-                <li key={f.title} className="flex gap-3">
-                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
-                    <FeatureIcon icon={f.icon} />
-                  </span>
-                  <div>
-                    <p className="font-semibold">{f.title}</p>
-                    <p className="text-sm text-muted">{f.description}</p>
-                  </div>
-                </li>
-              ))}
-            </ul>
-            <div className="mt-8 flex flex-wrap items-center gap-3">
-              <LinkButton href={backtest.appUrl} external>
-                {ui.openApp}
-              </LinkButton>
-            </div>
-          </Reveal>
-        </div>
+        <Reveal className="mx-auto max-w-2xl text-center">
+          <Tag>{ui.freeBadge}</Tag>
+          <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{backtest.title}</h2>
+          <p className="mt-4 text-lg text-muted">{backtest.subtitle}</p>
+        </Reveal>
+
+        <Reveal className="mt-12" delay={0.1}>
+          <BacktestVideo />
+        </Reveal>
+
+        <Reveal className="mt-16" delay={0.1}>
+          <ul className="grid gap-x-8 gap-y-8 sm:grid-cols-2 lg:grid-cols-3">
+            {backtest.features.map((f) => (
+              <li key={f.title} className="flex gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                  <FeatureIcon icon={f.icon} />
+                </span>
+                <div>
+                  <p className="font-semibold">{f.title}</p>
+                  <p className="text-sm text-muted">{f.description}</p>
+                </div>
+              </li>
+            ))}
+          </ul>
+          <div className="mt-10 text-center">
+            <LinkButton href={backtest.appUrl} external>
+              {ui.openApp}
+            </LinkButton>
+          </div>
+        </Reveal>
 
         <div className="mt-20">
           <h3 className="text-xl font-bold">{ui.howToGetAccess}</h3>

@@ -33,10 +33,13 @@ describe.each(LANGS)('about route %s', (lang) => {
   it('shows contact links and no social links', async () => {
     await renderWithRouter(`/${lang}/about`)
     const main = await screen.findByRole('main')
-    const wa = within(main).getByRole('link', { name: c.ui.whatsapp })
-    expect(wa).toHaveAttribute('href', 'https://wa.me/6282184677520')
-    expect(wa).toHaveAttribute('target', '_blank')
-    expect(within(main).getByRole('link', { name: c.ui.email })).toHaveAttribute('href', 'mailto:ptbagusraditya@gmail.com')
+    // profile card: the details themselves, as text
+    const phone = within(main).getByRole('link', { name: '+62 821-8467-7520' })
+    expect(phone).toHaveAttribute('href', 'https://wa.me/6282184677520')
+    expect(within(main).getByRole('link', { name: 'ptbagusraditya@gmail.com' })).toHaveAttribute('href', 'mailto:ptbagusraditya@gmail.com')
+    // services section: the call-to-action buttons, once each
+    expect(within(main).getAllByRole('link', { name: c.ui.whatsapp })).toHaveLength(1)
+    expect(within(main).getAllByRole('link', { name: c.ui.email })).toHaveLength(1)
     expect(c.about.socials).toEqual([])
     for (const name of ['X', 'LinkedIn', 'GitHub']) expect(within(main).queryByRole('link', { name })).toBeNull()
   })

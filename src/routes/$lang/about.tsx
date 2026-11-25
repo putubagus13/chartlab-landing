@@ -6,6 +6,7 @@ import { useContent } from '@/i18n/use-content'
 import { ProfileCard } from '@/components/about/profile-card'
 import { ExperienceTimeline } from '@/components/about/experience-timeline'
 import { LinkButton } from '@/components/ui/button'
+import { ServicesSection } from '@/components/sections/services-section'
 import { Reveal } from '@/components/motion/reveal'
 import { Brackets, SectionShell } from '@/components/ui/frame'
 
@@ -36,6 +37,8 @@ function About() {
           <ProfileCard />
         </div>
       </SectionShell>
+
+      <ServicesSection />
 
       <SectionShell id="details" bg="dots" edge="none">
         <div className="mx-auto grid max-w-6xl gap-12 px-4 sm:px-6 lg:grid-cols-[1fr_1.4fr]">

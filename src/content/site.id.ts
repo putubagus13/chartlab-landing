@@ -42,7 +42,6 @@ export const siteId: SiteContent = {
   nav: [
     { label: 'Alur Trading', page: 'home', hash: 'workflow' },
     { label: 'Web App Backtest', page: 'home', hash: 'backtest' },
-    { label: 'Layanan', page: 'home', hash: 'services' },
     { label: 'Tentang Saya', page: 'about' },
   ],
   hero: {
@@ -111,8 +110,8 @@ export const siteId: SiteContent = {
   },
   services: {
     title: 'Layanan Pembuatan Website dan Aplikasi',
-    subtitle: 'Selain web app backtest, Disatu menerima pembuatan website dan aplikasi sesuai kebutuhanmu.',
-    contactLead: 'Tertarik? Hubungi langsung.',
+    subtitle: 'Selain trading, saya menerima pembuatan website dan aplikasi sesuai kebutuhanmu.',
+    contactLead: 'Tertarik? Hubungi saya langsung.',
     items: [
       { title: 'Pembuatan Website', description: 'Landing page, company profile, hingga website bisnis yang cepat dan responsif.', icon: shared.serviceIcons[0] },
       { title: 'Pembuatan Aplikasi', description: 'Aplikasi yang dirancang untuk kebutuhanmu, dari ide sampai siap dipakai.', icon: shared.serviceIcons[1] },
@@ -192,7 +191,7 @@ export const siteId: SiteContent = {
   about: {
     name: 'Putu Bagus Raditya',
     headline: 'Trader Crypto dan Software Engineer',
-    bio: 'Saya trader crypto dengan pengalaman 3 tahun yang memakai pendekatan Smart Money Concept, sekaligus software engineer. Lewat Disatu, saya menyediakan web app backtest gratis serta melayani pembuatan website dan aplikasi.',
+    bio: 'Saya trader crypto dengan pengalaman 3 tahun yang memakai pendekatan Smart Money Concept, sekaligus software engineer. Saya mengembangkan Disatu, web app backtest yang gratis dipakai, dan menerima pembuatan website serta aplikasi secara pribadi.',
     location: 'Kota Bandung, Jawa Barat',
     contact: shared.contact,
     socials: shared.socials,

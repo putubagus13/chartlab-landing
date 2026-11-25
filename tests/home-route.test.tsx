@@ -10,8 +10,9 @@ describe.each(LANGS)('home route %s', (lang) => {
     await renderWithRouter(`/${lang}`)
     await waitFor(() => expect(document.getElementById('backtest')).not.toBeNull())
     const ids = Array.from(document.querySelectorAll('main section[id]')).map((s) => s.id)
-    expect(ids).toEqual(['hero', 'workflow', 'backtest', 'services', 'offer'])
+    expect(ids).toEqual(['hero', 'workflow', 'backtest', 'offer'])
     expect(screen.getByRole('heading', { name: c.offer.title })).toBeInTheDocument()
+    expect(document.getElementById('services')).toBeNull() // personal service: lives on the About page
     await waitFor(() => expect(document.title).toBe(c.meta.homeTitle))
   })
   it('emits hreflang alternates', async () => {

@@ -42,7 +42,6 @@ export const siteEn: SiteContent = {
   nav: [
     { label: 'Trading Workflow', page: 'home', hash: 'workflow' },
     { label: 'Backtest Web App', page: 'home', hash: 'backtest' },
-    { label: 'Services', page: 'home', hash: 'services' },
     { label: 'About Me', page: 'about' },
   ],
   hero: {
@@ -111,8 +110,8 @@ export const siteEn: SiteContent = {
   },
   services: {
     title: 'Website and App Development Services',
-    subtitle: 'Besides the backtest web app, Disatu takes on website and app development tailored to your needs.',
-    contactLead: 'Interested? Get in touch directly.',
+    subtitle: 'Besides trading, I take on website and app development tailored to your needs.',
+    contactLead: 'Interested? Contact me directly.',
     items: [
       { title: 'Website Development', description: 'Landing pages, company profiles, and business websites that are fast and responsive.', icon: shared.serviceIcons[0] },
       { title: 'App Development', description: 'Apps designed around your needs, from idea to ready to use.', icon: shared.serviceIcons[1] },
@@ -192,7 +191,7 @@ export const siteEn: SiteContent = {
   about: {
     name: 'Putu Bagus Raditya',
     headline: 'Crypto Trader and Software Engineer',
-    bio: 'I am a crypto trader with 3 years of experience using the Smart Money Concept approach, and a software engineer. Through Disatu, I offer a free backtest web app and build websites and apps for clients.',
+    bio: 'I am a crypto trader with 3 years of experience using the Smart Money Concept approach, and a software engineer. I develop Disatu, a backtest web app that is free to use, and I take on website and app projects personally.',
     location: 'Bandung City, West Java',
     contact: shared.contact,
     socials: shared.socials,

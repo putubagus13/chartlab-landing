@@ -4,10 +4,10 @@ import { renderWithRouter } from './utils'
 import { getContent } from '@/content'
 import { LANGS } from '@/i18n/lang'
 
-describe.each(LANGS)('ServicesSection %s', (lang) => {
+describe.each(LANGS)('Services on the About page %s', (lang) => {
   const c = getContent(lang)
   it('lists website and app services with working contact links', async () => {
-    await renderWithRouter(`/${lang}`)
+    await renderWithRouter(`/${lang}/about`)
     const sec = await waitFor(() => {
       const el = document.getElementById('services')
       if (!el) throw new Error('no services section')
@@ -15,6 +15,9 @@ describe.each(LANGS)('ServicesSection %s', (lang) => {
     })
     expect(within(sec).getByRole('heading', { level: 2, name: c.services.title })).toBeInTheDocument()
     expect(c.services.items).toHaveLength(2)
+    // personal service, not a Disatu product
+    expect(c.services.subtitle).not.toMatch(/disatu/i)
+    expect(c.services.title).not.toMatch(/disatu/i)
     for (const i of c.services.items) expect(within(sec).getByRole('heading', { level: 3, name: i.title })).toBeInTheDocument()
     const wa = within(sec).getByRole('link', { name: c.ui.whatsapp })
     expect(wa).toHaveAttribute('href', 'https://wa.me/6282184677520')

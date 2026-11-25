@@ -7,7 +7,6 @@ import { WorkflowSection } from '@/components/sections/workflow-section'
 import { EbookSection } from '@/components/sections/ebook-section'
 import { BacktestSection } from '@/components/sections/backtest-section'
 import { OfferCta } from '@/components/sections/offer-cta'
-import { ServicesSection } from '@/components/sections/services-section'
 import { FEATURES } from '@/content/flags'
 
 export const Route = createFileRoute('/$lang/')({
@@ -35,7 +34,6 @@ function Home() {
       <WorkflowSection />
       {FEATURES.ebook && <EbookSection />}
       <BacktestSection />
-      <ServicesSection />
       <OfferCta />
     </>
   )

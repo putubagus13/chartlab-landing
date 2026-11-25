@@ -26,15 +26,18 @@ describe.each(LANGS)('BacktestSection %s', (lang) => {
     for (const s of c.backtest.steps) expect(within(ol as HTMLElement).getByText(s.title)).toBeInTheDocument()
   })
 
-  it('embeds the tutorial video with controls and without preloading the whole file', async () => {
+  it('embeds the tutorial video as a silent looping clip with no control bar', async () => {
     await renderWithRouter(`/${lang}`)
     const sec = await section()
     const video = sec.querySelector('video') as HTMLVideoElement
     expect(video).not.toBeNull()
     expect(video.getAttribute('src')).toBe('/assets/tutorial_backtest_v2.mp4')
     expect(video.getAttribute('poster')).toBe('/assets/tutorial_backtest_poster.jpg')
-    expect(video.hasAttribute('controls')).toBe(true)
-    expect(video.getAttribute('preload')).toBe('metadata')
+    expect(video.hasAttribute('controls')).toBe(false)
+    expect(video.muted).toBe(true)
+    expect(video.loop).toBe(true)
+    expect(video.hasAttribute('playsinline')).toBe(true)
+    expect(video.getAttribute('preload')).toBe('none')
     expect(video.getAttribute('aria-label')).toBe(c.backtest.videoLabel)
     expect(within(sec).getByText(c.backtest.videoNote)).toBeInTheDocument()
   })

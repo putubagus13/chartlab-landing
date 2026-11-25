@@ -1,7 +1,6 @@
 import { useContent } from '@/i18n/use-content'
 import { Reveal } from '@/components/motion/reveal'
-import { LinkButton } from '@/components/ui/button'
-import { contactLinks } from '@/lib/contact'
+import { contactLinks, formatPhone } from '@/lib/contact'
 
 export function initialsOf(name: string): string {
   return name
@@ -14,7 +13,7 @@ export function initialsOf(name: string): string {
 }
 
 export function ProfileCard() {
-  const { about, ui } = useContent()
+  const { about } = useContent()
   const links = contactLinks(about.contact)
   return (
     <Reveal className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
@@ -33,14 +32,18 @@ export function ProfileCard() {
         <p className="mt-1 text-lg text-accent">{about.headline}</p>
         <p className="mt-1 text-sm text-muted">{about.location}</p>
         <p className="mt-4 max-w-2xl text-muted">{about.bio}</p>
-        <div className="mt-6 flex flex-wrap gap-3">
-          <LinkButton href={links.whatsapp} external>
-            {ui.whatsapp}
-          </LinkButton>
-          <LinkButton href={links.mailto} external variant="ghost">
-            {ui.email}
-          </LinkButton>
-        </div>
+        <ul className="mt-5 flex flex-wrap gap-x-6 gap-y-1 text-sm font-medium">
+          <li>
+            <a href={links.whatsapp} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline">
+              {formatPhone(about.contact.phone)}
+            </a>
+          </li>
+          <li>
+            <a href={links.mailto} className="inline-flex min-h-11 items-center text-accent underline-offset-4 hover:underline">
+              {about.contact.email}
+            </a>
+          </li>
+        </ul>
         {about.socials.length > 0 && (
           <ul className="mt-4 flex flex-wrap gap-3">
             {about.socials.map((s) => (

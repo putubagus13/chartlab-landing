@@ -20,6 +20,10 @@ Object.defineProperty(window, 'matchMedia', {
 
 HTMLCanvasElement.prototype.getContext = (() => null) as never
 
+// jsdom does not implement media playback.
+HTMLMediaElement.prototype.play = vi.fn(() => Promise.resolve())
+HTMLMediaElement.prototype.pause = vi.fn()
+
 // jsdom has no IntersectionObserver; report everything as visible so whileInView resolves.
 class IO {
   constructor(private cb: IntersectionObserverCallback) {}

@@ -24,7 +24,7 @@ export function ServicesSection() {
   const { services, about, ui } = useContent()
   const links = contactLinks(about.contact)
   return (
-    <SectionShell id="services" bg="warm">
+    <SectionShell id="services" bg="hatch">
       <div className="mx-auto max-w-5xl px-4 sm:px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{services.title}</h2>
