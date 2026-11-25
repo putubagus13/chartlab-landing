@@ -50,6 +50,7 @@ describe('locale parity', () => {
     expect(en.backtest.appUrl).toBe(id.backtest.appUrl)
     expect(en.about.socials.map((s) => s.url)).toEqual(id.about.socials.map((s) => s.url))
     expect(en.nav.map((x) => [x.page, x.hash])).toEqual(id.nav.map((x) => [x.page, x.hash]))
+    expect(en.workflow.steps.map((s) => [s.id, s.points.length])).toEqual(id.workflow.steps.map((s) => [s.id, s.points.length]))
     expect(en.backtest.features.map((f) => f.icon)).toEqual(id.backtest.features.map((f) => f.icon))
   })
 })

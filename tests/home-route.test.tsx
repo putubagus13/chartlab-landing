@@ -10,7 +10,7 @@ describe.each(LANGS)('home route %s', (lang) => {
     await renderWithRouter(`/${lang}`)
     await waitFor(() => expect(document.getElementById('backtest')).not.toBeNull())
     const ids = Array.from(document.querySelectorAll('main section[id]')).map((s) => s.id)
-    expect(ids).toEqual(['hero', 'ebook', 'backtest', 'offer'])
+    expect(ids).toEqual(['hero', 'workflow', 'ebook', 'backtest', 'offer'])
     expect(screen.getByRole('heading', { name: c.offer.title })).toBeInTheDocument()
     await waitFor(() => expect(document.title).toBe(c.meta.homeTitle))
   })

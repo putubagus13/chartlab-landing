@@ -3,6 +3,7 @@ import { alternateLinks } from '@/i18n/alternates'
 import { getContent } from '@/content'
 import { isLang } from '@/i18n/lang'
 import { Hero } from '@/components/sections/hero'
+import { WorkflowSection } from '@/components/sections/workflow-section'
 import { EbookSection } from '@/components/sections/ebook-section'
 import { BacktestSection } from '@/components/sections/backtest-section'
 import { OfferCta } from '@/components/sections/offer-cta'
@@ -29,6 +30,7 @@ function Home() {
   return (
     <>
       <Hero />
+      <WorkflowSection />
       <EbookSection />
       <BacktestSection />
       <OfferCta />

@@ -1,4 +1,4 @@
-export type Section = 'hero' | 'ebook' | 'backtest'
+export type Section = 'hero' | 'workflow' | 'ebook' | 'backtest'
 export type NavItem = { label: string; page: 'home' | 'about'; hash?: Section }
 export type EbookPackage = {
   id: string
@@ -15,6 +15,14 @@ export type BacktestFeature = {
   title: string
   description: string
   icon: 'chart' | 'bolt' | 'layers' | 'shield' | 'clock' | 'target'
+}
+export type WorkflowStepId = 'learn' | 'system' | 'backtest' | 'live' | 'profit'
+export type WorkflowStep = {
+  id: WorkflowStepId
+  label: string
+  title: string
+  description: string
+  points: { label: string; text: string }[]
 }
 export type Experience = {
   role: string
@@ -60,6 +68,17 @@ export type SiteContent = {
     features: BacktestFeature[]
     stats: { label: string; value: string }[]
     steps: { title: string; description: string }[]
+  }
+  workflow: {
+    tag: string
+    title: string
+    subtitle: string
+    stepWord: string
+    hubLabel: string
+    next: string
+    cta: string
+    note: string
+    steps: WorkflowStep[]
   }
   offer: { title: string; subtitle: string }
   about: {

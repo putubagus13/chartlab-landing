@@ -106,6 +106,73 @@ export const siteEn: SiteContent = {
       { title: 'Start backtesting', description: 'Open the web app and test your first strategy.' },
     ],
   },
+  workflow: {
+    tag: 'The right way to trade',
+    title: 'Five stages before you risk real money',
+    subtitle: 'Most beginners jump straight to the market. Follow this order instead: learn, build a system, prove it, go live small, and secure your profit.',
+    stepWord: 'Step',
+    hubLabel: 'Your edge',
+    next: 'Next step',
+    cta: 'Learn every stage in the e-book',
+    note: 'Sample data for illustration only. Not financial advice.',
+    steps: [
+      {
+        id: 'learn',
+        label: 'Learn the markets',
+        title: 'Build your foundation from three angles',
+        description: 'Before any trade, learn to read the market from more than one lens. No single method is enough on its own.',
+        points: [
+          { label: 'Technical analysis', text: 'Read price, trend, support and resistance, and volume to time entries and exits.' },
+          { label: 'Fundamental analysis', text: 'Judge a project’s real value: team, tokenomics, adoption, and the macro picture.' },
+          { label: 'On-chain data', text: 'Follow wallets, exchange flows, and network activity to see what large holders actually do.' },
+        ],
+      },
+      {
+        id: 'system',
+        label: 'Define your system',
+        title: 'Turn knowledge into written rules',
+        description: 'Combine what you learned into one trading system with no room for guessing or mood.',
+        points: [
+          { label: 'Entry rules', text: 'The exact conditions that must be true before you buy or sell.' },
+          { label: 'Exit and stop loss', text: 'The level where you admit the trade is wrong and get out.' },
+          { label: 'Risk and position size', text: 'How much you risk per trade, for example 1% of your capital.' },
+        ],
+      },
+      {
+        id: 'backtest',
+        label: 'Backtest',
+        title: 'Prove the system on past data',
+        description: 'Run your rules on historical prices in the Disatu backtest web app. Only a system that survives the numbers moves on.',
+        points: [
+          { label: 'Win rate and profit factor', text: 'Check that the edge comes from more than a few lucky trades.' },
+          { label: 'Maximum drawdown', text: 'See the worst losing streak you would have had to sit through.' },
+          { label: 'Not profitable yet?', text: 'Go back to step 2, adjust the rules, and test again before risking a cent.' },
+        ],
+      },
+      {
+        id: 'live',
+        label: 'Real market',
+        title: 'Go live, but start small',
+        description: 'Past results are no guarantee. Trade the real market with a small size and follow the system exactly.',
+        points: [
+          { label: 'Start with small size', text: 'Let the market confirm the system before you scale up.' },
+          { label: 'Follow the rules', text: 'No changing the plan mid-trade because of fear or excitement.' },
+          { label: 'Keep a journal', text: 'Record every trade so you can compare real results with the backtest.' },
+        ],
+      },
+      {
+        id: 'profit',
+        label: 'Take profit',
+        title: 'Secure the gains you earned',
+        description: 'A profit you never take is only a number on a screen. Plan your exits before you enter.',
+        points: [
+          { label: 'Scale out in levels', text: 'Take part of the position at TP1, TP2, and TP3 instead of all or nothing.' },
+          { label: 'Trail your stop', text: 'Move the stop behind price so winners are protected.' },
+          { label: 'Review and repeat', text: 'Withdraw part of the profit, review the journal, and run the cycle again.' },
+        ],
+      },
+    ],
+  },
   offer: {
     title: 'One e-book package, full Backtest Web App access.',
     subtitle: 'Learn the theory, then prove it yourself with data.',

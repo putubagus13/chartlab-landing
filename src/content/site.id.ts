@@ -106,6 +106,73 @@ export const siteId: SiteContent = {
       { title: 'Mulai backtest', description: 'Masuk ke web app dan uji strategi pertamamu.' },
     ],
   },
+  workflow: {
+    tag: 'Alur trading yang tepat',
+    title: 'Lima tahap sebelum mempertaruhkan uang sungguhan',
+    subtitle: 'Kebanyakan pemula langsung masuk ke market. Ikuti urutan ini: belajar, susun sistem, buktikan, mulai kecil di market asli, lalu amankan profit.',
+    stepWord: 'Langkah',
+    hubLabel: 'Edge-mu',
+    next: 'Langkah berikutnya',
+    cta: 'Pelajari semua tahap di e-book',
+    note: 'Data contoh untuk ilustrasi. Bukan saran keuangan.',
+    steps: [
+      {
+        id: 'learn',
+        label: 'Pelajari market',
+        title: 'Bangun fondasi dari tiga sudut pandang',
+        description: 'Sebelum trading, pelajari cara membaca market dari lebih dari satu sisi. Satu metode saja tidak cukup.',
+        points: [
+          { label: 'Analisis teknikal', text: 'Baca harga, tren, support dan resistance, serta volume untuk menentukan waktu masuk dan keluar.' },
+          { label: 'Analisis fundamental', text: 'Nilai kualitas proyek: tim, tokenomics, adopsi, dan kondisi makro.' },
+          { label: 'Data on-chain', text: 'Pantau dompet, arus bursa, dan aktivitas jaringan untuk melihat apa yang benar-benar dilakukan pemegang besar.' },
+        ],
+      },
+      {
+        id: 'system',
+        label: 'Tentukan sistem',
+        title: 'Ubah ilmu menjadi aturan tertulis',
+        description: 'Gabungkan semua yang kamu pelajari menjadi satu sistem trading tanpa ruang untuk menebak atau ikut mood.',
+        points: [
+          { label: 'Aturan entry', text: 'Kondisi pasti yang harus terpenuhi sebelum kamu membeli atau menjual.' },
+          { label: 'Exit dan stop loss', text: 'Level tempat kamu mengakui trade itu salah dan keluar.' },
+          { label: 'Risiko dan ukuran posisi', text: 'Berapa yang kamu pertaruhkan per trade, misalnya 1% dari modal.' },
+        ],
+      },
+      {
+        id: 'backtest',
+        label: 'Backtest',
+        title: 'Buktikan sistem pada data historis',
+        description: 'Jalankan aturanmu pada harga masa lalu di web app backtest Disatu. Hanya sistem yang lolos hitungan yang lanjut.',
+        points: [
+          { label: 'Win rate dan profit factor', text: 'Pastikan keunggulan datang dari lebih dari beberapa trade yang kebetulan untung.' },
+          { label: 'Maximum drawdown', text: 'Lihat rentetan kerugian terburuk yang harus kamu tahan.' },
+          { label: 'Belum profit?', text: 'Kembali ke langkah 2, perbaiki aturan, lalu uji lagi sebelum memakai uang asli.' },
+        ],
+      },
+      {
+        id: 'live',
+        label: 'Market asli',
+        title: 'Masuk market asli, tapi mulai kecil',
+        description: 'Hasil masa lalu bukan jaminan. Trading di market asli dengan ukuran kecil dan jalankan sistem persis seperti rencana.',
+        points: [
+          { label: 'Mulai dengan ukuran kecil', text: 'Biarkan market membuktikan sistemmu sebelum kamu menambah modal.' },
+          { label: 'Patuhi aturan', text: 'Jangan mengubah rencana di tengah trade karena takut atau euforia.' },
+          { label: 'Catat di jurnal', text: 'Catat setiap trade supaya hasil asli bisa dibandingkan dengan hasil backtest.' },
+        ],
+      },
+      {
+        id: 'profit',
+        label: 'Take profit',
+        title: 'Amankan keuntungan yang sudah kamu raih',
+        description: 'Profit yang tidak pernah diambil hanya angka di layar. Rencanakan exit sebelum kamu entry.',
+        points: [
+          { label: 'Ambil bertahap', text: 'Ambil sebagian posisi di TP1, TP2, dan TP3, bukan semua atau tidak sama sekali.' },
+          { label: 'Geser stop mengikuti harga', text: 'Naikkan stop di belakang harga agar posisi yang untung terlindungi.' },
+          { label: 'Evaluasi dan ulangi', text: 'Tarik sebagian profit, tinjau jurnal, lalu jalankan siklus dari awal.' },
+        ],
+      },
+    ],
+  },
   offer: {
     title: 'Satu paket e-book, akses penuh Web App Backtest.',
     subtitle: 'Belajar teorinya, lalu buktikan sendiri dengan data.',

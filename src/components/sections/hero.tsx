@@ -1,12 +1,12 @@
-import { useContent, useLang } from '@/i18n/use-content'
-import { useTheme } from '@/theme/theme-provider'
-import { LinkButton } from '@/components/ui/button'
-import { StippleOrb } from '@/components/ui/stipple-orb'
+import { useContent, useLang } from "@/i18n/use-content";
+import { useTheme } from "@/theme/theme-provider";
+import { LinkButton } from "@/components/ui/button";
+import { StippleOrb } from "@/components/ui/stipple-orb";
 
 export function Hero() {
-  const lang = useLang()
-  const { hero, ui } = useContent()
-  const { resolved } = useTheme()
+  const lang = useLang();
+  const { hero, ui } = useContent();
+  const { resolved } = useTheme();
   return (
     <section id="hero" className="relative isolate overflow-hidden bg-bg">
       <div
@@ -16,26 +16,49 @@ export function Hero() {
       <div className="mx-auto grid min-h-[calc(100svh-4rem)] max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2">
         <div className="order-2 lg:order-1">
           <p
-            style={{ '--i': 0 } as React.CSSProperties}
+            style={{ "--i": 0 } as React.CSSProperties}
             className="hero-rise mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-surface px-3 py-1 font-mono text-xs text-muted"
           >
             <span className="h-1.5 w-1.5 rounded-full bg-accent" />
             {hero.eyebrow}
           </p>
-          <h1 style={{ '--i': 1 } as React.CSSProperties} className="hero-rise text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl">
+          <h1
+            style={{ "--i": 1 } as React.CSSProperties}
+            className="hero-rise text-4xl font-bold leading-[1.05] tracking-tight sm:text-5xl lg:text-6xl"
+          >
             {hero.title}
           </h1>
-          <p style={{ '--i': 2 } as React.CSSProperties} className="hero-rise mt-6 max-w-xl text-lg text-muted">
+          <p
+            style={{ "--i": 2 } as React.CSSProperties}
+            className="hero-rise mt-6 max-w-xl text-lg text-muted"
+          >
             {hero.subtitle}
           </p>
-          <div style={{ '--i': 3 } as React.CSSProperties} className="hero-rise mt-8 flex flex-wrap gap-3">
+          <div
+            style={{ "--i": 3 } as React.CSSProperties}
+            className="hero-rise mt-8 flex flex-wrap gap-3"
+          >
             <LinkButton href={`/${lang}#ebook`}>{ui.buyEbook}</LinkButton>
             <LinkButton href={`/${lang}#backtest`} variant="ghost">
               {ui.seeApp}
             </LinkButton>
           </div>
-          <p style={{ '--i': 4 } as React.CSSProperties} className="hero-rise mt-6 flex items-center gap-2 text-sm font-medium">
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" className="text-accent" aria-hidden="true">
+          <p
+            style={{ "--i": 4 } as React.CSSProperties}
+            className="hero-rise mt-6 flex items-center gap-2 text-sm font-medium"
+          >
+            <svg
+              width="16"
+              height="16"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="text-accent"
+              aria-hidden="true"
+            >
               <path d="M5 12l5 5L20 7" />
             </svg>
             {hero.bundleNote}
@@ -43,9 +66,13 @@ export function Hero() {
         </div>
 
         <div className="order-1 flex justify-center lg:order-2">
-          <StippleOrb dark={resolved === 'dark'} label={`${ui.orbLabel}. ${ui.orbHint}.`} hint={ui.orbHint} />
+          <StippleOrb
+            dark={resolved === "dark"}
+            label={`${ui.orbLabel}. ${ui.orbHint}.`}
+            hint={ui.orbHint}
+          />
         </div>
       </div>
     </section>
-  )
+  );
 }
