@@ -1,16 +1,18 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useMotionEnabled } from '@/components/motion/use-motion-enabled'
 import type { Experience } from '@/content/types'
 import { Reveal } from '@/components/motion/reveal'
 
 export function ExperienceTimeline({ items }: { items: Experience[] }) {
-  const reduced = useReducedMotion()
+  const enabled = useMotionEnabled()
   return (
     <div className="relative">
       <motion.span
+        key={enabled ? 'motion' : 'static'}
         aria-hidden="true"
         className="absolute bottom-2 left-[7px] top-2 w-px origin-top bg-border"
-        initial={reduced ? false : { scaleY: 0 }}
-        whileInView={reduced ? undefined : { scaleY: 1 }}
+        initial={enabled ? { scaleY: 0 } : false}
+        whileInView={enabled ? { scaleY: 1 } : undefined}
         viewport={{ once: true }}
         transition={{ duration: 1, ease: 'easeOut' }}
       />

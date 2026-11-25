@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
+import { useRouterState } from '@tanstack/react-router'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useContent, useLang } from '@/i18n/use-content'
 import type { NavItem } from '@/content/types'
@@ -17,6 +18,11 @@ export function SiteHeader() {
   const { nav, ui } = useContent()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const btnRef = useRef<HTMLButtonElement>(null)
+  const href = useRouterState({ select: (st) => st.location.href })
+
+  // any navigation (logo, language switch, back/forward) closes the menu
+  useEffect(() => setOpen(false), [href])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8)
@@ -27,7 +33,12 @@ export function SiteHeader() {
 
   useEffect(() => {
     if (!open) return
-    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false)
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setOpen(false)
+        btnRef.current?.focus()
+      }
+    }
     document.addEventListener('keydown', onKey)
     return () => document.removeEventListener('keydown', onKey)
   }, [open])
@@ -56,6 +67,7 @@ export function SiteHeader() {
         </div>
 
         <button
+          ref={btnRef}
           type="button"
           className="inline-flex h-11 w-11 cursor-pointer items-center justify-center rounded-full border border-border md:hidden"
           aria-expanded={open}

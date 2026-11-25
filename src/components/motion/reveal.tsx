@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useMotionEnabled } from './use-motion-enabled'
 
 type RevealProps = {
   children: React.ReactNode
@@ -9,8 +10,8 @@ type RevealProps = {
 }
 
 export function Reveal({ children, delay = 0, y = 24, className, as = 'div' }: RevealProps) {
-  const reduced = useReducedMotion()
-  if (reduced) {
+  const enabled = useMotionEnabled()
+  if (!enabled) {
     const Tag = as
     return <Tag className={className}>{children}</Tag>
   }

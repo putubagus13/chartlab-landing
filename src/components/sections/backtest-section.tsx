@@ -1,4 +1,5 @@
-import { motion, useReducedMotion } from 'framer-motion'
+import { motion } from 'framer-motion'
+import { useMotionEnabled } from '@/components/motion/use-motion-enabled'
 import { useContent, useLang } from '@/i18n/use-content'
 import type { BacktestFeature } from '@/content/types'
 import { LinkButton } from '@/components/ui/button'
@@ -34,11 +35,11 @@ function FeatureIcon({ icon }: { icon: BacktestFeature['icon'] }) {
 }
 
 function AppPreview() {
-  const reduced = useReducedMotion()
+  const enabled = useMotionEnabled()
   const { backtest, ui } = useContent()
   const line = 'M0 150 L40 140 L80 148 L120 120 L160 126 L200 96 L240 104 L280 70 L320 78 L360 40 L400 30'
   return (
-    <div className="overflow-hidden rounded-2xl border border-border bg-[#0a0a0a] shadow-2xl" aria-hidden="false">
+    <div className="overflow-hidden rounded-2xl border border-border bg-[#0a0a0a] shadow-2xl">
       <div className="flex items-center gap-1.5 border-b border-[#262626] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
@@ -52,14 +53,15 @@ function AppPreview() {
           ))}
           <path d={`${line} L400 180 L0 180 Z`} fill="#3fa37f" opacity="0.12" />
           <motion.path
+            key={enabled ? 'motion' : 'static'}
             d={line}
             fill="none"
             stroke="#3fa37f"
             strokeWidth="2.5"
             strokeLinejoin="round"
             strokeLinecap="round"
-            initial={reduced ? false : { pathLength: 0 }}
-            whileInView={reduced ? undefined : { pathLength: 1 }}
+            initial={enabled ? { pathLength: 0 } : false}
+            whileInView={enabled ? { pathLength: 1 } : undefined}
             viewport={{ once: true }}
             transition={{ duration: 1.6, ease: 'easeInOut' }}
           />

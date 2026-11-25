@@ -58,4 +58,20 @@ describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
     fireEvent.click(within(menu).getByRole('link', { name: c.nav[2].label }))
     await waitFor(() => expect(menuBtn).toHaveAttribute('aria-expanded', 'false'))
   })
+
+  it('mobile menu closes after switching language from inside it', async () => {
+    await renderWithRouter(`/${lang}`)
+    const menuBtn = await screen.findByRole('button', { name: c.ui.menuOpen })
+    fireEvent.click(menuBtn)
+    const menu = document.getElementById('mobile-menu')!
+    fireEvent.click(within(menu).getByRole('link', { name: other.toUpperCase() }))
+    await waitFor(() => expect(document.documentElement.lang).toBe(other))
+    await waitFor(() => expect(screen.getByRole('button', { name: getContent(other).ui.menuOpen })).toHaveAttribute('aria-expanded', 'false'))
+  })
+
+  it('language switch keeps the hash after mount', async () => {
+    await renderWithRouter(`/${lang}#ebook`)
+    const header = await screen.findByRole('banner')
+    await waitFor(() => expect(within(header).getByRole('link', { name: other.toUpperCase() })).toHaveAttribute('href', `/${other}#ebook`))
+  })
 })
