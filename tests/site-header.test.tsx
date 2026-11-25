@@ -1,0 +1,61 @@
+import { describe, it, expect, beforeEach } from 'vitest'
+import { screen, waitFor, fireEvent, within } from '@testing-library/react'
+import { renderWithRouter } from './utils'
+import { getContent } from '@/content'
+import { THEME_KEY } from '@/theme/theme'
+
+beforeEach(() => {
+  localStorage.clear()
+  document.documentElement.classList.remove('dark')
+})
+
+describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
+  const other = lang === 'id' ? 'en' : 'id'
+  const c = getContent(lang)
+
+  it('nav links and language switch', async () => {
+    await renderWithRouter(`/${lang}/about`)
+    const header = await screen.findByRole('banner')
+    const links = within(header).getAllByRole('link')
+    const hrefOf = (name: string) => links.find((a) => a.textContent === name)?.getAttribute('href')
+    expect(hrefOf(c.nav[0].label)).toBe(`/${lang}#ebook`)
+    expect(hrefOf(c.nav[1].label)).toBe(`/${lang}#backtest`)
+    expect(hrefOf(c.nav[2].label)).toBe(`/${lang}/about`)
+    const sw = within(header).getByRole('link', { name: other.toUpperCase() })
+    expect(sw.getAttribute('href')).toBe(`/${other}/about`)
+    expect(within(header).getByRole('link', { name: lang.toUpperCase() })).toHaveAttribute('aria-current', 'page')
+  })
+
+  it('theme toggle cycles light -> dark -> system', async () => {
+    await renderWithRouter(`/${lang}`)
+    const header = await screen.findByRole('banner')
+    const btn = await waitFor(() => {
+      const b = within(header).getAllByRole('button').find((x) => /theme|tema/i.test(x.getAttribute('aria-label') ?? ''))
+      if (!b) throw new Error('no toggle')
+      return b
+    })
+    fireEvent.click(btn)
+    expect(localStorage.getItem(THEME_KEY)).toBe('light')
+    expect(document.documentElement.classList.contains('dark')).toBe(false)
+    fireEvent.click(btn)
+    expect(localStorage.getItem(THEME_KEY)).toBe('dark')
+    expect(document.documentElement.classList.contains('dark')).toBe(true)
+    fireEvent.click(btn)
+    expect(localStorage.getItem(THEME_KEY)).toBe('system')
+  })
+
+  it('mobile menu opens, closes on Escape and on link click', async () => {
+    await renderWithRouter(`/${lang}`)
+    const menuBtn = await screen.findByRole('button', { name: c.ui.menuOpen })
+    expect(menuBtn).toHaveAttribute('aria-expanded', 'false')
+    fireEvent.click(menuBtn)
+    expect(menuBtn).toHaveAttribute('aria-expanded', 'true')
+    expect(document.getElementById('mobile-menu')).toBeInTheDocument()
+    fireEvent.keyDown(document, { key: 'Escape' })
+    await waitFor(() => expect(menuBtn).toHaveAttribute('aria-expanded', 'false'))
+    fireEvent.click(menuBtn)
+    const menu = document.getElementById('mobile-menu')!
+    fireEvent.click(within(menu).getByRole('link', { name: c.nav[2].label }))
+    await waitFor(() => expect(menuBtn).toHaveAttribute('aria-expanded', 'false'))
+  })
+})
