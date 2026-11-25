@@ -4,19 +4,8 @@ import { useMotionEnabled } from '@/components/motion/use-motion-enabled'
 import { useContent, useLang } from '@/i18n/use-content'
 import { Reveal } from '@/components/motion/reveal'
 import { AppLink } from '@/components/ui/app-link'
+import { Frame, SectionShell, Tag } from '@/components/ui/frame'
 import { StepVisual } from './workflow-visuals'
-
-function Brackets() {
-  const c = 'pointer-events-none absolute h-3 w-3 border-fg/40'
-  return (
-    <>
-      <span aria-hidden="true" className={`${c} -left-1.5 -top-1.5 border-l-[1.5px] border-t-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -right-1.5 -top-1.5 border-r-[1.5px] border-t-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -bottom-1.5 -left-1.5 border-b-[1.5px] border-l-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -bottom-1.5 -right-1.5 border-b-[1.5px] border-r-[1.5px]`} />
-    </>
-  )
-}
 
 export function WorkflowSection() {
   const lang = useLang()
@@ -29,23 +18,16 @@ export function WorkflowSection() {
   const progress = (active / (w.steps.length - 1)) * 100
 
   return (
-    <section
-      id="workflow"
-      className="border-y border-border bg-surface/40 py-20 sm:py-28"
-      style={{
-        backgroundImage: 'repeating-linear-gradient(135deg, color-mix(in srgb, var(--fg) 5%, transparent) 0 1px, transparent 1px 10px)',
-      }}
-    >
+    <SectionShell id="workflow" edge="y">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
-          <p className="mb-3 inline-flex rounded-full border border-border bg-bg px-3 py-1 text-xs font-semibold text-muted">{w.tag}</p>
+          <Tag>{w.tag}</Tag>
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{w.title}</h2>
           <p className="mt-4 text-lg text-muted">{w.subtitle}</p>
         </Reveal>
 
         <Reveal className="mt-12" delay={0.1}>
-          <div className="relative border border-border bg-bg p-4 sm:p-8">
-            <Brackets />
+          <Frame>
 
             <ol className="relative grid grid-cols-5">
               <span aria-hidden="true" className="absolute left-[10%] right-[10%] top-5 h-px bg-border" />
@@ -128,14 +110,14 @@ export function WorkflowSection() {
                   )}
                 </div>
               </div>
-              <div className="rounded-xl border border-border bg-bg p-4">
+              <div className="border border-border bg-bg p-4">
                 <StepVisual step={step} hubLabel={w.hubLabel} enabled={enabled} sampleNote={ui.sampleData} />
               </div>
             </motion.div>
             <p className="mt-4 text-center text-xs text-muted">{w.note}</p>
-          </div>
+          </Frame>
         </Reveal>
       </div>
-    </section>
+    </SectionShell>
   )
 }

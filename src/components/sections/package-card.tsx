@@ -2,6 +2,7 @@ import { useContent, useLang } from '@/i18n/use-content'
 import type { EbookPackage } from '@/content/types'
 import { formatIDR } from '@/lib/format'
 import { LinkButton } from '@/components/ui/button'
+import { Brackets } from '@/components/ui/frame'
 
 function Check() {
   return (
@@ -15,11 +16,8 @@ export function PackageCard({ pkg }: { pkg: EbookPackage }) {
   const lang = useLang()
   const { ui } = useContent()
   return (
-    <article
-      className={`relative flex h-full flex-col rounded-2xl border bg-bg p-6 ${
-        pkg.highlighted ? 'border-2 border-accent shadow-[0_0_48px_-12px_var(--accent)] lg:scale-105' : 'border-border'
-      }`}
-    >
+    <article className={`relative flex h-full flex-col border bg-surface p-6 ${pkg.highlighted ? 'border-accent' : 'border-border'}`}>
+      {pkg.highlighted && <Brackets tone="accent" />}
       {pkg.highlighted && (
         <span className="absolute -top-3 left-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent">{ui.mostPopular}</span>
       )}
