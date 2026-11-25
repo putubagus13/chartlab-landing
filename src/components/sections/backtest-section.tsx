@@ -5,7 +5,7 @@ import type { BacktestFeature } from '@/content/types'
 import { LinkButton } from '@/components/ui/button'
 import { AppLink } from '@/components/ui/app-link'
 import { Reveal } from '@/components/motion/reveal'
-import { Frame, SectionShell, Tag } from '@/components/ui/frame'
+import { Brackets, SectionShell, Tag } from '@/components/ui/frame'
 
 const ICONS: Record<BacktestFeature['icon'], React.ReactNode> = {
   chart: <path d="M4 19V5M4 19h16M8 15l3-4 3 3 5-7" />,
@@ -40,7 +40,8 @@ function AppPreview() {
   const { backtest, ui } = useContent()
   const line = 'M0 150 L40 140 L80 148 L120 120 L160 126 L200 96 L240 104 L280 70 L320 78 L360 40 L400 30'
   return (
-    <div className="overflow-hidden border border-border bg-[#0a0a0a]">
+    <div className="relative border border-border bg-[#0a0a0a]">
+      <Brackets tone="accent" />
       <div className="flex items-center gap-1.5 border-b border-[#262626] px-4 py-3">
         <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
         <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
@@ -85,56 +86,53 @@ export function BacktestSection() {
   const lang = useLang()
   const { backtest, ui } = useContent()
   return (
-    <SectionShell id="backtest">
+    <SectionShell id="backtest" bg="dots">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
-        <Reveal>
-          <Frame>
-            <div className="grid items-center gap-8 border border-border bg-surface p-5 sm:p-8 lg:grid-cols-2 lg:gap-12">
-              <div>
-                <AppPreview />
-              </div>
-              <div>
-                <Tag>{ui.freeForBuyers}</Tag>
-                <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{backtest.title}</h2>
-                <p className="mt-4 text-lg text-muted">{backtest.subtitle}</p>
-                <ul className="mt-8 grid gap-5 sm:grid-cols-2">
-                  {backtest.features.map((f) => (
-                    <li key={f.title} className="flex gap-3">
-                      <span className="flex h-10 w-10 shrink-0 items-center justify-center border border-border bg-bg text-accent">
-                        <FeatureIcon icon={f.icon} />
-                      </span>
-                      <div>
-                        <p className="font-semibold">{f.title}</p>
-                        <p className="text-sm text-muted">{f.description}</p>
-                      </div>
-                    </li>
-                  ))}
-                </ul>
-                <div className="mt-8 flex flex-wrap items-center gap-3">
-                  <LinkButton href={backtest.appUrl} external>
-                    {ui.openApp}
-                  </LinkButton>
-                  <AppLink href={`/${lang}#ebook`} className="text-sm font-medium text-accent underline-offset-4 hover:underline">
-                    {ui.buyEbook} →
-                  </AppLink>
-                </div>
-              </div>
+        <div className="grid items-center gap-12 lg:grid-cols-2">
+          <Reveal>
+            <AppPreview />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <Tag>{ui.freeForBuyers}</Tag>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{backtest.title}</h2>
+            <p className="mt-4 text-lg text-muted">{backtest.subtitle}</p>
+            <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+              {backtest.features.map((f) => (
+                <li key={f.title} className="flex gap-3">
+                  <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-accent/10 text-accent">
+                    <FeatureIcon icon={f.icon} />
+                  </span>
+                  <div>
+                    <p className="font-semibold">{f.title}</p>
+                    <p className="text-sm text-muted">{f.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <div className="mt-8 flex flex-wrap items-center gap-3">
+              <LinkButton href={backtest.appUrl} external>
+                {ui.openApp}
+              </LinkButton>
+              <AppLink href={`/${lang}#ebook`} className="text-sm font-medium text-accent underline-offset-4 hover:underline">
+                {ui.buyEbook} →
+              </AppLink>
             </div>
+          </Reveal>
+        </div>
 
-            <div className="mt-8">
-              <h3 className="text-xl font-bold">{ui.howToGetAccess}</h3>
-              <ol className="mt-6 grid gap-4 md:grid-cols-3">
-                {backtest.steps.map((s, i) => (
-                  <Reveal as="li" key={s.title} delay={i * 0.08} className="border border-border bg-surface p-6">
-                    <span className="font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span>
-                    <p className="mt-2 font-semibold">{s.title}</p>
-                    <p className="mt-1 text-sm text-muted">{s.description}</p>
-                  </Reveal>
-                ))}
-              </ol>
-            </div>
-          </Frame>
-        </Reveal>
+        <div className="mt-20">
+          <h3 className="text-xl font-bold">{ui.howToGetAccess}</h3>
+          <ol className="mt-6 grid gap-8 md:grid-cols-3">
+            {backtest.steps.map((s, i) => (
+              <Reveal as="li" key={s.title} delay={i * 0.08}>
+                <span aria-hidden="true" className="block h-0.5 w-12 bg-grad" />
+                <span className="mt-4 block font-mono text-sm text-accent">{String(i + 1).padStart(2, '0')}</span>
+                <p className="mt-2 font-semibold">{s.title}</p>
+                <p className="mt-1 text-sm text-muted">{s.description}</p>
+              </Reveal>
+            ))}
+          </ol>
+        </div>
       </div>
     </SectionShell>
   )

@@ -1,42 +1,38 @@
-import type { CSSProperties, ReactNode } from 'react'
-
-/** The shared "blueprint" look: hatched page, square bordered panels, corner brackets. */
-const HATCH: CSSProperties = {
-  backgroundImage: 'repeating-linear-gradient(135deg, color-mix(in srgb, var(--fg) 5%, transparent) 0 1px, transparent 1px 10px)',
-}
+import type { ReactNode } from 'react'
 
 type Tone = 'default' | 'accent'
 
+/** Corner brackets for a card. The accent tone alternates the two brand colours around the card. */
 export function Brackets({ tone = 'default' }: { tone?: Tone }) {
-  const c = `pointer-events-none absolute h-3 w-3 ${tone === 'accent' ? 'border-accent' : 'border-fg/40'}`
+  const accent = tone === 'accent'
+  const base = 'pointer-events-none absolute h-3 w-3'
+  const green = accent ? 'border-[color:var(--grad-from)]' : 'border-fg/40'
+  const yellow = accent ? 'border-[color:var(--grad-to)]' : 'border-fg/40'
+  const w = accent ? 2 : 1.5
   return (
     <>
-      <span aria-hidden="true" className={`${c} -left-1.5 -top-1.5 border-l-[1.5px] border-t-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -right-1.5 -top-1.5 border-r-[1.5px] border-t-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -bottom-1.5 -left-1.5 border-b-[1.5px] border-l-[1.5px]`} />
-      <span aria-hidden="true" className={`${c} -bottom-1.5 -right-1.5 border-b-[1.5px] border-r-[1.5px]`} />
+      <span aria-hidden="true" className={`${base} ${green} -left-1.5 -top-1.5`} style={{ borderLeftWidth: w, borderTopWidth: w }} />
+      <span aria-hidden="true" className={`${base} ${yellow} -right-1.5 -top-1.5`} style={{ borderRightWidth: w, borderTopWidth: w }} />
+      <span aria-hidden="true" className={`${base} ${yellow} -bottom-1.5 -left-1.5`} style={{ borderBottomWidth: w, borderLeftWidth: w }} />
+      <span aria-hidden="true" className={`${base} ${green} -bottom-1.5 -right-1.5`} style={{ borderBottomWidth: w, borderRightWidth: w }} />
     </>
   )
 }
 
 const EDGE = { y: 'border-y', b: 'border-b', none: '' } as const
+const BG = {
+  hatch: 'bg-bg bg-hatch',
+  dots: 'bg-bg bg-dots',
+  warm: 'bg-surface bg-glow-warm',
+  center: 'bg-bg bg-glow-center',
+} as const
 
-/** A full-width hatched section. `edge` says which hairlines it draws, so neighbours never double up. */
-export function SectionShell({ id, edge = 'b', children }: { id: string; edge?: keyof typeof EDGE; children: ReactNode }) {
+/** A full-width section. `bg` picks its backdrop, `edge` which hairlines it draws, so neighbours never double up. */
+export function SectionShell({ id, bg, edge = 'b', children }: { id: string; bg: keyof typeof BG; edge?: keyof typeof EDGE; children: ReactNode }) {
   return (
-    <section id={id} className={`${EDGE[edge]} border-border bg-surface/40 py-20 sm:py-28`} style={HATCH}>
+    <section id={id} className={`${EDGE[edge]} border-border ${BG[bg]} py-20 sm:py-28`}>
       {children}
     </section>
-  )
-}
-
-/** The big bordered board a section's content sits on. */
-export function Frame({ children, tone = 'default', className = '' }: { children: ReactNode; tone?: Tone; className?: string }) {
-  return (
-    <div className={`relative border border-border bg-bg p-4 sm:p-8 ${className}`}>
-      <Brackets tone={tone} />
-      {children}
-    </div>
   )
 }
 

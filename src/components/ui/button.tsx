@@ -12,7 +12,7 @@ type Props = {
 const base =
   'inline-flex min-h-11 cursor-pointer items-center justify-center gap-2 rounded-full px-6 text-sm font-semibold transition-colors duration-200'
 const variants = {
-  primary: 'bg-accent text-on-accent hover:opacity-90',
+  primary: 'bg-grad text-on-grad hover:brightness-105',
   secondary: 'bg-fg text-bg hover:opacity-90',
   ghost: 'border border-border text-fg hover:bg-surface',
 }

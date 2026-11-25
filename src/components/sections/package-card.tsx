@@ -16,10 +16,10 @@ export function PackageCard({ pkg }: { pkg: EbookPackage }) {
   const lang = useLang()
   const { ui } = useContent()
   return (
-    <article className={`relative flex h-full flex-col border bg-surface p-6 ${pkg.highlighted ? 'border-accent' : 'border-border'}`}>
+    <article className={`relative flex h-full flex-col p-6 [--card-bg:var(--bg)] ${pkg.highlighted ? 'card-grad' : 'border border-border bg-bg'}`}>
       {pkg.highlighted && <Brackets tone="accent" />}
       {pkg.highlighted && (
-        <span className="absolute -top-3 left-6 rounded-full bg-accent px-3 py-1 text-xs font-semibold text-on-accent">{ui.mostPopular}</span>
+        <span className="absolute -top-3 left-6 rounded-full bg-grad px-3 py-1 text-xs font-semibold text-on-grad">{ui.mostPopular}</span>
       )}
       <h3 className="text-xl font-bold">{pkg.name}</h3>
       <p className="mt-1 text-sm text-muted">{pkg.tagline}</p>

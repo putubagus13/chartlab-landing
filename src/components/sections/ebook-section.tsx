@@ -2,7 +2,7 @@ import { motion, useReducedMotion } from 'framer-motion'
 import { useContent } from '@/i18n/use-content'
 import { Logo } from '@/components/ui/logo'
 import { Reveal } from '@/components/motion/reveal'
-import { Frame, SectionShell } from '@/components/ui/frame'
+import { SectionShell } from '@/components/ui/frame'
 import { PackageCard } from './package-card'
 
 function Cover({ title }: { title: string }) {
@@ -28,39 +28,37 @@ function Cover({ title }: { title: string }) {
 export function EbookSection() {
   const { ebook, ui } = useContent()
   return (
-    <SectionShell id="ebook">
+    <SectionShell id="ebook" bg="warm">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <Reveal className="mx-auto max-w-2xl text-center">
           <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{ebook.title}</h2>
           <p className="mt-4 text-lg text-muted">{ebook.subtitle}</p>
         </Reveal>
 
-        <Reveal className="mt-12" delay={0.1}>
-          <Frame>
-            <div className="grid items-center gap-8 border border-border bg-surface p-5 sm:p-8 lg:grid-cols-[auto_1fr]">
-              <div className="border border-border bg-bg p-8">
-                <Cover title={ebook.title} />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold">{ui.whatYouLearn}</h3>
-                <ul className="mt-4 grid gap-3 sm:grid-cols-2">
-                  {ebook.chapters.map((ch, i) => (
-                    <li key={ch} className="flex gap-3 border border-border bg-bg p-4 text-sm">
-                      <span className="font-mono text-accent">{String(i + 1).padStart(2, '0')}</span>
-                      <span>{ch}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-            </div>
-
-            <div className="mt-8 grid gap-6 pt-3 lg:grid-cols-3 lg:items-stretch">
-              {ebook.packages.map((pkg) => (
-                <PackageCard key={pkg.id} pkg={pkg} />
+        <div className="mt-14 grid items-center gap-12 lg:grid-cols-[auto_1fr]">
+          <Reveal>
+            <Cover title={ebook.title} />
+          </Reveal>
+          <Reveal delay={0.1}>
+            <h3 className="text-lg font-semibold">{ui.whatYouLearn}</h3>
+            <ul className="mt-4 grid gap-x-8 sm:grid-cols-2">
+              {ebook.chapters.map((ch, i) => (
+                <li key={ch} className="flex gap-3 border-b border-border py-4 text-sm">
+                  <span className="font-mono text-accent">{String(i + 1).padStart(2, '0')}</span>
+                  <span>{ch}</span>
+                </li>
               ))}
-            </div>
-          </Frame>
-        </Reveal>
+            </ul>
+          </Reveal>
+        </div>
+
+        <div className="mt-20 grid gap-6 lg:grid-cols-3 lg:items-stretch">
+          {ebook.packages.map((pkg, i) => (
+            <Reveal key={pkg.id} delay={i * 0.08}>
+              <PackageCard pkg={pkg} />
+            </Reveal>
+          ))}
+        </div>
       </div>
     </SectionShell>
   )

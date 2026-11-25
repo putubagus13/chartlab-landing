@@ -30,6 +30,15 @@
   color-scheme: light;
 }
 
+/* Brand gradient: Disatu green into the logo yellow. Used for fills and lines only,
+   never for text, so contrast stays safe on both themes. Dark ink sits on top of it. */
+:root {
+  --grad-from: #3fa37f;
+  --grad-to: #ffd33f;
+  --grad: linear-gradient(120deg, var(--grad-from), var(--grad-to));
+  --on-grad: #0a0a0a;
+}
+
 .dark {
   --bg: #0a0a0a;
   --surface: #141414;
@@ -125,4 +134,37 @@ section[id] {
     opacity: 0.4;
     transform: scale(1.8);
   }
+}
+
+/* ---- Gradient + background utilities ---- */
+@utility bg-grad {
+  background-image: var(--grad);
+}
+@utility text-on-grad {
+  color: var(--on-grad);
+}
+/* A card with a gradient hairline border. Set --card-bg to match the fill behind it. */
+@utility card-grad {
+  border: 1.5px solid transparent;
+  background:
+    linear-gradient(var(--card-bg, var(--surface)), var(--card-bg, var(--surface))) padding-box,
+    var(--grad) border-box;
+}
+/* Section backgrounds, each different so the page does not read as one flat slab. */
+@utility bg-hatch {
+  background-image: repeating-linear-gradient(135deg, color-mix(in srgb, var(--fg) 5%, transparent) 0 1px, transparent 1px 10px);
+}
+@utility bg-dots {
+  background-image: radial-gradient(color-mix(in srgb, var(--fg) 16%, transparent) 1px, transparent 1.5px);
+  background-size: 22px 22px;
+}
+@utility bg-glow-warm {
+  background-image:
+    radial-gradient(55% 60% at 88% 8%, color-mix(in srgb, var(--grad-to) 16%, transparent), transparent 70%),
+    radial-gradient(55% 60% at 8% 92%, color-mix(in srgb, var(--grad-from) 18%, transparent), transparent 70%);
+}
+@utility bg-glow-center {
+  background-image:
+    radial-gradient(45% 70% at 50% 50%, color-mix(in srgb, var(--grad-from) 20%, transparent), transparent 72%),
+    radial-gradient(35% 55% at 78% 40%, color-mix(in srgb, var(--grad-to) 16%, transparent), transparent 70%);
 }
