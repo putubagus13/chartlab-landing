@@ -7,7 +7,7 @@ type LogoProps = {
 
 export function Logo({ variant = 'horizontal', onDark = false, className = '', alt = 'Disatu' }: LogoProps) {
   const base = `/brand/disatu-${variant}`
-  const size = variant === 'horizontal' ? 'h-8 w-auto' : 'h-8 w-8'
+  const size = variant === 'horizontal' ? 'h-auto w-28' : 'h-8 w-8'
   if (onDark) {
     return <img src={`${base}-white.svg`} alt={alt} className={`${size} ${className}`} />
   }

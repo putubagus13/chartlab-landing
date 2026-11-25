@@ -38,7 +38,7 @@ export function SiteHeader() {
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
         <AppLink href={`/${lang}`} aria-label="Disatu" className="shrink-0">
-          <Logo className="min-w-[100px]" />
+          <Logo />
         </AppLink>
 
         <nav className="hidden items-center gap-6 text-sm font-medium md:flex">

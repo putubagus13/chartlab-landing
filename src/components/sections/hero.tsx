@@ -19,7 +19,7 @@ export function Hero() {
     <section id="hero" className="relative isolate overflow-hidden bg-bg">
       <div
         aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[70vmin] w-[70vmin] -translate-y-1/2 translate-x-[5%] rounded-full bg-brand-green/25 blur-3xl lg:left-[62%]"
+        className="pointer-events-none absolute left-1/2 top-1/2 -z-10 h-[60vmin] w-[60vmin] -translate-x-1/2 -translate-y-1/2 rounded-full bg-brand-green/10 blur-3xl dark:bg-brand-green/25 lg:left-[72%]"
       />
       <div className="mx-auto grid min-h-[calc(100svh-4rem)] max-w-6xl items-center gap-10 px-4 py-12 sm:px-6 lg:grid-cols-2">
         <motion.div variants={container} initial="hidden" animate="show" className="order-2 lg:order-1">
