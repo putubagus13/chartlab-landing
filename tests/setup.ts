@@ -19,3 +19,17 @@ Object.defineProperty(window, 'matchMedia', {
 })
 
 HTMLCanvasElement.prototype.getContext = (() => null) as never
+
+// jsdom has no IntersectionObserver; report everything as visible so whileInView resolves.
+class IO {
+  constructor(private cb: IntersectionObserverCallback) {}
+  observe(el: Element) {
+    this.cb([{ isIntersecting: true, target: el, intersectionRatio: 1 } as IntersectionObserverEntry], this as never)
+  }
+  unobserve() {}
+  disconnect() {}
+  takeRecords() {
+    return []
+  }
+}
+;(globalThis as unknown as { IntersectionObserver: unknown }).IntersectionObserver = IO
