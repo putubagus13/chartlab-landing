@@ -1,5 +1,7 @@
 import { useContent } from '@/i18n/use-content'
 import { Reveal } from '@/components/motion/reveal'
+import { LinkButton } from '@/components/ui/button'
+import { contactLinks } from '@/lib/contact'
 
 export function initialsOf(name: string): string {
   return name
@@ -12,7 +14,8 @@ export function initialsOf(name: string): string {
 }
 
 export function ProfileCard() {
-  const { about } = useContent()
+  const { about, ui } = useContent()
+  const links = contactLinks(about.contact)
   return (
     <Reveal className="flex flex-col items-start gap-6 sm:flex-row sm:items-center">
       {about.photo ? (
@@ -30,20 +33,30 @@ export function ProfileCard() {
         <p className="mt-1 text-lg text-accent">{about.headline}</p>
         <p className="mt-1 text-sm text-muted">{about.location}</p>
         <p className="mt-4 max-w-2xl text-muted">{about.bio}</p>
-        <ul className="mt-5 flex flex-wrap gap-3">
-          {about.socials.map((s) => (
-            <li key={s.label}>
-              <a
-                href={s.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm font-medium transition-colors hover:bg-surface"
-              >
-                {s.label}
-              </a>
-            </li>
-          ))}
-        </ul>
+        <div className="mt-6 flex flex-wrap gap-3">
+          <LinkButton href={links.whatsapp} external>
+            {ui.whatsapp}
+          </LinkButton>
+          <LinkButton href={links.mailto} external variant="ghost">
+            {ui.email}
+          </LinkButton>
+        </div>
+        {about.socials.length > 0 && (
+          <ul className="mt-4 flex flex-wrap gap-3">
+            {about.socials.map((s) => (
+              <li key={s.label}>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex min-h-11 items-center rounded-full border border-border px-4 text-sm font-medium transition-colors hover:bg-surface"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))}
+          </ul>
+        )}
       </div>
     </Reveal>
   )

@@ -15,7 +15,7 @@ export function navHref(lang: string, item: NavItem) {
 
 export function SiteHeader() {
   const lang = useLang()
-  const { nav, ui } = useContent()
+  const { nav, ui, backtest } = useContent()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
@@ -63,7 +63,9 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 md:flex">
           <LangSwitch />
           <ThemeToggle />
-          <LinkButton href={`/${lang}#ebook`}>{ui.buyEbook}</LinkButton>
+          <LinkButton href={backtest.appUrl} external>
+            {ui.openApp}
+          </LinkButton>
         </div>
 
         <button
@@ -106,8 +108,8 @@ export function SiteHeader() {
                 <ThemeToggle />
               </div>
               <div className="mt-3" onClick={() => setOpen(false)}>
-                <LinkButton href={`/${lang}#ebook`} className="w-full">
-                  {ui.buyEbook}
+                <LinkButton href={backtest.appUrl} external className="w-full">
+                  {ui.openApp}
                 </LinkButton>
               </div>
             </div>

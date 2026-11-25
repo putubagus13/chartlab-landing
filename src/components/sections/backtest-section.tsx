@@ -1,9 +1,6 @@
-import { motion } from 'framer-motion'
-import { useMotionEnabled } from '@/components/motion/use-motion-enabled'
-import { useContent, useLang } from '@/i18n/use-content'
+import { useContent } from '@/i18n/use-content'
 import type { BacktestFeature } from '@/content/types'
 import { LinkButton } from '@/components/ui/button'
-import { AppLink } from '@/components/ui/app-link'
 import { Reveal } from '@/components/motion/reveal'
 import { Brackets, SectionShell, Tag } from '@/components/ui/frame'
 
@@ -35,65 +32,39 @@ function FeatureIcon({ icon }: { icon: BacktestFeature['icon'] }) {
   )
 }
 
-function AppPreview() {
-  const enabled = useMotionEnabled()
-  const { backtest, ui } = useContent()
-  const line = 'M0 150 L40 140 L80 148 L120 120 L160 126 L200 96 L240 104 L280 70 L320 78 L360 40 L400 30'
+function BacktestVideo() {
+  const { backtest } = useContent()
   return (
-    <div className="relative border border-border bg-[#0a0a0a]">
-      <Brackets tone="accent" />
-      <div className="flex items-center gap-1.5 border-b border-[#262626] px-4 py-3">
-        <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
-        <span className="h-2.5 w-2.5 rounded-full bg-[#262626]" />
-        <span className="ml-3 rounded bg-[#141414] px-3 py-0.5 font-mono text-[11px] text-[#a1a1a1]">BTC/USDT · 1D</span>
+    <figure className="m-0">
+      <div className="relative border border-border bg-[#0a0a0a]">
+        <Brackets tone="accent" />
+        {/* preload=metadata: the clip is ~20 MB, so nothing heavy downloads until someone presses play */}
+        <video
+          src={backtest.videoSrc}
+          poster={backtest.videoPoster}
+          controls
+          playsInline
+          preload="metadata"
+          aria-label={backtest.videoLabel}
+          className="block aspect-video w-full bg-[#0a0a0a]"
+        />
       </div>
-      <div className="p-4">
-        <svg viewBox="0 0 400 180" className="w-full" role="img" aria-label={ui.sampleData}>
-          {[30, 70, 110, 150].map((y) => (
-            <line key={y} x1="0" x2="400" y1={y} y2={y} stroke="#262626" strokeWidth="1" />
-          ))}
-          <path d={`${line} L400 180 L0 180 Z`} fill="#3fa37f" opacity="0.12" />
-          <motion.path
-            key={enabled ? 'motion' : 'static'}
-            d={line}
-            fill="none"
-            stroke="#3fa37f"
-            strokeWidth="2.5"
-            strokeLinejoin="round"
-            strokeLinecap="round"
-            initial={enabled ? { pathLength: 0 } : false}
-            whileInView={enabled ? { pathLength: 1 } : undefined}
-            viewport={{ once: true }}
-            transition={{ duration: 1.6, ease: 'easeInOut' }}
-          />
-        </svg>
-        <div className="mt-4 grid grid-cols-3 gap-3">
-          {backtest.stats.map((s) => (
-            <div key={s.label} className="border border-[#262626] bg-[#141414] p-3">
-              <p className="text-[11px] text-[#a1a1a1]">{s.label}</p>
-              <p className="font-display text-lg font-bold text-[#f5f5f5]">{s.value}</p>
-            </div>
-          ))}
-        </div>
-        <p className="mt-3 text-right font-mono text-[10px] text-[#a1a1a1]">{ui.sampleData}</p>
-      </div>
-    </div>
+      <figcaption className="mt-3 text-sm text-muted">{backtest.videoNote}</figcaption>
+    </figure>
   )
 }
 
 export function BacktestSection() {
-  const lang = useLang()
   const { backtest, ui } = useContent()
   return (
     <SectionShell id="backtest" bg="dots">
       <div className="mx-auto max-w-6xl px-4 sm:px-6">
         <div className="grid items-center gap-12 lg:grid-cols-2">
           <Reveal>
-            <AppPreview />
+            <BacktestVideo />
           </Reveal>
           <Reveal delay={0.1}>
-            <Tag>{ui.freeForBuyers}</Tag>
+            <Tag>{ui.freeBadge}</Tag>
             <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">{backtest.title}</h2>
             <p className="mt-4 text-lg text-muted">{backtest.subtitle}</p>
             <ul className="mt-8 grid gap-5 sm:grid-cols-2">
@@ -113,9 +84,6 @@ export function BacktestSection() {
               <LinkButton href={backtest.appUrl} external>
                 {ui.openApp}
               </LinkButton>
-              <AppLink href={`/${lang}#ebook`} className="text-sm font-medium text-accent underline-offset-4 hover:underline">
-                {ui.buyEbook} →
-              </AppLink>
             </div>
           </Reveal>
         </div>

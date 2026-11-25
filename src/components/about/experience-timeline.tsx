@@ -19,16 +19,18 @@ export function ExperienceTimeline({ items }: { items: Experience[] }) {
       <ol className="space-y-10">
         {items.map((e, i) => (
           <Reveal as="li" key={`${e.company}-${e.period}-${i}`} delay={i * 0.08} className="relative pl-10">
-            <span aria-hidden="true" className="absolute left-0 top-1.5 h-4 w-4 rounded-full border-2 border-accent bg-bg" />
+            <span aria-hidden="true" className="absolute left-0 top-1.5 h-4 w-4 rounded-full bg-grad ring-4 ring-bg" />
             <p className="font-mono text-xs text-muted">{e.period}</p>
             <h3 className="mt-1 text-lg font-semibold">{e.role}</h3>
             <p className="text-sm font-medium text-accent">{e.company}</p>
             <p className="mt-2 text-muted">{e.description}</p>
-            <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
-              {e.highlights.map((h) => (
-                <li key={h}>{h}</li>
-              ))}
-            </ul>
+            {e.highlights.length > 0 && (
+              <ul className="mt-3 list-disc space-y-1 pl-5 text-sm">
+                {e.highlights.map((h) => (
+                  <li key={h}>{h}</li>
+                ))}
+              </ul>
+            )}
           </Reveal>
         ))}
       </ol>

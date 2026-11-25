@@ -44,7 +44,7 @@ describe.each(LANGS)('WorkflowSection %s', (lang) => {
     expect(within(ol).getByRole('button', { name: new RegExp(w.steps[0].label) })).not.toHaveAttribute('aria-current')
   })
 
-  it('next button advances, and the last stage points to the e-book', async () => {
+  it('next button advances, and the last stage points to the free web app', async () => {
     await renderWithRouter(`/${lang}`)
     const sec = await section()
     fireEvent.click(within(sec).getByRole('button', { name: w.next }))
@@ -53,6 +53,6 @@ describe.each(LANGS)('WorkflowSection %s', (lang) => {
     fireEvent.click(within(ol).getByRole('button', { name: new RegExp(w.steps[4].label) }))
     expect(within(sec).queryByRole('button', { name: w.next })).toBeNull()
     const cta = within(sec).getByRole('link', { name: new RegExp(w.cta) })
-    expect(cta).toHaveAttribute('href', `/${lang}#ebook`)
+    expect(cta).toHaveAttribute('href', `/${lang}#backtest`)
   })
 })

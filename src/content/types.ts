@@ -1,4 +1,4 @@
-export type Section = 'hero' | 'workflow' | 'ebook' | 'backtest'
+export type Section = 'hero' | 'workflow' | 'ebook' | 'backtest' | 'services'
 export type NavItem = { label: string; page: 'home' | 'about'; hash?: Section }
 export type EbookPackage = {
   id: string
@@ -24,6 +24,9 @@ export type WorkflowStep = {
   description: string
   points: { label: string; text: string }[]
 }
+export type ServiceItem = { title: string; description: string; icon: 'web' | 'app' }
+export type Education = { degree: string; school: string }
+export type SkillGroup = { group: string; items: string[] }
 export type Experience = {
   role: string
   company: string
@@ -39,7 +42,7 @@ export type SiteContent = {
     mostPopular: string
     freeBacktestBadge: string
     openApp: string
-    freeForBuyers: string
+    freeBadge: string
     seeApp: string
     menuOpen: string
     menuClose: string
@@ -56,6 +59,9 @@ export type SiteContent = {
     experienceTitle: string
     skillsTitle: string
     aboutCta: string
+    educationTitle: string
+    whatsapp: string
+    email: string
   }
   brand: { name: 'Disatu'; tagline: string }
   nav: NavItem[]
@@ -65,10 +71,14 @@ export type SiteContent = {
     title: string
     subtitle: string
     appUrl: string
+    videoSrc: string
+    videoPoster: string
+    videoLabel: string
+    videoNote: string
     features: BacktestFeature[]
-    stats: { label: string; value: string }[]
     steps: { title: string; description: string }[]
   }
+  services: { title: string; subtitle: string; contactLead: string; items: ServiceItem[] }
   workflow: {
     tag: string
     title: string
@@ -87,8 +97,10 @@ export type SiteContent = {
     bio: string
     photo?: string
     location: string
+    contact: { phone: string; email: string }
     socials: { label: string; url: string }[]
-    skills: string[]
+    education: Education[]
+    skills: SkillGroup[]
     experiences: Experience[]
   }
   footer: { note: string }

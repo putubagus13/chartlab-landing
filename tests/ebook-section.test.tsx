@@ -1,4 +1,7 @@
-import { describe, it, expect } from 'vitest'
+import { describe, it, expect, vi } from 'vitest'
+
+// The e-book is hidden by default; turn it on to keep its section covered for when it returns.
+vi.mock('@/content/flags', () => ({ FEATURES: { ebook: true } }))
 import { screen, waitFor, within } from '@testing-library/react'
 import { renderWithRouter } from './utils'
 import { getContent } from '@/content'

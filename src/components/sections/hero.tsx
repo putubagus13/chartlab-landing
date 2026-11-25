@@ -5,7 +5,7 @@ import { StippleOrb } from "@/components/ui/stipple-orb";
 
 export function Hero() {
   const lang = useLang();
-  const { hero, ui } = useContent();
+  const { hero, ui, backtest } = useContent();
   const { resolved } = useTheme();
   return (
     <section id="hero" className="relative isolate overflow-hidden bg-bg">
@@ -38,7 +38,9 @@ export function Hero() {
             style={{ "--i": 3 } as React.CSSProperties}
             className="hero-rise mt-8 flex flex-wrap gap-3"
           >
-            <LinkButton href={`/${lang}#ebook`}>{ui.buyEbook}</LinkButton>
+            <LinkButton href={backtest.appUrl} external>
+              {ui.openApp}
+            </LinkButton>
             <LinkButton href={`/${lang}#backtest`} variant="ghost">
               {ui.seeApp}
             </LinkButton>

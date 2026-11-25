@@ -22,7 +22,7 @@ export function LinkButton({ href, variant = 'primary', external, children, clas
   return (
     <motion.span className="inline-block" whileHover={{ scale: 1.03 }} whileTap={{ scale: 0.97 }}>
       {external ? (
-        <a href={href} target="_blank" rel="noopener noreferrer" className={cls}>
+        <a href={href} {...(/^https?:/.test(href) ? { target: '_blank', rel: 'noopener noreferrer' } : {})} className={cls}>
           {children}
         </a>
       ) : (
