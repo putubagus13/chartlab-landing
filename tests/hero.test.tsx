@@ -17,7 +17,7 @@ describe('Hero', () => {
 
   describe.each(LANGS)('%s', (lang) => {
     const c = getContent(lang)
-    it('renders copy, CTAs and orb', async () => {
+    it('renders copy, CTAs and the animated visual', async () => {
       await renderWithRouter(`/${lang}`)
       const hero = await waitFor(() => {
         const el = document.getElementById('hero')
@@ -31,7 +31,8 @@ describe('Hero', () => {
       expect(open).toHaveAttribute('href', c.backtest.appUrl)
       expect(open).toHaveAttribute('target', '_blank')
       expect(within(hero).getByRole('link', { name: c.ui.seeApp })).toHaveAttribute('href', `/${lang}#backtest`)
-      expect(within(hero).getByRole('img')).toHaveAttribute('aria-label', expect.stringContaining(c.ui.orbLabel))
+      expect(within(hero).getByRole('img')).toHaveAttribute('aria-label', c.ui.visualLabel)
+      expect(hero.textContent ?? '').not.toMatch(/strata/i)
       expect(within(hero).getByText(c.hero.bundleNote)).toBeInTheDocument()
       expect(screen.getAllByRole('heading', { level: 1 })).toHaveLength(1)
     })

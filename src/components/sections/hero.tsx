@@ -1,7 +1,7 @@
 import { useContent, useLang } from "@/i18n/use-content";
 import { useTheme } from "@/theme/theme-provider";
 import { LinkButton } from "@/components/ui/button";
-import { StippleOrb } from "@/components/ui/stipple-orb";
+import { HelixField } from "@/components/ui/helix-field";
 
 export function Hero() {
   const lang = useLang();
@@ -68,10 +68,15 @@ export function Hero() {
         </div>
 
         <div className="order-1 flex justify-center lg:order-2">
-          <StippleOrb
+          <HelixField
             dark={resolved === "dark"}
-            label={`${ui.orbLabel}. ${ui.orbHint}.`}
-            hint={ui.orbHint}
+            label={ui.visualLabel}
+            labels={{
+              modesLabel: ui.visualModesLabel,
+              modes: ui.visualModes,
+              pause: ui.visualPause,
+              play: ui.visualPlay,
+            }}
           />
         </div>
       </div>

@@ -51,8 +51,11 @@ export type SiteContent = {
     themeDark: string
     themeSystem: string
     switchLanguage: string
-    orbLabel: string
-    orbHint: string
+    visualLabel: string
+    visualModesLabel: string
+    visualModes: { helix: string; neural: string; ribbons: string }
+    visualPause: string
+    visualPlay: string
     whatYouLearn: string
     howToGetAccess: string
     sampleData: string
