@@ -95,6 +95,11 @@ export const siteEn: SiteContent = {
       { title: 'Compare versions', description: 'Change parameters and compare results side by side.', icon: shared.icons[4] },
       { title: 'Focus on evidence', description: 'Decide on data, not feelings.', icon: shared.icons[5] },
     ],
+    stats: [
+      { label: 'Win rate', value: '58%' },
+      { label: 'Max drawdown', value: '-12%' },
+      { label: 'Profit factor', value: '1.9' },
+    ],
     steps: [
       { title: 'Buy the e-book', description: 'Pick a package and complete checkout.' },
       { title: 'Receive access by email', description: 'We email you the e-book and web app access.' },

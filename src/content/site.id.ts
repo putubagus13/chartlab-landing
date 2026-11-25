@@ -95,6 +95,11 @@ export const siteId: SiteContent = {
       { title: 'Bandingkan versi', description: 'Ubah parameter dan bandingkan hasilnya berdampingan.', icon: shared.icons[4] },
       { title: 'Fokus pada bukti', description: 'Putuskan berdasarkan data, bukan perasaan.', icon: shared.icons[5] },
     ],
+    stats: [
+      { label: 'Win rate', value: '58%' },
+      { label: 'Max DD', value: '-12%' },
+      { label: 'Profit factor', value: '1.9' },
+    ],
     steps: [
       { title: 'Beli e-book', description: 'Pilih paket yang sesuai lalu selesaikan pembayaran.' },
       { title: 'Terima akses lewat email', description: 'Kami kirim e-book dan akses web app ke email-mu.' },

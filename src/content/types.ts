@@ -58,6 +58,7 @@ export type SiteContent = {
     subtitle: string
     appUrl: string
     features: BacktestFeature[]
+    stats: { label: string; value: string }[]
     steps: { title: string; description: string }[]
   }
   offer: { title: string; subtitle: string }
