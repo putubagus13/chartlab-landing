@@ -1,9 +1,10 @@
-import { useContent } from '@/i18n/use-content'
+import { useContent, useLang } from '@/i18n/use-content'
 import type { ChartLabFeature } from '@/content/types'
 import { LinkButton } from '@/components/ui/button'
 import { Reveal } from '@/components/motion/reveal'
 import { SectionShell, Tag } from '@/components/ui/frame'
 import { ChartLabVideo } from './chartlab-video'
+import { chartlabPath } from '@/lib/chartlab-embed'
 
 const ICONS: Record<ChartLabFeature['icon'], React.ReactNode> = {
   chart: <path d="M4 19V5M4 19h16M8 15l3-4 3 3 5-7" />,
@@ -34,6 +35,7 @@ function FeatureIcon({ icon }: { icon: ChartLabFeature['icon'] }) {
 }
 
 export function ChartLabSection() {
+  const lang = useLang()
   const { chartlab, ui } = useContent()
   return (
     <SectionShell id="chartlab" bg="dots">
@@ -63,7 +65,7 @@ export function ChartLabSection() {
             ))}
           </ul>
           <div className="mt-10 text-center">
-            <LinkButton href={chartlab.appUrl} external>
+            <LinkButton href={chartlabPath(lang)}>
               {ui.tryFree}
             </LinkButton>
           </div>

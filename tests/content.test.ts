@@ -31,7 +31,8 @@ describe.each(LANGS)('content %s', (lang) => {
     expect(new Set(ids).size).toBe(ids.length)
   })
   it('urls are https', () => {
-    expect(new URL(c.chartlab.appUrl).protocol).toBe('https:')
+    expect(c.chartlab).not.toHaveProperty('appUrl') // the call to action is the embedded page now, not an external URL
+    for (const s of strings(c.chartlab)) expect(s).not.toMatch(/example\.com/)
     for (const s of c.about.socials) expect(new URL(s.url).protocol).toBe('https:')
   })
   it('founder has experiences', () => expect(c.about.founder.experiences.length).toBeGreaterThanOrEqual(1))
@@ -62,7 +63,6 @@ describe('locale parity', () => {
   it('same non-text data', () => {
     const pk = (c: typeof id) => c.ebook.packages.map((p) => [p.id, p.price, p.originalPrice, p.checkoutUrl, p.highlighted])
     expect(pk(en)).toEqual(pk(id))
-    expect(en.chartlab.appUrl).toBe(id.chartlab.appUrl)
     expect(en.about.socials.map((s) => s.url)).toEqual(id.about.socials.map((s) => s.url))
     expect(en.about.contact).toEqual(id.about.contact)
     expect(en.about.founder.skills.map((g) => g.items)).toEqual(id.about.founder.skills.map((g) => g.items))

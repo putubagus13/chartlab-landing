@@ -105,7 +105,6 @@ export const siteId: SiteContent = {
   chartlab: {
     title: 'ChartLab: analisa dan uji strategimu di satu tempat',
     subtitle: 'ChartLab menggabungkan analisa chart dan backtesting dalam satu platform. Semua fiturnya gratis.',
-    appUrl: shared.appUrl,
     videoSrc: shared.videoSrc,
     videoPoster: shared.videoPoster,
     videoLabel: 'Video tutorial ChartLab',

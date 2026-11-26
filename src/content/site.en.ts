@@ -105,7 +105,6 @@ export const siteEn: SiteContent = {
   chartlab: {
     title: 'ChartLab: analyze and test your strategy in one place',
     subtitle: 'ChartLab brings chart analysis and backtesting together in one platform. Every feature is free.',
-    appUrl: shared.appUrl,
     videoSrc: shared.videoSrc,
     videoPoster: shared.videoPoster,
     videoLabel: 'ChartLab tutorial video',

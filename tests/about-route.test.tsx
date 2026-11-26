@@ -100,10 +100,10 @@ describe.each(LANGS)('about route %s', (lang) => {
     for (const name of ['X', 'LinkedIn', 'GitHub']) expect(within(main).queryByRole('link', { name })).toBeNull()
   })
 
-  it('ends by sending people to the free web app', async () => {
+  it('ends by sending people to ChartLab', async () => {
     const main = await page()
     const cta = within(main).getByRole('link', { name: c.ui.aboutCta })
-    expect(cta).toHaveAttribute('href', c.chartlab.appUrl)
-    expect(cta).toHaveAttribute('target', '_blank')
+    expect(cta).toHaveAttribute('href', `/${lang}/chartlab`)
+    expect(cta).not.toHaveAttribute('target')
   })
 })

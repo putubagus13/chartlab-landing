@@ -70,7 +70,6 @@ export type SiteContent = {
   chartlab: {
     title: string
     subtitle: string
-    appUrl: string
     videoSrc: string
     videoPoster: string
     videoLabel: string

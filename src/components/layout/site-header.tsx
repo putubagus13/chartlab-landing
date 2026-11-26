@@ -8,6 +8,7 @@ import { AppLink } from '@/components/ui/app-link'
 import { LinkButton } from '@/components/ui/button'
 import { LangSwitch } from '@/components/ui/lang-switch'
 import { ThemeToggle } from '@/components/ui/theme-toggle'
+import { chartlabPath } from '@/lib/chartlab-embed'
 
 export function navHref(lang: string, item: NavItem) {
   return item.page === 'about' ? `/${lang}/about` : `/${lang}${item.hash ? `#${item.hash}` : ''}`
@@ -15,7 +16,7 @@ export function navHref(lang: string, item: NavItem) {
 
 export function SiteHeader() {
   const lang = useLang()
-  const { nav, ui, chartlab } = useContent()
+  const { nav, ui } = useContent()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
@@ -63,7 +64,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 md:flex">
           <LangSwitch />
           <ThemeToggle />
-          <LinkButton href={chartlab.appUrl} external>
+          <LinkButton href={chartlabPath(lang)}>
             {ui.openApp}
           </LinkButton>
         </div>
@@ -108,7 +109,7 @@ export function SiteHeader() {
                 <ThemeToggle />
               </div>
               <div className="mt-3" onClick={() => setOpen(false)}>
-                <LinkButton href={chartlab.appUrl} external className="w-full">
+                <LinkButton href={chartlabPath(lang)} className="w-full">
                   {ui.openApp}
                 </LinkButton>
               </div>

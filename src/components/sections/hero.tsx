@@ -2,10 +2,11 @@ import { useContent, useLang } from "@/i18n/use-content";
 import { useTheme } from "@/theme/theme-provider";
 import { LinkButton } from "@/components/ui/button";
 import { HelixField } from "@/components/ui/helix-field";
+import { chartlabPath } from '@/lib/chartlab-embed'
 
 export function Hero() {
   const lang = useLang();
-  const { hero, ui, chartlab } = useContent();
+  const { hero, ui } = useContent();
   const { resolved } = useTheme();
   return (
     <section id="hero" className="relative isolate overflow-hidden bg-bg">
@@ -38,7 +39,7 @@ export function Hero() {
             style={{ "--i": 3 } as React.CSSProperties}
             className="hero-rise mt-8 flex flex-wrap gap-3"
           >
-            <LinkButton href={chartlab.appUrl} external>
+            <LinkButton href={chartlabPath(lang)}>
               {ui.tryFree}
             </LinkButton>
             <LinkButton href={`/${lang}#chartlab`} variant="ghost">

@@ -1,6 +1,5 @@
 // Non-text data shared by both locales. Replace placeholders (example.com, prices) with real values.
 export const shared = {
-  appUrl: 'https://example.com/app',
   // Where the standalone ChartLab app (the market-chart repo) is deployed. example.com is a reserved
   // placeholder, never a real site: it is replaced with the real URL once that app is live.
   chartlabUrl: 'https://chartlab.example.com',

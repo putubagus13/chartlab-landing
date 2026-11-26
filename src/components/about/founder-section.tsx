@@ -1,17 +1,19 @@
 import { useState } from 'react'
-import { useContent } from '@/i18n/use-content'
+import { useContent, useLang } from '@/i18n/use-content'
 import { Reveal } from '@/components/motion/reveal'
 import { LinkButton } from '@/components/ui/button'
 import { Brackets, SectionShell } from '@/components/ui/frame'
 import { contactLinks, formatPhone } from '@/lib/contact'
 import { FounderPhoto } from './founder-photo'
 import { ExperienceTimeline } from './experience-timeline'
+import { chartlabPath } from '@/lib/chartlab-embed'
 
 type Panel = 'skills' | 'experience' | 'education'
 
 /** The founder: photo, name and a short summary. Skills, experience and education open on demand. */
 export function FounderSection() {
-  const { about, ui, chartlab } = useContent()
+  const lang = useLang()
+  const { about, ui } = useContent()
   const f = about.founder
   const links = contactLinks(about.contact)
   const [open, setOpen] = useState<Panel | null>(null)
@@ -106,7 +108,7 @@ export function FounderSection() {
         )}
 
         <div className="mt-16 text-center">
-          <LinkButton href={chartlab.appUrl} external>
+          <LinkButton href={chartlabPath(lang)}>
             {ui.aboutCta}
           </LinkButton>
         </div>

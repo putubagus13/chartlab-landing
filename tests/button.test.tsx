@@ -16,8 +16,8 @@ describe('LinkButton', () => {
     const cta = within(header).getByRole('link', { name: c.ui.openApp })
     expect(cta.className).toContain('shiny-cta')
     expect(cta.querySelector(':scope > span')?.textContent).toBe(c.ui.openApp)
-    expect(cta).toHaveAttribute('target', '_blank')
-    expect(cta.getAttribute('rel')).toContain('noopener')
+    expect(cta).toHaveAttribute('href', '/id/chartlab') // internal: the embedded page
+    expect(cta).not.toHaveAttribute('target')
   })
 
   it('ghost buttons stay quiet outlines', async () => {
