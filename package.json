@@ -21,7 +21,8 @@
     "framer-motion": "^14.14.0",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
-    "tailwindcss": "^4.1.18"
+    "tailwindcss": "^4.1.18",
+    "threejs-components": "0.0.19"
   },
   "devDependencies": {
     "@tanstack/devtools-vite": "0.8.7",

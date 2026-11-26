@@ -3,6 +3,7 @@ import { isLang } from '@/i18n/lang'
 import { useContent } from '@/i18n/use-content'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteFooter } from '@/components/layout/site-footer'
+import { CursorTubes } from '@/components/ui/cursor-tubes'
 
 export const Route = createFileRoute('/$lang')({
   beforeLoad: ({ params }) => {
@@ -26,6 +27,7 @@ function LangLayout() {
         <Outlet />
       </main>
       <SiteFooter />
+      <CursorTubes />
     </>
   )
 }
