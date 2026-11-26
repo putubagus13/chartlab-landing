@@ -20,7 +20,7 @@ describe('tutorial video playback', () => {
     reduced = false
     await renderWithRouter('/id')
     const video = (await waitFor(() => {
-      const v = document.querySelector('#backtest video')
+      const v = document.querySelector('#chartlab video')
       if (!v) throw new Error('no video')
       return v
     })) as HTMLVideoElement
@@ -32,7 +32,7 @@ describe('tutorial video playback', () => {
     reduced = true
     await renderWithRouter('/id')
     const video = (await waitFor(() => {
-      const v = document.querySelector('#backtest video')
+      const v = document.querySelector('#chartlab video')
       if (!v) throw new Error('no video')
       return v
     })) as HTMLVideoElement

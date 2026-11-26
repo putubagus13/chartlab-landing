@@ -5,7 +5,7 @@ import { HelixField } from "@/components/ui/helix-field";
 
 export function Hero() {
   const lang = useLang();
-  const { hero, ui, backtest } = useContent();
+  const { hero, ui, chartlab } = useContent();
   const { resolved } = useTheme();
   return (
     <section id="hero" className="relative isolate overflow-hidden bg-bg">
@@ -38,10 +38,10 @@ export function Hero() {
             style={{ "--i": 3 } as React.CSSProperties}
             className="hero-rise mt-8 flex flex-wrap gap-3"
           >
-            <LinkButton href={backtest.appUrl} external>
-              {ui.openApp}
+            <LinkButton href={chartlab.appUrl} external>
+              {ui.tryFree}
             </LinkButton>
-            <LinkButton href={`/${lang}#backtest`} variant="ghost">
+            <LinkButton href={`/${lang}#chartlab`} variant="ghost">
               {ui.seeApp}
             </LinkButton>
           </div>

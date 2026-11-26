@@ -97,7 +97,7 @@ export function WorkflowSection() {
                 </ul>
                 <div className="mt-8">
                   {last ? (
-                    <AppLink href={`/${lang}#backtest`} className="text-sm font-semibold text-accent underline-offset-4 hover:underline">
+                    <AppLink href={`/${lang}#chartlab`} className="text-sm font-semibold text-accent underline-offset-4 hover:underline">
                       {w.cta} →
                     </AppLink>
                   ) : (

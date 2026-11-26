@@ -53,6 +53,6 @@ describe.each(LANGS)('WorkflowSection %s', (lang) => {
     fireEvent.click(within(ol).getByRole('button', { name: new RegExp(w.steps[4].label) }))
     expect(within(sec).queryByRole('button', { name: w.next })).toBeNull()
     const cta = within(sec).getByRole('link', { name: new RegExp(w.cta) })
-    expect(cta).toHaveAttribute('href', `/${lang}#backtest`)
+    expect(cta).toHaveAttribute('href', `/${lang}#chartlab`)
   })
 })

@@ -1,4 +1,4 @@
-export type Section = 'hero' | 'workflow' | 'ebook' | 'backtest' | 'services'
+export type Section = 'hero' | 'workflow' | 'ebook' | 'chartlab' | 'services'
 export type NavItem = { label: string; page: 'home' | 'about'; hash?: Section }
 export type EbookPackage = {
   id: string
@@ -11,7 +11,7 @@ export type EbookPackage = {
   highlighted?: boolean
   checkoutUrl: string
 }
-export type BacktestFeature = {
+export type ChartLabFeature = {
   title: string
   description: string
   icon: 'chart' | 'bolt' | 'layers' | 'shield' | 'clock' | 'target'
@@ -42,6 +42,7 @@ export type SiteContent = {
     mostPopular: string
     freeBacktestBadge: string
     openApp: string
+    tryFree: string
     freeBadge: string
     seeApp: string
     menuOpen: string
@@ -66,7 +67,7 @@ export type SiteContent = {
   nav: NavItem[]
   hero: { eyebrow: string; title: string; subtitle: string; bundleNote: string }
   ebook: { title: string; subtitle: string; chapters: string[]; packages: EbookPackage[] }
-  backtest: {
+  chartlab: {
     title: string
     subtitle: string
     appUrl: string
@@ -74,7 +75,7 @@ export type SiteContent = {
     videoPoster: string
     videoLabel: string
     videoNote: string
-    features: BacktestFeature[]
+    features: ChartLabFeature[]
     steps: { title: string; description: string }[]
   }
   services: { title: string; subtitle: string; contactLead: string; items: ServiceItem[] }

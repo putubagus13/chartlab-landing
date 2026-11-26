@@ -15,7 +15,7 @@ export function navHref(lang: string, item: NavItem) {
 
 export function SiteHeader() {
   const lang = useLang()
-  const { nav, ui, backtest } = useContent()
+  const { nav, ui, chartlab } = useContent()
   const [open, setOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
   const btnRef = useRef<HTMLButtonElement>(null)
@@ -63,7 +63,7 @@ export function SiteHeader() {
         <div className="hidden items-center gap-2 md:flex">
           <LangSwitch />
           <ThemeToggle />
-          <LinkButton href={backtest.appUrl} external>
+          <LinkButton href={chartlab.appUrl} external>
             {ui.openApp}
           </LinkButton>
         </div>
@@ -108,7 +108,7 @@ export function SiteHeader() {
                 <ThemeToggle />
               </div>
               <div className="mt-3" onClick={() => setOpen(false)}>
-                <LinkButton href={backtest.appUrl} external className="w-full">
+                <LinkButton href={chartlab.appUrl} external className="w-full">
                   {ui.openApp}
                 </LinkButton>
               </div>

@@ -18,9 +18,9 @@ describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
     const header = await screen.findByRole('banner')
     const links = within(header).getAllByRole('link')
     const hrefOf = (name: string) => links.find((a) => a.textContent === name)?.getAttribute('href')
-    expect(c.nav.map((n) => [n.page, n.hash])).toEqual([['home', 'workflow'], ['home', 'backtest'], ['about', undefined]])
+    expect(c.nav.map((n) => [n.page, n.hash])).toEqual([['home', 'workflow'], ['home', 'chartlab'], ['about', undefined]])
     expect(hrefOf(c.nav[0].label)).toBe(`/${lang}#workflow`)
-    expect(hrefOf(c.nav[1].label)).toBe(`/${lang}#backtest`)
+    expect(hrefOf(c.nav[1].label)).toBe(`/${lang}#chartlab`)
     expect(hrefOf(c.nav[2].label)).toBe(`/${lang}/about`)
     const sw = within(header).getByRole('link', { name: other.toUpperCase() })
     expect(sw.getAttribute('href')).toBe(`/${other}/about`)
@@ -71,8 +71,8 @@ describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
   })
 
   it('language switch keeps the hash after mount', async () => {
-    await renderWithRouter(`/${lang}#backtest`)
+    await renderWithRouter(`/${lang}#chartlab`)
     const header = await screen.findByRole('banner')
-    await waitFor(() => expect(within(header).getByRole('link', { name: other.toUpperCase() })).toHaveAttribute('href', `/${other}#backtest`))
+    await waitFor(() => expect(within(header).getByRole('link', { name: other.toUpperCase() })).toHaveAttribute('href', `/${other}#chartlab`))
   })
 })

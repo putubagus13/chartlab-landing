@@ -31,7 +31,7 @@ describe.each(LANGS)('content %s', (lang) => {
     expect(new Set(ids).size).toBe(ids.length)
   })
   it('urls are https', () => {
-    expect(new URL(c.backtest.appUrl).protocol).toBe('https:')
+    expect(new URL(c.chartlab.appUrl).protocol).toBe('https:')
     for (const s of c.about.socials) expect(new URL(s.url).protocol).toBe('https:')
   })
   it('founder has experiences', () => expect(c.about.founder.experiences.length).toBeGreaterThanOrEqual(1))
@@ -48,7 +48,7 @@ describe.each(LANGS)('content %s', (lang) => {
   })
   it('services and backtest video', () => {
     expect(c.services.items).toHaveLength(4)
-    expect(c.backtest.videoSrc).toBe('/assets/tutorial_backtest_v2.mp4')
+    expect(c.chartlab.videoSrc).toBe('/assets/tutorial_backtest_v2.mp4')
   })
   it('no empty strings', () => {
     for (const s of strings(c)) expect(s.trim()).not.toBe('')
@@ -62,16 +62,16 @@ describe('locale parity', () => {
   it('same non-text data', () => {
     const pk = (c: typeof id) => c.ebook.packages.map((p) => [p.id, p.price, p.originalPrice, p.checkoutUrl, p.highlighted])
     expect(pk(en)).toEqual(pk(id))
-    expect(en.backtest.appUrl).toBe(id.backtest.appUrl)
+    expect(en.chartlab.appUrl).toBe(id.chartlab.appUrl)
     expect(en.about.socials.map((s) => s.url)).toEqual(id.about.socials.map((s) => s.url))
     expect(en.about.contact).toEqual(id.about.contact)
     expect(en.about.founder.skills.map((g) => g.items)).toEqual(id.about.founder.skills.map((g) => g.items))
     expect(en.about.founder.photo).toBe(id.about.founder.photo)
     expect(en.about.company.facts.map((f) => f.value)).toEqual(id.about.company.facts.map((f) => f.value))
     expect(en.services.items.map((i) => i.icon)).toEqual(id.services.items.map((i) => i.icon))
-    expect(en.backtest.videoSrc).toBe(id.backtest.videoSrc)
+    expect(en.chartlab.videoSrc).toBe(id.chartlab.videoSrc)
     expect(en.nav.map((x) => [x.page, x.hash])).toEqual(id.nav.map((x) => [x.page, x.hash]))
     expect(en.workflow.steps.map((s) => [s.id, s.points.length])).toEqual(id.workflow.steps.map((s) => [s.id, s.points.length]))
-    expect(en.backtest.features.map((f) => f.icon)).toEqual(id.backtest.features.map((f) => f.icon))
+    expect(en.chartlab.features.map((f) => f.icon)).toEqual(id.chartlab.features.map((f) => f.icon))
   })
 })

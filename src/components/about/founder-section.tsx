@@ -11,7 +11,7 @@ type Panel = 'skills' | 'experience' | 'education'
 
 /** The founder: photo, name and a short summary. Skills, experience and education open on demand. */
 export function FounderSection() {
-  const { about, ui, backtest } = useContent()
+  const { about, ui, chartlab } = useContent()
   const f = about.founder
   const links = contactLinks(about.contact)
   const [open, setOpen] = useState<Panel | null>(null)
@@ -106,7 +106,7 @@ export function FounderSection() {
         )}
 
         <div className="mt-16 text-center">
-          <LinkButton href={backtest.appUrl} external>
+          <LinkButton href={chartlab.appUrl} external>
             {ui.aboutCta}
           </LinkButton>
         </div>

@@ -103,7 +103,7 @@ describe.each(LANGS)('about route %s', (lang) => {
   it('ends by sending people to the free web app', async () => {
     const main = await page()
     const cta = within(main).getByRole('link', { name: c.ui.aboutCta })
-    expect(cta).toHaveAttribute('href', c.backtest.appUrl)
+    expect(cta).toHaveAttribute('href', c.chartlab.appUrl)
     expect(cta).toHaveAttribute('target', '_blank')
   })
 })

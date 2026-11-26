@@ -9,8 +9,8 @@ import { Brackets } from '@/components/ui/frame'
  * Visitors who ask for reduced motion get a still poster plus a control bar, so nothing moves on its own
  * and they can still choose to play it.
  */
-export function BacktestVideo() {
-  const { backtest } = useContent()
+export function ChartLabVideo() {
+  const { chartlab } = useContent()
   const ref = useRef<HTMLVideoElement>(null)
   const reduced = useReducedMotion()
   const [mounted, setMounted] = useState(false)
@@ -37,18 +37,18 @@ export function BacktestVideo() {
         <Brackets tone="accent" />
         <video
           ref={ref}
-          src={backtest.videoSrc}
-          poster={backtest.videoPoster}
+          src={chartlab.videoSrc}
+          poster={chartlab.videoPoster}
           muted
           loop
           playsInline
           preload="none"
           controls={mounted && !!reduced}
-          aria-label={backtest.videoLabel}
+          aria-label={chartlab.videoLabel}
           className="block aspect-video w-full bg-[#0a0a0a]"
         />
       </div>
-      <figcaption className="mt-3 text-center text-sm text-muted">{backtest.videoNote}</figcaption>
+      <figcaption className="mt-3 text-center text-sm text-muted">{chartlab.videoNote}</figcaption>
     </figure>
   )
 }
