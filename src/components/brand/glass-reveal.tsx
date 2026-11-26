@@ -895,8 +895,10 @@ export function GlassIconReveal({
       ref={wrapRef}
       role="img"
       aria-label={label}
-      className={`relative isolate select-none overflow-hidden ${className}`}
-      style={{ backgroundColor: settings.background, ...style }}
+      className={`isolate select-none overflow-hidden ${className}`}
+      // position is inline on purpose: the canvas inside is absolute, so this must be a positioned box, and a caller's
+      // class ("absolute", "fixed") must not be able to lose a stylesheet-order fight with a "relative" class here
+      style={{ position: "relative", backgroundColor: settings.background, ...style }}
       {...props}
     />
   )

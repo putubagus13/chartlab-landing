@@ -100,7 +100,7 @@ export function Splash() {
           finalScale={0.8}
           tuning={{ startZoom: 2.3, present: 1.5, glide: 1.4 }}
           label="Disatu"
-          className="absolute inset-0"
+          style={{ position: 'absolute', inset: 0 }}
           onComplete={() => control.current.complete()}
           onFallback={() => control.current.fallback()}
         />

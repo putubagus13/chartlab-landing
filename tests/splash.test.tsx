@@ -13,6 +13,8 @@ type GlassProps = {
   logo: string
   originalColors?: boolean
   loop?: boolean
+  style?: React.CSSProperties
+  className?: string
   onComplete?: () => void
   onFallback?: () => void
 }
@@ -33,6 +35,7 @@ vi.mock('@/components/brand/glass-reveal', async (orig) => {
 import { renderWithRouter } from './utils'
 import { SPLASH_KEY, splashInitScript } from '@/lib/splash'
 import { Splash } from '@/components/ui/splash'
+import { GlassIconReveal } from '@/components/brand/glass-reveal'
 
 const css = readFileSync('src/styles.css', 'utf8')
 const loaderCss = css.slice(css.indexOf('/* ---- Disatu loader'))
@@ -62,6 +65,10 @@ describe('splash screen', () => {
     expect(glass!.background.toLowerCase()).toBe('#ffffff')
     expect(glass!.originalColors).toBe(true)
     expect(glass!.loop).toBe(false)
+    // It must fill the overlay. Positioned inline, because Tailwind classes that disagree ("relative" vs "absolute")
+    // are settled by stylesheet order, which once left this wrapper 0x0 and the whole intro invisible.
+    expect(glass!.style).toMatchObject({ position: 'absolute' })
+    expect(glass!.style).toMatchObject({ inset: 0 })
     expect(glass!.logo).toContain('#ffd33f') // the yellow accent
     expect(glass!.logo).toContain('#0a0a0a') // the D, dark on light
     cleanup()
@@ -112,6 +119,21 @@ describe('splash screen', () => {
   it('shows nothing, and no scripts need to run, for visitors with JavaScript off', () => {
     const { container } = render(<Splash />)
     expect(container.querySelector('noscript')).not.toBeNull()
+  })
+})
+
+describe('GlassIconReveal wrapper', () => {
+  const logo = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 10 10"><path d="M0 0h10v10z"/></svg>'
+  it('takes the position it is given, inline, whatever classes come with it', () => {
+    mockGlass = false
+    const { container } = render(<GlassIconReveal logo={logo} className="relative absolute inset-0" style={{ position: 'absolute', inset: 0 }} />)
+    const el = container.firstElementChild as HTMLElement
+    expect(el.style.position).toBe('absolute')
+  })
+  it('is positioned (so its canvas can fill it) when nothing is given', () => {
+    mockGlass = false
+    const { container } = render(<GlassIconReveal logo={logo} />)
+    expect((container.firstElementChild as HTMLElement).style.position).toBe('relative')
   })
 })
 
