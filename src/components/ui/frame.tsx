@@ -28,9 +28,9 @@ const BG = {
 } as const
 
 /** A full-width section. `bg` picks its backdrop, `edge` which hairlines it draws, so neighbours never double up. */
-export function SectionShell({ id, bg, edge = 'b', children }: { id: string; bg: keyof typeof BG; edge?: keyof typeof EDGE; children: ReactNode }) {
+export function SectionShell({ id, bg, edge = 'b', className = '', children }: { id: string; bg: keyof typeof BG; edge?: keyof typeof EDGE; className?: string; children: ReactNode }) {
   return (
-    <section id={id} className={`${EDGE[edge]} border-border ${BG[bg]} py-20 sm:py-28`}>
+    <section id={id} className={`${EDGE[edge]} border-border ${BG[bg]} py-20 sm:py-28 ${className}`}>
       {children}
     </section>
   )

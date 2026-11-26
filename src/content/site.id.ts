@@ -8,8 +8,8 @@ export const siteId: SiteContent = {
     homeTitle: 'Disatu — Web App Backtest Crypto Gratis',
     homeDescription:
       'Uji strategi trading crypto-mu pada data historis dengan web app backtest Disatu. Gratis diakses, lengkap dengan Bar Replay, order SL/TP, dan jurnal trade.',
-    aboutTitle: 'Tentang Saya — Disatu',
-    aboutDescription: 'Putu Bagus Raditya: trader crypto dan software engineer di balik Disatu.',
+    aboutTitle: 'Tentang Disatu',
+    aboutDescription: 'Disatu menyediakan jasa pembuatan website, aplikasi mobile, sistem backend, dan web app. Berdiri sejak 2024, didirikan oleh Putu Bagus Raditya.',
   },
   ui: {
     buyEbook: 'Beli E-Book',
@@ -41,7 +41,7 @@ export const siteId: SiteContent = {
   nav: [
     { label: 'Alur Trading', page: 'home', hash: 'workflow' },
     { label: 'Web App Backtest', page: 'home', hash: 'backtest' },
-    { label: 'Tentang Saya', page: 'about' },
+    { label: 'Tentang Disatu', page: 'about' },
   ],
   hero: {
     eyebrow: 'Web App Backtest · Gratis',
@@ -108,12 +108,14 @@ export const siteId: SiteContent = {
     ],
   },
   services: {
-    title: 'Layanan Pembuatan Website dan Aplikasi',
-    subtitle: 'Selain trading, saya menerima pembuatan website dan aplikasi sesuai kebutuhanmu.',
-    contactLead: 'Tertarik? Hubungi saya langsung.',
+    title: 'Layanan Disatu',
+    subtitle: 'Dari company profile sampai sistem backend, kami bantu wujudkan produk digital sesuai kebutuhanmu.',
+    contactLead: 'Punya proyek? Hubungi kami.',
     items: [
-      { title: 'Pembuatan Website', description: 'Landing page, company profile, hingga website bisnis yang cepat dan responsif.', icon: shared.serviceIcons[0] },
-      { title: 'Pembuatan Aplikasi', description: 'Aplikasi yang dirancang untuk kebutuhanmu, dari ide sampai siap dipakai.', icon: shared.serviceIcons[1] },
+      { title: 'Website Company Profile', description: 'Website profil perusahaan yang rapi, cepat, dan mencerminkan brand bisnismu.', icon: shared.serviceIcons[0] },
+      { title: 'Aplikasi Mobile', description: 'Aplikasi mobile yang dirancang sesuai kebutuhan bisnis dan penggunanya.', icon: shared.serviceIcons[1] },
+      { title: 'Sistem Backend', description: 'API dan sistem di balik layar yang andal dan siap dikembangkan.', icon: shared.serviceIcons[2] },
+      { title: 'Web App dan E-Commerce', description: 'Web app sesuai kebutuhan, seperti toko online, dashboard, dan sistem bisnis lainnya.', icon: shared.serviceIcons[3] },
     ],
   },
   workflow: {
@@ -188,36 +190,52 @@ export const siteId: SiteContent = {
     subtitle: 'Web app-nya gratis. Buktikan idemu dengan data, bukan perasaan.',
   },
   about: {
-    name: 'Putu Bagus Raditya',
-    headline: 'Trader Crypto dan Software Engineer',
-    bio: 'Saya trader crypto dengan pengalaman 3 tahun yang memakai pendekatan Smart Money Concept, sekaligus software engineer. Saya mengembangkan Disatu, web app backtest yang gratis dipakai, dan menerima pembuatan website serta aplikasi secara pribadi.',
-    location: 'Kota Bandung, Jawa Barat',
+    company: {
+      title: 'Tentang Disatu',
+      tag: 'Berdiri sejak 2024',
+      intro:
+        'Disatu menyediakan jasa pembuatan website company profile, aplikasi mobile, sistem backend, dan web app seperti e-commerce. Kami juga mengembangkan web app backtest crypto yang gratis dipakai.',
+      principleTitle: 'Kebutuhan klien nomor satu',
+      principle: 'Disatu selalu mengutamakan kebutuhan klien dan mencarikan solusi terbaik untuk setiap proyek.',
+      facts: [
+        { label: 'Berdiri', value: shared.foundedYear },
+        { label: 'Founder', value: 'Putu Bagus Raditya' },
+      ],
+    },
+    founder: {
+      name: 'Putu Bagus Raditya',
+      role: 'Founder Disatu',
+      summary:
+        'Trader crypto dengan pengalaman 3 tahun yang memakai pendekatan Smart Money Concept, sekaligus software engineer di NoLimit Indonesia.',
+      location: 'Kota Bandung, Jawa Barat',
+      photo: shared.founderPhoto,
+      education: [{ degree: 'S1 Fisika', school: 'Universitas Lampung' }],
+      skills: [
+        { group: 'Frontend', items: shared.skills.frontend },
+        { group: 'Backend', items: shared.skills.backend },
+        { group: 'Database', items: shared.skills.database },
+        { group: 'Blockchain', items: shared.skills.blockchain },
+        { group: 'Trading', items: shared.skills.trading },
+      ],
+      experiences: [
+        {
+          role: 'Software Engineer',
+          company: 'NoLimit Indonesia',
+          period: 'Okt 2023 — Sekarang',
+          description: 'Bekerja sebagai software engineer.',
+          highlights: [],
+        },
+        {
+          role: 'Trader Crypto',
+          company: 'Market crypto',
+          period: '± 3 tahun',
+          description: 'Trading crypto dengan pendekatan Smart Money Concept.',
+          highlights: [],
+        },
+      ],
+    },
     contact: shared.contact,
     socials: shared.socials,
-    education: [{ degree: 'S1 Fisika', school: 'Universitas Lampung' }],
-    skills: [
-      { group: 'Frontend', items: shared.skills.frontend },
-      { group: 'Backend', items: shared.skills.backend },
-      { group: 'Database', items: shared.skills.database },
-      { group: 'Blockchain', items: shared.skills.blockchain },
-      { group: 'Trading', items: shared.skills.trading },
-    ],
-    experiences: [
-      {
-        role: 'Software Engineer',
-        company: 'NoLimit Indonesia',
-        period: 'Okt 2023 — Sekarang',
-        description: 'Bekerja sebagai software engineer.',
-        highlights: [],
-      },
-      {
-        role: 'Trader Crypto',
-        company: 'Market crypto',
-        period: '± 3 tahun',
-        description: 'Trading crypto dengan pendekatan Smart Money Concept.',
-        highlights: [],
-      },
-    ],
   },
   footer: { note: '© Disatu. Konten edukasi, bukan saran keuangan.' },
 }

@@ -24,7 +24,7 @@ export type WorkflowStep = {
   description: string
   points: { label: string; text: string }[]
 }
-export type ServiceItem = { title: string; description: string; icon: 'web' | 'app' }
+export type ServiceItem = { title: string; description: string; icon: 'web' | 'mobile' | 'backend' | 'webapp' }
 export type Education = { degree: string; school: string }
 export type SkillGroup = { group: string; items: string[] }
 export type Experience = {
@@ -91,16 +91,27 @@ export type SiteContent = {
   }
   offer: { title: string; subtitle: string }
   about: {
-    name: string
-    headline: string
-    bio: string
-    photo?: string
-    location: string
+    company: {
+      title: string
+      tag: string
+      intro: string
+      principleTitle: string
+      principle: string
+      facts: { label: string; value: string }[]
+    }
+    founder: {
+      name: string
+      role: string
+      summary: string
+      location: string
+      photo: string
+      education: Education[]
+      skills: SkillGroup[]
+      experiences: Experience[]
+    }
+    /** Company contact: phone (E.164) and email. */
     contact: { phone: string; email: string }
     socials: { label: string; url: string }[]
-    education: Education[]
-    skills: SkillGroup[]
-    experiences: Experience[]
   }
   footer: { note: string }
 }

@@ -12,10 +12,24 @@ const ICONS: Record<ServiceItem['icon'], React.ReactNode> = {
       <path d="M3 9h18M7 6.5h.01M10 6.5h.01" />
     </>
   ),
-  app: (
+  mobile: (
     <>
       <rect x="7" y="2.5" width="10" height="19" rx="2" />
       <path d="M11 18.5h2" />
+    </>
+  ),
+  backend: (
+    <>
+      <rect x="3" y="3.5" width="18" height="7" rx="2" />
+      <rect x="3" y="13.5" width="18" height="7" rx="2" />
+      <path d="M7 7h.01M7 17h.01M11 7h6M11 17h6" />
+    </>
+  ),
+  webapp: (
+    <>
+      <path d="M3 4h2l2.4 10.2a1.5 1.5 0 0 0 1.5 1.2h7.7a1.5 1.5 0 0 0 1.5-1.1L20 8H6.2" />
+      <circle cx="9.5" cy="19.5" r="1.2" />
+      <circle cx="16.5" cy="19.5" r="1.2" />
     </>
   ),
 }
@@ -31,7 +45,7 @@ export function ServicesSection() {
           <p className="mt-4 text-lg text-muted">{services.subtitle}</p>
         </Reveal>
 
-        <ul className="mt-12 grid gap-6 md:grid-cols-2">
+        <ul className="mt-12 grid gap-6 sm:grid-cols-2">
           {services.items.map((item, i) => (
             <Reveal as="li" key={item.title} delay={i * 0.08} className="border border-border bg-bg p-6 sm:p-8">
               <span aria-hidden="true" className="block h-0.5 w-12 bg-grad" />

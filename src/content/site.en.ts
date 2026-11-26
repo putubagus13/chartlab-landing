@@ -8,8 +8,8 @@ export const siteEn: SiteContent = {
     homeTitle: 'Disatu — Free Crypto Backtest Web App',
     homeDescription:
       'Test your crypto trading strategy on historical data with the Disatu backtest web app. Free to use, with Bar Replay, SL/TP orders, and a trade journal.',
-    aboutTitle: 'About Me — Disatu',
-    aboutDescription: 'Putu Bagus Raditya: the crypto trader and software engineer behind Disatu.',
+    aboutTitle: 'About Disatu',
+    aboutDescription: 'Disatu builds websites, mobile apps, backend systems, and web apps. Founded in 2024 by Putu Bagus Raditya.',
   },
   ui: {
     buyEbook: 'Buy E-Book',
@@ -41,7 +41,7 @@ export const siteEn: SiteContent = {
   nav: [
     { label: 'Trading Workflow', page: 'home', hash: 'workflow' },
     { label: 'Backtest Web App', page: 'home', hash: 'backtest' },
-    { label: 'About Me', page: 'about' },
+    { label: 'About Disatu', page: 'about' },
   ],
   hero: {
     eyebrow: 'Backtest Web App · Free',
@@ -108,12 +108,14 @@ export const siteEn: SiteContent = {
     ],
   },
   services: {
-    title: 'Website and App Development Services',
-    subtitle: 'Besides trading, I take on website and app development tailored to your needs.',
-    contactLead: 'Interested? Contact me directly.',
+    title: 'Disatu Services',
+    subtitle: 'From company profiles to backend systems, we help turn your idea into a digital product that fits your needs.',
+    contactLead: 'Got a project? Get in touch.',
     items: [
-      { title: 'Website Development', description: 'Landing pages, company profiles, and business websites that are fast and responsive.', icon: shared.serviceIcons[0] },
-      { title: 'App Development', description: 'Apps designed around your needs, from idea to ready to use.', icon: shared.serviceIcons[1] },
+      { title: 'Company Profile Websites', description: 'Clean, fast company websites that reflect your brand.', icon: shared.serviceIcons[0] },
+      { title: 'Mobile Apps', description: 'Mobile apps designed around your business and its users.', icon: shared.serviceIcons[1] },
+      { title: 'Backend Systems', description: 'APIs and behind-the-scenes systems that are reliable and ready to grow.', icon: shared.serviceIcons[2] },
+      { title: 'Web Apps and E-Commerce', description: 'Custom web apps such as online stores, dashboards, and other business systems.', icon: shared.serviceIcons[3] },
     ],
   },
   workflow: {
@@ -188,36 +190,52 @@ export const siteEn: SiteContent = {
     subtitle: 'The web app is free. Prove your ideas with data, not gut feeling.',
   },
   about: {
-    name: 'Putu Bagus Raditya',
-    headline: 'Crypto Trader and Software Engineer',
-    bio: 'I am a crypto trader with 3 years of experience using the Smart Money Concept approach, and a software engineer. I develop Disatu, a backtest web app that is free to use, and I take on website and app projects personally.',
-    location: 'Bandung City, West Java',
+    company: {
+      title: 'About Disatu',
+      tag: 'Founded in 2024',
+      intro:
+        'Disatu builds company-profile websites, mobile apps, backend systems, and web apps such as e-commerce. We also develop a crypto backtest web app that is free to use.',
+      principleTitle: 'Client needs come first',
+      principle: 'Disatu always puts the client’s needs first and looks for the best solution for every project.',
+      facts: [
+        { label: 'Founded', value: shared.foundedYear },
+        { label: 'Founder', value: 'Putu Bagus Raditya' },
+      ],
+    },
+    founder: {
+      name: 'Putu Bagus Raditya',
+      role: 'Founder of Disatu',
+      summary:
+        'A crypto trader with 3 years of experience using the Smart Money Concept approach, and a software engineer at NoLimit Indonesia.',
+      location: 'Bandung City, West Java',
+      photo: shared.founderPhoto,
+      education: [{ degree: 'Bachelor’s in Physics', school: 'University of Lampung' }],
+      skills: [
+        { group: 'Frontend', items: shared.skills.frontend },
+        { group: 'Backend', items: shared.skills.backend },
+        { group: 'Database', items: shared.skills.database },
+        { group: 'Blockchain', items: shared.skills.blockchain },
+        { group: 'Trading', items: shared.skills.trading },
+      ],
+      experiences: [
+        {
+          role: 'Software Engineer',
+          company: 'NoLimit Indonesia',
+          period: 'Oct 2023 — Present',
+          description: 'Working as a software engineer.',
+          highlights: [],
+        },
+        {
+          role: 'Crypto Trader',
+          company: 'Crypto market',
+          period: '~3 years',
+          description: 'Trading crypto with the Smart Money Concept approach.',
+          highlights: [],
+        },
+      ],
+    },
     contact: shared.contact,
     socials: shared.socials,
-    education: [{ degree: 'Bachelor’s in Physics', school: 'University of Lampung' }],
-    skills: [
-      { group: 'Frontend', items: shared.skills.frontend },
-      { group: 'Backend', items: shared.skills.backend },
-      { group: 'Database', items: shared.skills.database },
-      { group: 'Blockchain', items: shared.skills.blockchain },
-      { group: 'Trading', items: shared.skills.trading },
-    ],
-    experiences: [
-      {
-        role: 'Software Engineer',
-        company: 'NoLimit Indonesia',
-        period: 'Oct 2023 — Present',
-        description: 'Working as a software engineer.',
-        highlights: [],
-      },
-      {
-        role: 'Crypto Trader',
-        company: 'Crypto market',
-        period: '~3 years',
-        description: 'Trading crypto with the Smart Money Concept approach.',
-        highlights: [],
-      },
-    ],
   },
   footer: { note: '© Disatu. Educational content, not financial advice.' },
 }

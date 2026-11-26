@@ -18,6 +18,8 @@ export const shared = {
     blockchain: ['Solidity'],
     trading: ['Smart Money Concept'],
   },
-  serviceIcons: ['web', 'app'] as const,
+  serviceIcons: ['web', 'mobile', 'backend', 'webapp'] as const,
+  founderPhoto: '/assets/profile-picture.JPG',
+  foundedYear: '2024',
   icons: ['chart', 'bolt', 'layers', 'shield', 'clock', 'target'] as const,
 }
