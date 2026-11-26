@@ -17,3 +17,8 @@ export const VIEWBOX_MARK = '0 0 302 302'
 export const VIEWBOX_WIDE = '0 0 815 302'
 export const WORDMARK_X = 358.75
 export const WORDMARK_Y = 126.75
+
+/** The mark (the "D" plus its yellow accent) as standalone SVG markup, for the WebGL glass reveal. */
+export function markSvg(bodyColor: string): string {
+  return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="${VIEWBOX_MARK}"><path fill="#ffd33f" d="${ACCENT_PATH}"/><path fill="${bodyColor}" d="${MARK_PATH}"/></svg>`
+}

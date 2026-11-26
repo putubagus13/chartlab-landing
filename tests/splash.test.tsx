@@ -1,9 +1,34 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest'
 import { readFileSync } from 'node:fs'
-import { render, waitFor } from '@testing-library/react'
+import { act, cleanup, render, waitFor } from '@testing-library/react'
 
 // Keep the real timings out of the test: a 40 ms intro and a 20 ms fade.
 vi.mock('@/lib/splash', async (orig) => ({ ...((await orig()) as object), SPLASH_MIN_MS: 40, SPLASH_FADE_MS: 20 }))
+
+// A stand-in for the WebGL glass engine so the splash's own logic can be driven step by step.
+type GlassProps = {
+  look: string
+  background: string
+  plateColor?: string
+  logo: string
+  originalColors?: boolean
+  loop?: boolean
+  onComplete?: () => void
+  onFallback?: () => void
+}
+let glass: GlassProps | null = null
+let mockGlass = true
+vi.mock('@/components/brand/glass-reveal', async (orig) => {
+  const real = (await orig()) as { GlassIconReveal: unknown }
+  return {
+    ...real,
+    GlassIconReveal: (props: GlassProps) => {
+      if (!mockGlass) return (real.GlassIconReveal as (p: GlassProps) => unknown)(props)
+      glass = props
+      return <div data-testid="glass" />
+    },
+  }
+})
 
 import { renderWithRouter } from './utils'
 import { SPLASH_KEY, splashInitScript } from '@/lib/splash'
@@ -16,24 +41,64 @@ const overlay = () => document.querySelector('[data-splash-overlay]') as HTMLEle
 
 beforeEach(() => {
   delete document.documentElement.dataset.splash
+  document.documentElement.classList.remove('dark')
   sessionStorage.clear()
+  glass = null
+  mockGlass = true
 })
 
 describe('splash screen', () => {
-  it('is part of the app and covers the page on a first visit with the animated logo (mark, accent, wordmark)', async () => {
+  it('is part of the app and covers the page on a first visit', async () => {
     await renderWithRouter('/id')
     const el = overlay()!
     expect(el).not.toBeNull()
     expect(el.getAttribute('aria-hidden')).toBe('true') // decorative: the page behind it is readable at once
-    expect(el.querySelector('.dsl-g')).not.toBeNull()
-    expect(el.querySelector('.dsl-y')).not.toBeNull()
-    expect(el.querySelector('.dsl-w')).not.toBeNull()
   })
 
-  it('fades out after the intro and is then removed from the page', async () => {
+  it('plays the glass reveal with the Disatu mark in its own colours, in light and dark', async () => {
     render(<Splash />)
+    await waitFor(() => expect(glass).not.toBeNull())
+    expect(glass!.look).toBe('light')
+    expect(glass!.background.toLowerCase()).toBe('#ffffff')
+    expect(glass!.originalColors).toBe(true)
+    expect(glass!.loop).toBe(false)
+    expect(glass!.logo).toContain('#ffd33f') // the yellow accent
+    expect(glass!.logo).toContain('#0a0a0a') // the D, dark on light
+    cleanup()
+
+    glass = null
+    document.documentElement.classList.add('dark')
+    render(<Splash />)
+    await waitFor(() => expect(glass).not.toBeNull())
+    expect(glass!.look).toBe('dark')
+    expect(glass!.background.toLowerCase()).toBe('#0a0a0a') // the site's near-black, not pure black
+    expect(glass!.logo).toContain('#f5f5f5') // the D, light on dark
+  })
+
+  it('stays until the reveal has finished, then fades out and is removed', async () => {
+    render(<Splash />)
+    await waitFor(() => expect(glass).not.toBeNull())
+    await new Promise((r) => setTimeout(r, 120)) // well past the (mocked) minimum time
     expect(overlay()?.getAttribute('data-done')).toBe('false')
+    act(() => glass!.onComplete!())
     await waitFor(() => expect(overlay()?.getAttribute('data-done')).toBe('true'))
+    await waitFor(() => expect(overlay()).toBeNull())
+  })
+
+  it('falls back to the CSS logo animation when WebGL is unavailable, and still finishes by itself', async () => {
+    render(<Splash />)
+    await waitFor(() => expect(glass).not.toBeNull())
+    act(() => glass!.onFallback!())
+    expect(overlay()!.querySelector('.dsl-g')).not.toBeNull()
+    expect(overlay()!.querySelector('.dsl-y')).not.toBeNull()
+    await waitFor(() => expect(overlay()?.getAttribute('data-done')).toBe('true'))
+    await waitFor(() => expect(overlay()).toBeNull())
+  })
+
+  it('uses the CSS animation when the real engine finds no WebGL2 (jsdom has none)', async () => {
+    mockGlass = false
+    render(<Splash />)
+    await waitFor(() => expect(overlay()!.querySelector('.dsl-g')).not.toBeNull())
     await waitFor(() => expect(overlay()).toBeNull())
   })
 
@@ -41,6 +106,12 @@ describe('splash screen', () => {
     document.documentElement.dataset.splash = 'seen'
     render(<Splash />)
     expect(overlay()).toBeNull() // at once, not after the intro's timers
+    expect(glass).toBeNull() // and the heavy engine is never started
+  })
+
+  it('shows nothing, and no scripts need to run, for visitors with JavaScript off', () => {
+    const { container } = render(<Splash />)
+    expect(container.querySelector('noscript')).not.toBeNull()
   })
 })
 

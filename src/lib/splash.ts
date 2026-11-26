@@ -1,8 +1,10 @@
 // Splash screen settings, shared by the head script, the component and the tests.
 
 export const SPLASH_KEY = 'disatu-splash'
-/** The intro never ends before this many ms after the page started loading, so the logo animation can play out. */
+/** Fallback (no WebGL): the CSS logo animation never ends before this many ms after the page started loading. */
 export const SPLASH_MIN_MS = 2000
+/** Hard cap: whatever happens, the intro is over this many ms after the page started loading. */
+export const SPLASH_MAX_MS = 5500
 /** How long the fade-out takes. Keep in sync with --splash-fade in styles.css. */
 export const SPLASH_FADE_MS = 500
 
