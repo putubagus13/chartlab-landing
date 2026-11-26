@@ -50,6 +50,7 @@ describe('cursor tubes effect', () => {
     const [canvas, opts] = factory.mock.calls[0] as [HTMLCanvasElement, { tubes: { colors: string[]; lights: { colors: string[] } } }]
     const layer = canvas.parentElement as HTMLElement
     expect(layer.className).toMatch(/pointer-events-none/)
+    expect(layer.className).toContain('cursor-tubes') // dims over links and buttons (rule in styles.css)
     expect(layer.className).toMatch(/fixed/)
     expect(layer.getAttribute('aria-hidden')).toBe('true')
     // the library paints an opaque black canvas, so the layer must blend it into the page instead of covering it

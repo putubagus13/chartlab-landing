@@ -54,7 +54,7 @@ export function CursorTubes() {
     // light theme: invert + hue-rotate turns the black to white and the glow to deep tones, then `multiply` drops the white.
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-[60] opacity-75 mix-blend-multiply [filter:invert(1)_hue-rotate(180deg)] dark:opacity-100 dark:mix-blend-screen dark:[filter:none]"
+      className="cursor-tubes pointer-events-none fixed inset-0 z-[60] opacity-75 mix-blend-multiply [filter:invert(1)_hue-rotate(180deg)] dark:opacity-100 dark:mix-blend-screen dark:[filter:none]"
     >
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>

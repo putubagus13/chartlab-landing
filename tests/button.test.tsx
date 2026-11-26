@@ -1,0 +1,56 @@
+import { describe, it, expect } from 'vitest'
+import { readFileSync } from 'node:fs'
+import { screen, waitFor, within } from '@testing-library/react'
+import { renderWithRouter } from './utils'
+import { getContent } from '@/content'
+
+const css = readFileSync('src/styles.css', 'utf8')
+const shiny = css.slice(css.indexOf('/* ---- Shiny button'))
+
+describe('LinkButton', () => {
+  const c = getContent('id')
+
+  it('primary buttons use the shiny style, with the label in the span the effect hangs on', async () => {
+    await renderWithRouter('/id')
+    const header = await screen.findByRole('banner')
+    const cta = within(header).getByRole('link', { name: c.ui.openApp })
+    expect(cta.className).toContain('shiny-cta')
+    expect(cta.querySelector(':scope > span')?.textContent).toBe(c.ui.openApp)
+    expect(cta).toHaveAttribute('target', '_blank')
+    expect(cta.getAttribute('rel')).toContain('noopener')
+  })
+
+  it('ghost buttons stay quiet outlines', async () => {
+    await renderWithRouter('/id')
+    const hero = await waitFor(() => {
+      const el = document.getElementById('hero')
+      if (!el) throw new Error('no hero')
+      return el
+    })
+    const ghost = within(hero).getByRole('link', { name: c.ui.seeApp })
+    expect(ghost.className).not.toContain('shiny-cta')
+    expect(ghost.className).toContain('border')
+  })
+})
+
+describe('shiny button stylesheet', () => {
+  it('exists and is built on the registered gradient properties', () => {
+    expect(shiny.length).toBeGreaterThan(200)
+    for (const p of ['--gradient-angle', '--gradient-angle-offset', '--gradient-percent', '--gradient-shine']) {
+      expect(shiny).toContain(`@property ${p}`)
+    }
+  })
+  it('uses brand colours (green highlight, logo-yellow shine), not the example blue', () => {
+    expect(shiny).toMatch(/--shiny-cta-highlight:\s*#3fa37f/i)
+    expect(shiny).toMatch(/#ffd33f/i)
+    expect(shiny).not.toMatch(/highlight:\s*blue/i)
+    expect(shiny).not.toMatch(/#8484ff/i)
+  })
+  it('dims the cursor-tubes glow while the pointer is on an interactive element, so labels stay readable', () => {
+    expect(css).toMatch(/body:has\([^)]*a:hover[^)]*button:hover[^)]*\)\s*\.cursor-tubes\s*\{[^}]*opacity/)
+  })
+  it('does not pull a web font from Google and switches animation off for reduced motion', () => {
+    expect(shiny).not.toMatch(/@import/)
+    expect(shiny).toMatch(/prefers-reduced-motion:\s*reduce\)[\s\S]*animation:\s*none/)
+  })
+})
