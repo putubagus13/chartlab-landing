@@ -1,5 +1,5 @@
-import { describe, it, expect, vi } from 'vitest'
-import { fireEvent, waitFor, within } from '@testing-library/react'
+import { describe, it, expect, vi, afterEach } from 'vitest'
+import { act, waitFor, within } from '@testing-library/react'
 
 // framer returns null on the server and the real preference on the client.
 let reduced: boolean | null = false
@@ -12,46 +12,59 @@ import { renderWithRouter } from './utils'
 import { getContent } from '@/content'
 import { LANGS } from '@/i18n/lang'
 
-async function hero() {
-  return waitFor(() => {
+afterEach(() => vi.useRealTimers())
+
+async function visual() {
+  const hero = await waitFor(() => {
     const el = document.getElementById('hero')
     if (!el) throw new Error('no hero')
     return el
   })
+  const field = hero.querySelector('[data-mode]') as HTMLElement
+  expect(field).not.toBeNull()
+  return { hero, field }
 }
 
-describe.each(LANGS)('hero animation controls %s', (lang) => {
-  const ui = getContent(lang).ui
+describe.each(LANGS)('hero animation %s', (lang) => {
+  const c = getContent(lang)
 
-  it('offers three shapes (one pressed) and no "strata" wording', async () => {
+  it('has no controls and no "strata" wording', async () => {
     reduced = false
     await renderWithRouter(`/${lang}`)
-    const h = await hero()
-    const group = within(h).getByRole('group', { name: ui.visualModesLabel })
-    const buttons = within(group).getAllByRole('button')
-    expect(buttons.map((b) => b.textContent)).toEqual([ui.visualModes.helix, ui.visualModes.neural, ui.visualModes.ribbons])
-    expect(buttons.filter((b) => b.getAttribute('aria-pressed') === 'true')).toHaveLength(1)
-    expect(buttons[0]).toHaveAttribute('aria-pressed', 'true')
-    fireEvent.click(buttons[2])
-    expect(buttons[2]).toHaveAttribute('aria-pressed', 'true')
-    expect(buttons[0]).toHaveAttribute('aria-pressed', 'false')
-    expect(h.textContent ?? '').not.toMatch(/strata/i)
+    const { hero } = await visual()
+    // the only buttons left in the hero are none at all: its CTAs are links
+    expect(within(hero).queryAllByRole('button')).toHaveLength(0)
+    expect(within(hero).getByRole('img')).toHaveAttribute('aria-label', c.ui.visualLabel)
+    expect(hero.textContent ?? '').not.toMatch(/strata/i)
   })
 
-  it('can be paused and resumed', async () => {
+  it('changes shape on its own every few seconds, looping helix -> neural -> ribbons', async () => {
     reduced = false
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] })
     await renderWithRouter(`/${lang}`)
-    const h = await hero()
-    const pause = await within(h).findByRole('button', { name: ui.visualPause })
-    fireEvent.click(pause)
-    expect(within(h).getByRole('button', { name: ui.visualPlay })).toBeInTheDocument()
+    const { field } = await visual()
+    expect(field.dataset.mode).toBe('helix')
+    const next = async () => {
+      await act(async () => {
+        vi.advanceTimersByTime(6000)
+      })
+    }
+    await next()
+    expect(field.dataset.mode).toBe('neural')
+    await next()
+    expect(field.dataset.mode).toBe('ribbons')
+    await next()
+    expect(field.dataset.mode).toBe('helix')
   })
 
-  it('starts paused for visitors who ask for reduced motion', async () => {
+  it('stays on one still shape for visitors who ask for reduced motion', async () => {
     reduced = true
+    vi.useFakeTimers({ toFake: ['setInterval', 'clearInterval'] })
     await renderWithRouter(`/${lang}`)
-    const h = await hero()
-    expect(await within(h).findByRole('button', { name: ui.visualPlay })).toBeInTheDocument()
-    expect(within(h).queryByRole('button', { name: ui.visualPause })).toBeNull()
+    const { field } = await visual()
+    await act(async () => {
+      vi.advanceTimersByTime(30000)
+    })
+    expect(field.dataset.mode).toBe('helix')
   })
 })

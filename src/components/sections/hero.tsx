@@ -68,16 +68,7 @@ export function Hero() {
         </div>
 
         <div className="order-1 flex justify-center lg:order-2">
-          <HelixField
-            dark={resolved === "dark"}
-            label={ui.visualLabel}
-            labels={{
-              modesLabel: ui.visualModesLabel,
-              modes: ui.visualModes,
-              pause: ui.visualPause,
-              play: ui.visualPlay,
-            }}
-          />
+          <HelixField dark={resolved === "dark"} label={ui.visualLabel} />
         </div>
       </div>
     </section>
