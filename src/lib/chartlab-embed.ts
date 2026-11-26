@@ -9,6 +9,9 @@ export type ChartLabSet = { type: 'chartlab:set'; theme?: EmbedTheme; lang?: Emb
 
 export const READY_TYPE = 'chartlab:ready'
 
+/** How long to wait for `chartlab:ready` before the page offers the app in its own tab instead. */
+export const CHARTLAB_TIMEOUT_MS = 8000
+
 /** Where the app lives. Override per environment, e.g. VITE_CHARTLAB_URL=http://localhost:5192 for local work. */
 export const CHARTLAB_BASE: string = (import.meta.env.VITE_CHARTLAB_URL as string | undefined) || shared.chartlabUrl
 

@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as LangRouteImport } from './routes/$lang'
 import { Route as LangIndexRouteImport } from './routes/$lang/index'
 import { Route as LangAboutRouteImport } from './routes/$lang/about'
+import { Route as LangChartlabRouteImport } from './routes/$lang/chartlab'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
@@ -34,16 +35,23 @@ const LangAboutRoute = LangAboutRouteImport.update({
   path: '/about',
   getParentRoute: () => LangRoute,
 } as any)
+const LangChartlabRoute = LangChartlabRouteImport.update({
+  id: '/chartlab',
+  path: '/chartlab',
+  getParentRoute: () => LangRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
   '/$lang/about': typeof LangAboutRoute
+  '/$lang/chartlab': typeof LangChartlabRoute
   '/$lang/': typeof LangIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$lang/about': typeof LangAboutRoute
+  '/$lang/chartlab': typeof LangChartlabRoute
   '/$lang': typeof LangIndexRoute
 }
 export interface FileRoutesById {
@@ -51,14 +59,16 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/$lang': typeof LangRouteWithChildren
   '/$lang/about': typeof LangAboutRoute
+  '/$lang/chartlab': typeof LangChartlabRoute
   '/$lang/': typeof LangIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$lang' | '/$lang/about' | '/$lang/'
+  fullPaths: '/' | '/$lang' | '/$lang/about' | '/$lang/chartlab' | '/$lang/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$lang/about' | '/$lang'
-  id: '__root__' | '/' | '/$lang' | '/$lang/about' | '/$lang/'
+  to: '/' | '/$lang/about' | '/$lang/chartlab' | '/$lang'
+  id:
+    '__root__' | '/' | '/$lang' | '/$lang/about' | '/$lang/chartlab' | '/$lang/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -96,16 +106,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof LangAboutRouteImport
       parentRoute: typeof LangRoute
     }
+    '/$lang/chartlab': {
+      id: '/$lang/chartlab'
+      path: '/chartlab'
+      fullPath: '/$lang/chartlab'
+      preLoaderRoute: typeof LangChartlabRouteImport
+      parentRoute: typeof LangRoute
+    }
   }
 }
 
 interface LangRouteChildren {
   LangAboutRoute: typeof LangAboutRoute
+  LangChartlabRoute: typeof LangChartlabRoute
   LangIndexRoute: typeof LangIndexRoute
 }
 
 const LangRouteChildren: LangRouteChildren = {
   LangAboutRoute: LangAboutRoute,
+  LangChartlabRoute: LangChartlabRoute,
   LangIndexRoute: LangIndexRoute,
 }
 

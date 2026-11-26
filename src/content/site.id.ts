@@ -276,6 +276,14 @@ export const siteId: SiteContent = {
     title: 'Analisa lebih tajam. Sistem teruji. Gratis.',
     subtitle: 'ChartLab menggabungkan analisa market dan backtesting dalam satu platform gratis.',
   },
+  chartlabPage: {
+    title: "ChartLab — Platform Trading Crypto Gratis",
+    description: "Analisa market crypto, backtest sistemmu, dan temukan R:R terbaik di ChartLab. Semua fitur gratis.",
+    loading: "Memuat ChartLab…",
+    fallback: "ChartLab belum bisa dimuat di halaman ini. Buka di tab baru untuk memakainya langsung.",
+    openNewTab: "Buka di tab baru",
+    credit: "Chart oleh Vela (LuxAlgo)",
+  },
   about: {
     company: {
       title: "Tentang Disatu",

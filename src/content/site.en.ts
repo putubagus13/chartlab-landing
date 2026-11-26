@@ -274,6 +274,14 @@ export const siteEn: SiteContent = {
     title: 'Sharper analysis. Tested systems. Free.',
     subtitle: 'ChartLab brings market analysis and backtesting together in one free platform.',
   },
+  chartlabPage: {
+    title: "ChartLab — Free Crypto Trading Platform",
+    description: "Analyze the crypto market, backtest your system, and find the best R:R in ChartLab. Every feature is free.",
+    loading: "Loading ChartLab…",
+    fallback: "ChartLab could not load on this page. Open it in a new tab to use it directly.",
+    openNewTab: "Open in a new tab",
+    credit: "Chart by Vela (LuxAlgo)",
+  },
   about: {
     company: {
       title: "About Disatu",
