@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react'
 import { useContent, useLang } from '@/i18n/use-content'
 import { useTheme } from '@/theme/theme-provider'
-import { CHARTLAB_BASE, CHARTLAB_TIMEOUT_MS, READY_TYPE, chartlabEmbedUrl, isFromChartLab, type ChartLabSet } from '@/lib/chartlab-embed'
+import { CHARTLAB_BASE, CHARTLAB_TIMEOUT_MS, READY_TYPE, chartlabEmbedUrl, chartlabOpenUrl, isFromChartLab, type ChartLabSet } from '@/lib/chartlab-embed'
 
 type State = 'loading' | 'ready' | 'failed'
 
@@ -15,6 +15,7 @@ export function ChartLabEmbed() {
   const { chartlabPage: t } = useContent()
   const { resolved, mounted } = useTheme()
   const frameRef = useRef<HTMLIFrameElement>(null)
+  const openUrl = chartlabOpenUrl(CHARTLAB_BASE, { theme: resolved, lang })
   const [state, setState] = useState<State>('loading')
 
   // The theme is only known after mount (it lives in storage), so the iframe is created then, with the right
@@ -57,7 +58,7 @@ export function ChartLabEmbed() {
           <a href="https://velacharts.dev" target="_blank" rel="noopener noreferrer" className="text-muted underline-offset-4 hover:text-fg hover:underline">
             {t.credit}
           </a>
-          <a href={CHARTLAB_BASE} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
+          <a href={openUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
             {t.openNewTab}
           </a>
         </div>
@@ -75,7 +76,7 @@ export function ChartLabEmbed() {
           {state === 'failed' ? (
             <>
               <p className="max-w-md text-muted">{t.fallback}</p>
-              <a href={CHARTLAB_BASE} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
+              <a href={openUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
                 {t.openNewTab}
               </a>
             </>

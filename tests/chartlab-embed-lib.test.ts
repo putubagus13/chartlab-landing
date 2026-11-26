@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest'
-import { CHARTLAB_BASE, READY_TYPE, chartlabEmbedUrl, chartlabPath, isFromChartLab } from '@/lib/chartlab-embed'
+import { CHARTLAB_BASE, READY_TYPE, chartlabEmbedUrl, chartlabOpenUrl, chartlabPath, isFromChartLab } from '@/lib/chartlab-embed'
 
 describe('chartlabEmbedUrl', () => {
   it('adds the embed flag, theme and language so the first paint is already right', () => {
@@ -15,6 +15,16 @@ describe('chartlabEmbedUrl', () => {
     expect(url.searchParams.get('theme')).toBe('light')
     expect(url.searchParams.get('lang')).toBe('en')
     expect(url.searchParams.get('embed')).toBe('1')
+  })
+})
+
+describe('chartlabOpenUrl', () => {
+  it('opens the app in its own tab in the visitor’s language and theme, but not in embed mode', () => {
+    const url = new URL(chartlabOpenUrl('https://chartlab.example.app', { theme: 'light', lang: 'id' }))
+    expect(url.origin).toBe('https://chartlab.example.app')
+    expect(url.searchParams.get('theme')).toBe('light')
+    expect(url.searchParams.get('lang')).toBe('id')
+    expect(url.searchParams.has('embed')).toBe(false)
   })
 })
 

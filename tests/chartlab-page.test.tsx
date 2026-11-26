@@ -71,7 +71,12 @@ describe.each(LANGS)('/%s/chartlab', (lang) => {
     await openPage(`/${lang}/chartlab`)
     const main = screen.getByRole('main')
     const tab = within(main).getByRole('link', { name: c.openNewTab })
-    expect(tab.getAttribute('href')).toBe(CHARTLAB_BASE)
+    // the standalone app opens in the language and theme the visitor already has, and is not in embed mode
+    const href = new URL(tab.getAttribute('href')!)
+    expect(href.origin).toBe(APP_ORIGIN)
+    expect(href.searchParams.get('lang')).toBe(lang)
+    expect(href.searchParams.get('theme')).toBe('light')
+    expect(href.searchParams.has('embed')).toBe(false)
     expect(tab).toHaveAttribute('target', '_blank')
     expect(tab.getAttribute('rel')).toContain('noopener')
     const credit = within(main).getByRole('link', { name: new RegExp(c.credit.replace(/[()]/g, '\\$&')) })
@@ -107,7 +112,10 @@ describe('the loading overlay', () => {
     await waitFor(() => expect(overlay().dataset.state).toBe('failed'))
     const c = getContent('en').chartlabPage
     expect(within(overlay()).getByText(c.fallback)).toBeInTheDocument()
-    expect(within(overlay()).getByRole('link', { name: c.openNewTab }).getAttribute('href')).toBe(CHARTLAB_BASE)
+    const fallbackHref = new URL(within(overlay()).getByRole('link', { name: c.openNewTab }).getAttribute('href')!)
+    expect(fallbackHref.origin).toBe(APP_ORIGIN)
+    expect(fallbackHref.searchParams.get('lang')).toBe('en')
+    expect(fallbackHref.searchParams.has('embed')).toBe(false)
   })
 })
 
@@ -122,6 +130,16 @@ describe('keeping the app in step with the page', () => {
     fireEvent.click(toggle) // light -> dark
     await waitFor(() => expect(post).toHaveBeenCalledWith(expect.objectContaining({ type: 'chartlab:set', theme: 'dark' }), APP_ORIGIN))
     for (const call of post.mock.calls) expect(call[1]).not.toBe('*')
+  })
+
+  it('keeps the "open in a new tab" link in step with the theme and language as they change', async () => {
+    await openPage('/id/chartlab')
+    const link = () => new URL(within(screen.getByRole('main')).getByRole('link', { name: getContent('id').chartlabPage.openNewTab }).getAttribute('href')!)
+    expect(link().searchParams.get('theme')).toBe('light')
+    const toggle = Array.from(document.querySelectorAll('header button')).find((b) => /theme|tema/i.test(b.getAttribute('aria-label') ?? '')) as HTMLButtonElement
+    fireEvent.click(toggle)
+    fireEvent.click(toggle) // -> dark
+    await waitFor(() => expect(link().searchParams.get('theme')).toBe('dark'))
   })
 
   it('tells the app when the language changes, without reloading it', async () => {

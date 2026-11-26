@@ -24,6 +24,14 @@ export function chartlabEmbedUrl(base: string, p: { theme: EmbedTheme; lang: Emb
   return url.toString()
 }
 
+/** The app in its own tab (the fallback when the embed cannot work): same language and theme as this page, not in embed mode. */
+export function chartlabOpenUrl(base: string, p: { theme: EmbedTheme; lang: EmbedLang }): string {
+  const url = new URL(base)
+  url.searchParams.set('theme', p.theme)
+  url.searchParams.set('lang', p.lang)
+  return url.toString()
+}
+
 /** True only for a message that came from the app's origin AND from our own iframe's window. */
 export function isFromChartLab(event: { origin: string; source: unknown }, base: string, frame: Window | null): boolean {
   if (!frame || event.source !== frame) return false
