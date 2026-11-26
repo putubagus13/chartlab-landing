@@ -50,7 +50,8 @@ describe('chartlabPath and constants', () => {
     expect(READY_TYPE).toBe('chartlab:ready')
   })
 
-  it('has a usable https base even when VITE_CHARTLAB_URL is not set', () => {
+  it('points at the deployed ChartLab app when VITE_CHARTLAB_URL is not set', () => {
     expect(new URL(CHARTLAB_BASE).protocol).toBe('https:')
+    expect(new URL(CHARTLAB_BASE).host).toBe('chartlab-disatu.vercel.app')
   })
 })

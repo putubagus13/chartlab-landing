@@ -176,6 +176,20 @@ Loaders simplify your data fetching logic dramatically. Check out more informati
 
 
 
+# ChartLab (the embedded app)
+
+The page `/{lang}/chartlab` embeds the ChartLab trading app in an `<iframe>`. The app is its own project
+(the `market-chart` repo, deployed separately on Vercel); this site only frames it and keeps its theme and
+language in step over `postMessage` (see `src/lib/chartlab-embed.ts`).
+
+- **Default URL:** `https://chartlab-disatu.vercel.app` (`src/content/shared.ts`).
+- **Local development against a local copy of the app:** run `npm run dev:app` in `market-chart` (port 5192),
+  then start this site with `VITE_CHARTLAB_URL=http://localhost:5192 npm run dev`. The app only accepts being
+  framed from `http://localhost:3000` and `https://*.vercel.app`; a custom production domain for this site must be
+  added to `ALLOWED_PARENTS` (`app/embed.ts`) and to `frame-ancestors` (`vercel.json`) in `market-chart`.
+- **Vela attribution:** the chart carries a visible Vela watermark and the page links to velacharts.dev. Keep both
+  (Apache-2.0 NOTICE).
+
 # Learn More
 
 You can learn more about all of the offerings from TanStack in the [TanStack documentation](https://tanstack.com).
