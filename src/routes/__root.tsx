@@ -2,6 +2,8 @@ import { HeadContent, Outlet, Scripts, createRootRoute } from '@tanstack/react-r
 import appCss from '../styles.css?url'
 import { ThemeProvider } from '@/theme/theme-provider'
 import { themeInitScript } from '@/theme/theme'
+import { splashInitScript } from '@/lib/splash'
+import { Splash } from '@/components/ui/splash'
 import { useLang } from '@/i18n/use-content'
 
 export const Route = createRootRoute({
@@ -26,11 +28,12 @@ export const Route = createRootRoute({
       },
       { rel: 'stylesheet', href: appCss },
     ],
-    scripts: [{ children: themeInitScript }],
+    scripts: [{ children: themeInitScript }, { children: splashInitScript }],
   }),
   shellComponent: RootDocument,
   component: () => (
     <ThemeProvider>
+      <Splash />
       <Outlet />
     </ThemeProvider>
   ),
