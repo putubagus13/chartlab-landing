@@ -27,7 +27,8 @@ export function resolveSiteUrl(value: string | undefined, devDefault: string, is
 /** The Disatu company landing (VITE_DISATU_URL). Dev default: its local dev server on port 3001. */
 export const DISATU_URL: string = resolveSiteUrl(
   import.meta.env.VITE_DISATU_URL as string | undefined,
-  'http://localhost:3001',
+  // only in dev builds, so the local URL never ends up in a production bundle
+  import.meta.env.DEV ? 'http://localhost:3001' : '',
   import.meta.env.DEV,
 )
 
