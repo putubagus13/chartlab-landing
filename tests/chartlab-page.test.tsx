@@ -1,3 +1,4 @@
+import { SITE_URL } from '@/seo/site-url'
 import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest'
 import { act, fireEvent, screen, waitFor, within } from '@testing-library/react'
 
@@ -84,11 +85,12 @@ describe.each(LANGS)('/%s/chartlab', (lang) => {
     expect(c.credit).toMatch(/Vela/)
   })
 
-  it('emits hreflang alternates for both languages', async () => {
+  it('emits absolute hreflang alternates and a self-referencing canonical', async () => {
     await openPage(`/${lang}/chartlab`)
     await waitFor(() => {
       const hrefs = Array.from(document.querySelectorAll('link[rel="alternate"][hreflang]')).map((l) => `${l.getAttribute('hreflang')}=${l.getAttribute('href')}`)
-      expect(hrefs).toEqual(expect.arrayContaining(['id=/id/chartlab', 'en=/en/chartlab']))
+      expect(hrefs).toEqual(expect.arrayContaining([`id=${SITE_URL}/id/chartlab`, `en=${SITE_URL}/en/chartlab`, `x-default=${SITE_URL}/id/chartlab`]))
+      expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${SITE_URL}/${lang}/chartlab`)
     })
   })
 })

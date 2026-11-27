@@ -24,12 +24,20 @@ npm test
 
 | Variable | Needed | Default | What it is |
 |---|---|---|---|
+| `VITE_SITE_URL` | **required for production builds** | `http://localhost:3000` in dev | This site's own public address (e.g. `https://chartlab.disatu.xyz`). It is the base of every canonical link, hreflang alternate, share URL, `sitemap.xml` and `robots.txt`. |
 | `VITE_DISATU_URL` | **required for production builds** | `http://localhost:3001` in dev | The Disatu landing. The footer badge "a product of disatu" links to `<url>/<lang>`. |
 | `VITE_CHARTLAB_URL` | optional | `https://app.disatu.xyz` | The ChartLab app embedded on `/{lang}/chartlab`. |
 
-Use the **full URL including `https://`** (e.g. `https://disatu-landing.vercel.app`), and set it for both the Production
+Use the **full URL including `https://`** (e.g. `https://disatu-landing.vercel.app`), and set each for both the Production
 and Preview environments. `npm run build` stops when the variable is missing or is not an absolute http(s) URL (a bare
 `disatu-landing.vercel.app` is rejected), so a site whose links to Disatu would be broken never ships.
+
+## SEO
+
+`src/seo/` owns what search engines and link previews see: `head.ts` (canonical, hreflang, Open Graph and Twitter
+cards, JSON-LD), `structured-data.ts` (ChartLab as a free web application made by Disatu), `sitemap.ts`, `robots.ts`
+(served at `/sitemap.xml` and `/robots.txt`), and `pages.ts` (the indexable pages). A new public page goes into
+`pages.ts` and uses `seoHead()` in its route. The share image is `public/og-image.png` (1200x630).
 
 ## Deploy (Vercel)
 

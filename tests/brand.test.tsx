@@ -77,12 +77,13 @@ describe('ChartLab brand', () => {
     expect(document.querySelector('img[src*="disatu-horizontal"]')).toBeNull()
   })
 
-  it('head uses the ChartLab favicons, site name and OG image', () => {
+  it('head uses the ChartLab favicons and site name', () => {
     const head = (RootRoute.options.head as () => { meta: Record<string, string>[]; links: Record<string, string>[] })()
     const hrefs = head.links.map((l) => l.href)
     expect(hrefs).toEqual(expect.arrayContaining(['/favicon.ico', '/chartlab-favicon-32.png', '/chartlab-favicon-180.png']))
     const prop = (p: string) => head.meta.find((m) => m.property === p)?.content
     expect(prop('og:site_name')).toBe('ChartLab')
-    expect(prop('og:image')).toBe('/og-image.png')
+    // the share image is set per page, as an absolute URL (see src/seo/head.ts); the root must not add a second, relative one
+    expect(prop('og:image')).toBeUndefined()
   })
 })
