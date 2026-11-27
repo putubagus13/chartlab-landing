@@ -2,7 +2,7 @@
 export const shared = {
   // Where the standalone ChartLab app (the market-chart repo) is deployed on Vercel. The /{lang}/chartlab page
   // embeds it. For local work, point at a dev copy with VITE_CHARTLAB_URL (see README).
-  chartlabUrl: 'https://chartlab-disatu.vercel.app',
+  chartlabUrl: 'https://app.disatu.xyz',
   videoSrc: '/assets/tutorial_backtest_v2.mp4',
   videoPoster: '/assets/tutorial_backtest_poster.jpg',
   packages: [

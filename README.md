@@ -25,7 +25,7 @@ npm test
 | Variable | Needed | Default | What it is |
 |---|---|---|---|
 | `VITE_DISATU_URL` | **required for production builds** | `http://localhost:3001` in dev | The Disatu landing. The footer badge "a product of disatu" links to `<url>/<lang>`. |
-| `VITE_CHARTLAB_URL` | optional | `https://chartlab-disatu.vercel.app` | The ChartLab app embedded on `/{lang}/chartlab`. |
+| `VITE_CHARTLAB_URL` | optional | `https://app.disatu.xyz` | The ChartLab app embedded on `/{lang}/chartlab`. |
 
 Use the **full URL including `https://`** (e.g. `https://disatu-landing.vercel.app`), and set it for both the Production
 and Preview environments. `npm run build` stops when the variable is missing or is not an absolute http(s) URL (a bare
@@ -52,7 +52,7 @@ The page `/{lang}/chartlab` embeds the ChartLab trading app in an `<iframe>`. Th
 (the `market-chart` repo, deployed separately on Vercel); this site only frames it and keeps its theme and
 language in step over `postMessage` (see `src/lib/chartlab-embed.ts`).
 
-- **Default URL:** `https://chartlab-disatu.vercel.app` (`src/content/shared.ts`).
+- **Default URL:** `https://app.disatu.xyz` (`src/content/shared.ts`).
 - **Local development against a local copy of the app:** run `npm run dev:app` in `market-chart` (port 5192),
   then start this site with `VITE_CHARTLAB_URL=http://localhost:5192 npm run dev`. The app only accepts being
   framed from `http://localhost:3000` and `https://*.vercel.app`; a custom production domain for this site must be
