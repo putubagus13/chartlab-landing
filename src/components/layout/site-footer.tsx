@@ -2,6 +2,7 @@ import { useContent, useLang } from '@/i18n/use-content'
 import { Logo } from '@/components/ui/logo'
 import { AppLink } from '@/components/ui/app-link'
 import { navHref } from './site-header'
+import { DisatuBadge } from '@/components/ui/disatu-badge'
 
 export function SiteFooter() {
   const lang = useLang()
@@ -20,7 +21,10 @@ export function SiteFooter() {
             </AppLink>
           ))}
         </nav>
-        <p className="text-xs text-muted">{footer.note}</p>
+        <div className="flex flex-col gap-3 md:items-end">
+          <DisatuBadge lang={lang} />
+          <p className="text-xs text-muted">{footer.note}</p>
+        </div>
       </div>
     </footer>
   )

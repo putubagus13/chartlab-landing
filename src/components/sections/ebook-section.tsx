@@ -1,6 +1,5 @@
 import { motion, useReducedMotion } from 'framer-motion'
 import { useContent } from '@/i18n/use-content'
-import { Logo } from '@/components/ui/logo'
 import { Reveal } from '@/components/motion/reveal'
 import { SectionShell } from '@/components/ui/frame'
 import { PackageCard } from './package-card'
@@ -16,7 +15,7 @@ function Cover({ title }: { title: string }) {
       >
         <span aria-hidden="true" className="absolute inset-y-0 left-0 w-2 bg-[#3fa37f]" />
         <div className="flex h-full flex-col justify-between pl-3">
-          <Logo variant="symbol" onDark alt="" className="!h-9 !w-9" />
+          <img src="/brand/chartlab-symbol-white.svg" alt="" className="h-9 w-9" />
           <p className="font-display text-2xl font-bold leading-tight text-white">{title}</p>
           <span aria-hidden="true" className="h-px w-12 bg-[#3fa37f]" />
         </div>

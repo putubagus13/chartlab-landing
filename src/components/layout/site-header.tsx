@@ -49,7 +49,7 @@ export function SiteHeader() {
       className={`sticky top-0 z-50 border-b transition-colors ${scrolled ? 'border-border bg-bg/80 backdrop-blur' : 'border-transparent bg-bg'}`}
     >
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between gap-4 px-4 sm:px-6">
-        <AppLink href={`/${lang}`} aria-label="Disatu" className="shrink-0">
+        <AppLink href={`/${lang}`} aria-label="ChartLab" className="shrink-0">
           <Logo />
         </AppLink>
 

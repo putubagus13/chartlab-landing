@@ -13,13 +13,14 @@ export const Route = createRootRoute({
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
       { name: 'theme-color', content: '#ffffff', media: '(prefers-color-scheme: light)' },
       { name: 'theme-color', content: '#0a0a0a', media: '(prefers-color-scheme: dark)' },
-      { property: 'og:site_name', content: 'Disatu' },
-      { property: 'og:image', content: '/favicon-512.png' },
+      { property: 'og:site_name', content: 'ChartLab' },
+      { property: 'og:image', content: '/og-image.png' },
     ],
     links: [
       { rel: 'icon', href: '/favicon.ico', sizes: 'any' },
-      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/favicon-32.png' },
-      { rel: 'apple-touch-icon', href: '/favicon-180.png' },
+      { rel: 'icon', type: 'image/svg+xml', href: '/chartlab-favicon.svg' },
+      { rel: 'icon', type: 'image/png', sizes: '32x32', href: '/chartlab-favicon-32.png' },
+      { rel: 'apple-touch-icon', href: '/chartlab-favicon-180.png' },
       { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
       { rel: 'preconnect', href: 'https://fonts.gstatic.com', crossOrigin: 'anonymous' },
       {
