@@ -35,8 +35,9 @@ and Preview environments. `npm run build` stops when the variable is missing or 
 ## SEO
 
 `src/seo/` owns what search engines and link previews see: `head.ts` (canonical, hreflang, Open Graph and Twitter
-cards, JSON-LD), `structured-data.ts` (ChartLab as a free web application made by Disatu), `sitemap.ts`, `robots.ts`
-(served at `/sitemap.xml` and `/robots.txt`), and `pages.ts` (the indexable pages). A new public page goes into
+cards, JSON-LD), `structured-data.ts` (ChartLab as a free web application made by Disatu), `sitemap.ts`, `robots.ts`,
+`llms.ts` (served at `/sitemap.xml`, `/robots.txt` and `/llms.txt`; the last is built from the content files so it cannot
+drift), and `pages.ts` (the indexable pages). A new public page goes into
 `pages.ts` and uses `seoHead()` in its route. The share image is `public/og-image.png` (1200x630).
 
 ## Deploy (Vercel)
