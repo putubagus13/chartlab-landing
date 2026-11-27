@@ -27,15 +27,16 @@ npm test
 | `VITE_DISATU_URL` | **required for production builds** | `http://localhost:3001` in dev | The Disatu landing. The footer badge "a product of disatu" links to `<url>/<lang>`. |
 | `VITE_CHARTLAB_URL` | optional | `https://chartlab-disatu.vercel.app` | The ChartLab app embedded on `/{lang}/chartlab`. |
 
-`npm run build` stops with "VITE_DISATU_URL is not set" when the required variable is missing, so a site whose links
-to Disatu would be broken never ships.
+Use the **full URL including `https://`** (e.g. `https://disatu-landing.vercel.app`), and set it for both the Production
+and Preview environments. `npm run build` stops when the variable is missing or is not an absolute http(s) URL (a bare
+`disatu-landing.vercel.app` is rejected), so a site whose links to Disatu would be broken never ships.
 
 ## Deploy (Vercel)
 
 1. Import the repo as a new Vercel project with the same settings as `disatu-landing` (the Nitro `vercel` preset in
    `vite.config.ts` produces the Vercel output).
 2. **Before the first deploy**, set `VITE_DISATU_URL` in the project's environment variables to the Disatu landing's
-   production URL (no trailing slash needed).
+   production URL, with `https://` (a trailing slash is fine).
 3. Deploy. Then give this project's production URL to the Disatu project as `VITE_CHARTLAB_LANDING_URL`.
 
 ## Brand rules (from `chartlab-brand-kit`)
