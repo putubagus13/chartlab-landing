@@ -8,7 +8,7 @@ describe('e-book is hidden while the free web app is the focus', () => {
   it('flag is off', () => expect(FEATURES.ebook).toBe(false))
 
   describe.each(LANGS)('%s', (lang) => {
-    it.each([['home', ''], ['about', '/about']])('%s page has no e-book promotion', async (_n, sub) => {
+    it.each([['home', ''], ['app', '/chartlab']])('%s page has no e-book promotion', async (_n, sub) => {
       await renderWithRouter(`/${lang}${sub}`)
       await waitFor(() => expect(document.querySelector('main')).not.toBeNull())
       expect(document.getElementById('ebook')).toBeNull()

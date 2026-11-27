@@ -12,8 +12,11 @@ describe.each(LANGS)('home route %s', (lang) => {
     const ids = Array.from(document.querySelectorAll('main section[id]')).map((s) => s.id)
     expect(ids).toEqual(['hero', 'workflow', 'chartlab', 'offer'])
     expect(screen.getByRole('heading', { name: c.offer.title })).toBeInTheDocument()
-    expect(document.getElementById('services')).toBeNull() // personal service: lives on the About page
     await waitFor(() => expect(document.title).toBe(c.meta.homeTitle))
+  })
+  it('has no About page (that lives on the Disatu landing)', async () => {
+    await renderWithRouter(`/${lang}/about`)
+    await waitFor(() => expect(screen.getByRole('heading', { name: /404/ })).toBeInTheDocument())
   })
   it('emits hreflang alternates', async () => {
     await renderWithRouter(`/${lang}`)

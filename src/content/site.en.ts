@@ -5,11 +5,9 @@ const [starter, pro, mentor] = shared.packages;
 
 export const siteEn: SiteContent = {
   meta: {
-    homeTitle: 'ChartLab — Free Crypto Trading Platform with Backtesting | Disatu',
+    homeTitle: 'ChartLab — Free Crypto Trading Platform with Backtesting',
     homeDescription:
       'ChartLab by Disatu: a free trading platform to analyze the crypto market. Backtest your system, see the statistics, and find the best R:R.',
-    aboutTitle: 'About Disatu',
-    aboutDescription: 'Disatu builds websites, mobile apps, backend systems, and web apps. Founded in 2024 by Putu Bagus Raditya.',
   },
   ui: {
     buyEbook: "Buy E-Book",
@@ -32,18 +30,11 @@ export const siteEn: SiteContent = {
     whatYouLearn: "What you'll learn",
     howToGetAccess: "How to get started",
     sampleData: "sample data",
-    experienceTitle: "Experience",
-    skillsTitle: "Skills",
-    aboutCta: 'Try ChartLab free',
-    educationTitle: "Education",
-    whatsapp: "WhatsApp",
-    email: "Email",
   },
-  brand: { name: "Disatu", tagline: "Learn, test, and trust your data." },
+  brand: { name: "ChartLab", tagline: "Learn, test, and trust your data." },
   nav: [
-    { label: 'Trading Workflow', page: 'home', hash: 'workflow' },
-    { label: 'ChartLab', page: 'home', hash: 'chartlab' },
-    { label: 'About Disatu', page: 'about' },
+    { label: 'Trading Workflow', hash: 'workflow' },
+    { label: 'ChartLab', hash: 'chartlab' },
   ],
   hero: {
     eyebrow: 'ChartLab · Crypto Trading Platform',
@@ -121,36 +112,6 @@ export const siteEn: SiteContent = {
       { title: 'Open ChartLab', description: 'Go in from your browser. It is free, at no cost.' },
       { title: 'Build and test your system', description: 'Add indicators, run Bar Replay, then open trades with SL and TP.' },
       { title: 'Read the stats and R:R', description: 'Review your backtest statistics and the best R:R recommended for your system.' },
-    ],
-  },
-  services: {
-    title: "Disatu Services",
-    subtitle:
-      "From company profiles to backend systems, we help turn your idea into a digital product that fits your needs.",
-    contactLead: "Got a project? Get in touch.",
-    items: [
-      {
-        title: "Company Profile Websites",
-        description: "Clean, fast company websites that reflect your brand.",
-        icon: shared.serviceIcons[0],
-      },
-      {
-        title: "Mobile Apps",
-        description: "Mobile apps designed around your business and its users.",
-        icon: shared.serviceIcons[1],
-      },
-      {
-        title: "Backend Systems",
-        description:
-          "APIs and behind-the-scenes systems that are reliable and ready to grow.",
-        icon: shared.serviceIcons[2],
-      },
-      {
-        title: "Web Apps and E-Commerce",
-        description:
-          "Custom web apps such as online stores, dashboards, and other business systems.",
-        icon: shared.serviceIcons[3],
-      },
     ],
   },
   workflow: {
@@ -280,56 +241,6 @@ export const siteEn: SiteContent = {
     fallback: "ChartLab could not load on this page. Open it in a new tab to use it directly.",
     openNewTab: "Open in a new tab",
     credit: "Chart by Vela (LuxAlgo)",
-  },
-  about: {
-    company: {
-      title: "About Disatu",
-      tag: "Founded in 2024",
-      intro:
-        "Disatu builds company-profile websites, mobile apps, backend systems, and web apps such as e-commerce. We also develop ChartLab, a crypto trading platform that is free to use.",
-      principleTitle: "Client needs come first",
-      principle:
-        "Disatu always puts the client’s needs first and looks for the best solution for every project.",
-      facts: [
-        { label: "Founded", value: shared.foundedYear },
-        { label: "Founder", value: "Putu Bagus Raditya" },
-      ],
-    },
-    founder: {
-      name: "Putu Bagus Raditya",
-      role: "Founder of Disatu",
-      summary: "A crypto trader and a software engineer at NoLimit Indonesia.",
-      location: "Bandung City, West Java",
-      photo: shared.founderPhoto,
-      education: [
-        { degree: "Bachelor’s in Physics", school: "University of Lampung" },
-      ],
-      skills: [
-        { group: "Frontend", items: shared.skills.frontend },
-        { group: "Backend", items: shared.skills.backend },
-        { group: "Database", items: shared.skills.database },
-        { group: "Blockchain", items: shared.skills.blockchain },
-        { group: "Trading", items: shared.skills.trading },
-      ],
-      experiences: [
-        {
-          role: "Software Engineer",
-          company: "NoLimit Indonesia",
-          period: "Oct 2023 — Present",
-          description: "Working as a software engineer.",
-          highlights: [],
-        },
-        {
-          role: "Crypto Trader",
-          company: "Crypto market",
-          period: "~3 years",
-          description: "Trading crypto with the Smart Money Concept approach.",
-          highlights: [],
-        },
-      ],
-    },
-    contact: shared.contact,
-    socials: shared.socials,
   },
   footer: { note: "© Disatu. Educational content, not financial advice." },
 };

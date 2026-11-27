@@ -1,5 +1,5 @@
-export type Section = 'hero' | 'workflow' | 'ebook' | 'chartlab' | 'services'
-export type NavItem = { label: string; page: 'home' | 'about'; hash?: Section }
+export type Section = 'hero' | 'workflow' | 'ebook' | 'chartlab'
+export type NavItem = { label: string; hash: Section }
 export type EbookPackage = {
   id: string
   name: string
@@ -24,18 +24,8 @@ export type WorkflowStep = {
   description: string
   points: { label: string; text: string }[]
 }
-export type ServiceItem = { title: string; description: string; icon: 'web' | 'mobile' | 'backend' | 'webapp' }
-export type Education = { degree: string; school: string }
-export type SkillGroup = { group: string; items: string[] }
-export type Experience = {
-  role: string
-  company: string
-  period: string
-  description: string
-  highlights: string[]
-}
 export type SiteContent = {
-  meta: { homeTitle: string; homeDescription: string; aboutTitle: string; aboutDescription: string }
+  meta: { homeTitle: string; homeDescription: string }
   ui: {
     buyEbook: string
     buyPackage: string
@@ -56,14 +46,8 @@ export type SiteContent = {
     whatYouLearn: string
     howToGetAccess: string
     sampleData: string
-    experienceTitle: string
-    skillsTitle: string
-    aboutCta: string
-    educationTitle: string
-    whatsapp: string
-    email: string
   }
-  brand: { name: 'Disatu'; tagline: string }
+  brand: { name: 'ChartLab'; tagline: string }
   nav: NavItem[]
   hero: { eyebrow: string; title: string; subtitle: string; bundleNote: string }
   ebook: { title: string; subtitle: string; chapters: string[]; packages: EbookPackage[] }
@@ -77,7 +61,6 @@ export type SiteContent = {
     features: ChartLabFeature[]
     steps: { title: string; description: string }[]
   }
-  services: { title: string; subtitle: string; contactLead: string; items: ServiceItem[] }
   workflow: {
     tag: string
     title: string
@@ -91,28 +74,5 @@ export type SiteContent = {
   }
   offer: { title: string; subtitle: string }
   chartlabPage: { title: string; description: string; loading: string; fallback: string; openNewTab: string; credit: string }
-  about: {
-    company: {
-      title: string
-      tag: string
-      intro: string
-      principleTitle: string
-      principle: string
-      facts: { label: string; value: string }[]
-    }
-    founder: {
-      name: string
-      role: string
-      summary: string
-      location: string
-      photo: string
-      education: Education[]
-      skills: SkillGroup[]
-      experiences: Experience[]
-    }
-    /** Company contact: phone (E.164) and email. */
-    contact: { phone: string; email: string }
-    socials: { label: string; url: string }[]
-  }
   footer: { note: string }
 }

@@ -5,11 +5,9 @@ const [starter, pro, mentor] = shared.packages;
 
 export const siteId: SiteContent = {
   meta: {
-    homeTitle: 'ChartLab — Platform Trading Crypto Gratis dengan Backtesting | Disatu',
+    homeTitle: 'ChartLab — Platform Trading Crypto Gratis dengan Backtesting',
     homeDescription:
       'ChartLab dari Disatu: platform trading gratis untuk menganalisa market crypto. Backtest sistemmu, lihat statistiknya, dan temukan R:R terbaik.',
-    aboutTitle: 'Tentang Disatu',
-    aboutDescription: 'Disatu menyediakan jasa pembuatan website, aplikasi mobile, sistem backend, dan web app. Berdiri sejak 2024, didirikan oleh Putu Bagus Raditya.',
   },
   ui: {
     buyEbook: "Beli E-Book",
@@ -32,18 +30,11 @@ export const siteId: SiteContent = {
     whatYouLearn: "Yang akan kamu pelajari",
     howToGetAccess: "Cara memulai",
     sampleData: "contoh data",
-    experienceTitle: "Pengalaman",
-    skillsTitle: "Keahlian",
-    aboutCta: 'Coba ChartLab gratis',
-    educationTitle: "Pendidikan",
-    whatsapp: "WhatsApp",
-    email: "Email",
   },
-  brand: { name: "Disatu", tagline: "Belajar, uji, dan percaya pada datamu." },
+  brand: { name: "ChartLab", tagline: "Belajar, uji, dan percaya pada datamu." },
   nav: [
-    { label: 'Alur Trading', page: 'home', hash: 'workflow' },
-    { label: 'ChartLab', page: 'home', hash: 'chartlab' },
-    { label: 'Tentang Disatu', page: 'about' },
+    { label: 'Alur Trading', hash: 'workflow' },
+    { label: 'ChartLab', hash: 'chartlab' },
   ],
   hero: {
     eyebrow: 'ChartLab · Platform Trading Crypto',
@@ -121,38 +112,6 @@ export const siteId: SiteContent = {
       { title: 'Buka ChartLab', description: 'Masuk dari browser. Gratis, tanpa biaya.' },
       { title: 'Bangun dan uji sistemmu', description: 'Pasang indikator, jalankan Bar Replay, lalu buka posisi dengan SL dan TP.' },
       { title: 'Baca statistik dan R:R', description: 'Tinjau statistik hasil backtest dan rekomendasi R:R terbaik untuk sistemmu.' },
-    ],
-  },
-  services: {
-    title: "Layanan Disatu",
-    subtitle:
-      "Dari company profile sampai sistem backend, kami bantu wujudkan produk digital sesuai kebutuhanmu.",
-    contactLead: "Punya proyek? Hubungi kami.",
-    items: [
-      {
-        title: "Website Company Profile",
-        description:
-          "Website profil perusahaan yang rapi, cepat, dan mencerminkan brand bisnismu.",
-        icon: shared.serviceIcons[0],
-      },
-      {
-        title: "Aplikasi Mobile",
-        description:
-          "Aplikasi mobile yang dirancang sesuai kebutuhan bisnis dan penggunanya.",
-        icon: shared.serviceIcons[1],
-      },
-      {
-        title: "Sistem Backend",
-        description:
-          "API dan sistem di balik layar yang andal dan siap dikembangkan.",
-        icon: shared.serviceIcons[2],
-      },
-      {
-        title: "Web App dan E-Commerce",
-        description:
-          "Web app sesuai kebutuhan, seperti toko online, dashboard, dan sistem bisnis lainnya.",
-        icon: shared.serviceIcons[3],
-      },
     ],
   },
   workflow: {
@@ -282,55 +241,6 @@ export const siteId: SiteContent = {
     fallback: "ChartLab belum bisa dimuat di halaman ini. Buka di tab baru untuk memakainya langsung.",
     openNewTab: "Buka di tab baru",
     credit: "Chart oleh Vela (LuxAlgo)",
-  },
-  about: {
-    company: {
-      title: "Tentang Disatu",
-      tag: "Berdiri sejak 2024",
-      intro:
-        "Disatu menyediakan jasa pembuatan website company profile, aplikasi mobile, sistem backend, dan web app seperti e-commerce. Kami juga mengembangkan ChartLab, platform trading crypto yang gratis dipakai.",
-      principleTitle: "Kebutuhan klien nomor satu",
-      principle:
-        "Disatu selalu mengutamakan kebutuhan klien dan mencarikan solusi terbaik untuk setiap proyek.",
-      facts: [
-        { label: "Berdiri", value: shared.foundedYear },
-        { label: "Founder", value: "Putu Bagus Raditya" },
-      ],
-    },
-    founder: {
-      name: "Putu Bagus Raditya",
-      role: "Founder Disatu",
-      summary:
-        "Trader crypto, sekaligus software engineer di NoLimit Indonesia.",
-      location: "Kota Bandung, Jawa Barat",
-      photo: shared.founderPhoto,
-      education: [{ degree: "S1 Fisika", school: "Universitas Lampung" }],
-      skills: [
-        { group: "Frontend", items: shared.skills.frontend },
-        { group: "Backend", items: shared.skills.backend },
-        { group: "Database", items: shared.skills.database },
-        { group: "Blockchain", items: shared.skills.blockchain },
-        { group: "Trading", items: shared.skills.trading },
-      ],
-      experiences: [
-        {
-          role: "Software Engineer",
-          company: "NoLimit Indonesia",
-          period: "Okt 2023 — Sekarang",
-          description: "Bekerja sebagai software engineer.",
-          highlights: [],
-        },
-        {
-          role: "Trader Crypto",
-          company: "Market crypto",
-          period: "± 3 tahun",
-          description: "Trading crypto dengan pendekatan Smart Money Concept.",
-          highlights: [],
-        },
-      ],
-    },
-    contact: shared.contact,
-    socials: shared.socials,
   },
   footer: { note: "© Disatu. Konten edukasi, bukan saran keuangan." },
 };

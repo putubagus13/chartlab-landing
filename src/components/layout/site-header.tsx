@@ -11,7 +11,7 @@ import { ThemeToggle } from '@/components/ui/theme-toggle'
 import { chartlabPath } from '@/lib/chartlab-embed'
 
 export function navHref(lang: string, item: NavItem) {
-  return item.page === 'about' ? `/${lang}/about` : `/${lang}${item.hash ? `#${item.hash}` : ''}`
+  return `/${lang}#${item.hash}`
 }
 
 export function SiteHeader() {

@@ -26,9 +26,9 @@ describe.each(LANGS)('ChartLab positioning %s', (lang) => {
     expect(c.nav.some((n) => n.label === 'ChartLab' && n.hash === 'chartlab')).toBe(true)
     expect(c.chartlab.title + c.chartlab.subtitle).toContain('ChartLab')
     expect(c.offer.subtitle).toContain('ChartLab')
-    expect(c.about.company.intro).toContain('ChartLab')
     expect(c.ui.openApp).toContain('ChartLab')
     expect(c.ui.tryFree).toContain('ChartLab')
+    for (const n of c.nav) expect(n.label).not.toMatch(/Disatu/)
   })
 
   it('leads with the two differentiators: it is free, and it has backtesting', () => {
@@ -62,12 +62,11 @@ describe.each(LANGS)('ChartLab positioning %s', (lang) => {
   it('every call to action that opens the platform names it', () => {
     expect(c.ui.openApp).toMatch(/ChartLab/)
     expect(c.ui.tryFree).toMatch(/ChartLab/)
-    expect(c.ui.aboutCta).toMatch(/ChartLab/)
   })
 })
 
 describe.each(LANGS)('ChartLab on the page %s', (lang) => {
-  it.each([['home', ''], ['about', '/about']])('%s page shows the name and never the old one', async (_n, sub) => {
+  it.each([['home', ''], ['app', '/chartlab']])('%s page shows the name and never the old one', async (_n, sub) => {
     await renderWithRouter(`/${lang}${sub}`)
     await waitFor(() => expect(document.querySelector('main')).not.toBeNull())
     const text = document.body.textContent ?? ''

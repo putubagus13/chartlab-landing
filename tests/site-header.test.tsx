@@ -14,16 +14,16 @@ describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
   const c = getContent(lang)
 
   it('nav links and language switch', async () => {
-    await renderWithRouter(`/${lang}/about`)
+    await renderWithRouter(`/${lang}`)
     const header = await screen.findByRole('banner')
     const links = within(header).getAllByRole('link')
     const hrefOf = (name: string) => links.find((a) => a.textContent === name)?.getAttribute('href')
-    expect(c.nav.map((n) => [n.page, n.hash])).toEqual([['home', 'workflow'], ['home', 'chartlab'], ['about', undefined]])
+    expect(c.nav.map((n) => n.hash)).toEqual(['workflow', 'chartlab'])
     expect(hrefOf(c.nav[0].label)).toBe(`/${lang}#workflow`)
     expect(hrefOf(c.nav[1].label)).toBe(`/${lang}#chartlab`)
-    expect(hrefOf(c.nav[2].label)).toBe(`/${lang}/about`)
+    expect(links.some((a) => (a.getAttribute('href') ?? '').endsWith('/about'))).toBe(false)
     const sw = within(header).getByRole('link', { name: other.toUpperCase() })
-    expect(sw.getAttribute('href')).toBe(`/${other}/about`)
+    expect(sw.getAttribute('href')).toBe(`/${other}`)
     expect(within(header).getByRole('link', { name: lang.toUpperCase() })).toHaveAttribute('aria-current', 'page')
   })
 
@@ -56,7 +56,7 @@ describe.each(['id', 'en'] as const)('SiteHeader %s', (lang) => {
     await waitFor(() => expect(menuBtn).toHaveAttribute('aria-expanded', 'false'))
     fireEvent.click(menuBtn)
     const menu = document.getElementById('mobile-menu')!
-    fireEvent.click(within(menu).getByRole('link', { name: c.nav[2].label }))
+    fireEvent.click(within(menu).getByRole('link', { name: c.nav[1].label }))
     await waitFor(() => expect(menuBtn).toHaveAttribute('aria-expanded', 'false'))
   })
 
