@@ -15,8 +15,24 @@ export function ChartLabEmbed() {
   const { chartlabPage: t } = useContent()
   const { resolved, mounted } = useTheme()
   const frameRef = useRef<HTMLIFrameElement>(null)
+  const sectionRef = useRef<HTMLElement>(null)
   const openUrl = chartlabOpenUrl(CHARTLAB_BASE, { theme: resolved, lang })
   const [state, setState] = useState<State>('loading')
+
+  // Full screen takes the whole section, header included: the way out and the Vela credit stay on screen. The button
+  // only exists where the browser can do it, and that is only known after mount, so the first render matches the server's.
+  const [canFullscreen, setCanFullscreen] = useState(false)
+  const [fullscreen, setFullscreen] = useState(false)
+  useEffect(() => {
+    setCanFullscreen(document.fullscreenEnabled === true && typeof sectionRef.current?.requestFullscreen === 'function')
+    const sync = () => setFullscreen(document.fullscreenElement !== null && document.fullscreenElement === sectionRef.current)
+    document.addEventListener('fullscreenchange', sync)
+    return () => document.removeEventListener('fullscreenchange', sync)
+  }, [])
+  const toggleFullscreen = () => {
+    if (fullscreen) void document.exitFullscreen?.()
+    else void sectionRef.current?.requestFullscreen?.()
+  }
 
   // The theme is only known after mount (it lives in storage), so the iframe is created then, with the right
   // theme in its URL from the first request. Later changes travel as messages: the src never changes.
@@ -51,20 +67,22 @@ export function ChartLabEmbed() {
   }, [state, resolved, lang])
 
   return (
-    <section aria-label={t.title} className="bg-bg">
+    <section ref={sectionRef} aria-label={t.title} className="bg-bg [&:fullscreen]:flex [&:fullscreen]:flex-col">
       <div className="mx-auto flex h-12 max-w-[120rem] items-center justify-between gap-4 border-b border-border px-4 sm:px-6">
         <h1 className="text-sm font-semibold tracking-tight">{t.title}</h1>
         <div className="flex items-center gap-4 text-xs">
           <a href="https://velacharts.dev" target="_blank" rel="noopener noreferrer" className="text-muted underline-offset-4 hover:text-fg hover:underline">
             {t.credit}
           </a>
-          <a href={openUrl} target="_blank" rel="noopener noreferrer" className="font-semibold text-accent underline-offset-4 hover:underline">
-            {t.openNewTab}
-          </a>
+          {canFullscreen && (
+            <button type="button" onClick={toggleFullscreen} className="font-semibold text-accent underline-offset-4 hover:underline">
+              {fullscreen ? t.exitFullscreen : t.fullscreen}
+            </button>
+          )}
         </div>
       </div>
 
-      <div className="relative h-[calc(100svh-4rem-3rem)] min-h-[560px] bg-surface">
+      <div className="relative h-[calc(100svh-4rem-3rem)] min-h-[560px] bg-surface [section:fullscreen_&]:h-auto [section:fullscreen_&]:min-h-0 [section:fullscreen_&]:flex-1">
         {src !== null && (
           <iframe ref={frameRef} src={src} title={t.title} allow="fullscreen" className="absolute inset-0 h-full w-full border-0" />
         )}

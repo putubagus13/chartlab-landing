@@ -240,6 +240,8 @@ export const siteId: SiteContent = {
     loading: "Memuat ChartLab…",
     fallback: "ChartLab belum bisa dimuat di halaman ini. Buka di tab baru untuk memakainya langsung.",
     openNewTab: "Buka di tab baru",
+    fullscreen: "Layar penuh",
+    exitFullscreen: "Keluar layar penuh",
     credit: "Chart oleh Vela (LuxAlgo)",
   },
   footer: { note: "© Disatu. Konten edukasi, bukan saran keuangan." },

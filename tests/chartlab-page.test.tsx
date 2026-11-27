@@ -30,7 +30,32 @@ beforeEach(() => {
 })
 afterEach(() => {
   window.matchMedia = realMatchMedia
+  removeFakeFullscreen()
 })
+
+/** jsdom has no Fullscreen API: stand one in, and let a test say which element is full screen. */
+function fakeFullscreen(supported = true) {
+  let current: Element | null = null
+  const request = vi.fn(function (this: Element) {
+    current = this
+    document.dispatchEvent(new Event('fullscreenchange'))
+    return Promise.resolve()
+  })
+  const exit = vi.fn(() => {
+    current = null
+    document.dispatchEvent(new Event('fullscreenchange'))
+    return Promise.resolve()
+  })
+  Object.defineProperty(document, 'fullscreenEnabled', { configurable: true, get: () => supported })
+  Object.defineProperty(document, 'fullscreenElement', { configurable: true, get: () => current })
+  Object.defineProperty(document, 'exitFullscreen', { configurable: true, value: exit })
+  Object.defineProperty(HTMLElement.prototype, 'requestFullscreen', { configurable: true, value: request })
+  return { request, exit }
+}
+function removeFakeFullscreen() {
+  for (const k of ['fullscreenEnabled', 'fullscreenElement', 'exitFullscreen']) Reflect.deleteProperty(document, k)
+  Reflect.deleteProperty(HTMLElement.prototype, 'requestFullscreen')
+}
 
 async function openPage(path: string) {
   const ctx = await renderWithRouter(path)
@@ -68,18 +93,11 @@ describe.each(LANGS)('/%s/chartlab', (lang) => {
     expect(new URL(frame.getAttribute('src')!).searchParams.get('theme')).toBe('dark')
   })
 
-  it('always offers the app in its own tab and credits Vela', async () => {
+  it('credits Vela, and offers no "new tab" link while the app is running: two copies would overwrite each other\'s saved data', async () => {
+    fakeFullscreen()
     await openPage(`/${lang}/chartlab`)
     const main = screen.getByRole('main')
-    const tab = within(main).getByRole('link', { name: c.openNewTab })
-    // the standalone app opens in the language and theme the visitor already has, and is not in embed mode
-    const href = new URL(tab.getAttribute('href')!)
-    expect(href.origin).toBe(APP_ORIGIN)
-    expect(href.searchParams.get('lang')).toBe(lang)
-    expect(href.searchParams.get('theme')).toBe('light')
-    expect(href.searchParams.has('embed')).toBe(false)
-    expect(tab).toHaveAttribute('target', '_blank')
-    expect(tab.getAttribute('rel')).toContain('noopener')
+    expect(within(main).queryByRole('link', { name: c.openNewTab })).toBeNull()
     const credit = within(main).getByRole('link', { name: new RegExp(c.credit.replace(/[()]/g, '\\$&')) })
     expect(credit).toHaveAttribute('href', 'https://velacharts.dev')
     expect(c.credit).toMatch(/Vela/)
@@ -92,6 +110,47 @@ describe.each(LANGS)('/%s/chartlab', (lang) => {
       expect(hrefs).toEqual(expect.arrayContaining([`id=${SITE_URL}/id/chartlab`, `en=${SITE_URL}/en/chartlab`, `x-default=${SITE_URL}/id/chartlab`]))
       expect(document.querySelector('link[rel="canonical"]')?.getAttribute('href')).toBe(`${SITE_URL}/${lang}/chartlab`)
     })
+  })
+})
+
+describe('full screen', () => {
+  it('puts the whole page section, header included, in full screen, so the way out and the Vela credit stay on screen', async () => {
+    const { request, exit } = fakeFullscreen()
+    const { frame } = await openPage('/en/chartlab')
+    const c = getContent('en').chartlabPage
+    const section = frame.closest('section')!
+    fireEvent.click(await screen.findByRole('button', { name: c.fullscreen }))
+    expect(request).toHaveBeenCalledTimes(1)
+    expect(request.mock.contexts[0]).toBe(section)
+    expect(section.contains(screen.getByRole('button', { name: c.exitFullscreen }))).toBe(true)
+    expect(within(section).getByRole('link', { name: new RegExp(c.credit.replace(/[()]/g, '\\$&')) })).toBeInTheDocument()
+    // the same button now leaves full screen
+    fireEvent.click(await screen.findByRole('button', { name: c.exitFullscreen }))
+    expect(exit).toHaveBeenCalledTimes(1)
+    expect(await screen.findByRole('button', { name: c.fullscreen })).toBeInTheDocument()
+  })
+
+  it('follows the browser: leaving with Esc puts the label back', async () => {
+    const { request } = fakeFullscreen()
+    const { frame } = await openPage('/id/chartlab')
+    const c = getContent('id').chartlabPage
+    fireEvent.click(await screen.findByRole('button', { name: c.fullscreen }))
+    expect(request).toHaveBeenCalled()
+    await screen.findByRole('button', { name: c.exitFullscreen })
+    act(() => {
+      Reflect.deleteProperty(document, 'fullscreenElement') // the browser left full screen by itself
+      Object.defineProperty(document, 'fullscreenElement', { configurable: true, get: () => null })
+      document.dispatchEvent(new Event('fullscreenchange'))
+    })
+    expect(await screen.findByRole('button', { name: c.fullscreen })).toBeInTheDocument()
+    expect(frame).toBeInTheDocument()
+  })
+
+  it('shows no button where the browser cannot do it (some phones), rather than one that does nothing', async () => {
+    fakeFullscreen(false)
+    await openPage('/en/chartlab')
+    const c = getContent('en').chartlabPage
+    expect(screen.queryByRole('button', { name: c.fullscreen })).toBeNull()
   })
 })
 
@@ -134,9 +193,11 @@ describe('keeping the app in step with the page', () => {
     for (const call of post.mock.calls) expect(call[1]).not.toBe('*')
   })
 
-  it('keeps the "open in a new tab" link in step with the theme and language as they change', async () => {
-    await openPage('/id/chartlab')
-    const link = () => new URL(within(screen.getByRole('main')).getByRole('link', { name: getContent('id').chartlabPage.openNewTab }).getAttribute('href')!)
+  it('keeps the fallback "open in a new tab" link in step with the theme as it changes', async () => {
+    timeoutMs = 30
+    const { overlay } = await openPage('/id/chartlab')
+    await waitFor(() => expect(overlay().dataset.state).toBe('failed'))
+    const link = () => new URL(within(overlay()).getByRole('link', { name: getContent('id').chartlabPage.openNewTab }).getAttribute('href')!)
     expect(link().searchParams.get('theme')).toBe('light')
     const toggle = Array.from(document.querySelectorAll('header button')).find((b) => /theme|tema/i.test(b.getAttribute('aria-label') ?? '')) as HTMLButtonElement
     fireEvent.click(toggle)

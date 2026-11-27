@@ -73,6 +73,6 @@ export type SiteContent = {
     steps: WorkflowStep[]
   }
   offer: { title: string; subtitle: string }
-  chartlabPage: { title: string; description: string; loading: string; fallback: string; openNewTab: string; credit: string }
+  chartlabPage: { title: string; description: string; loading: string; fallback: string; openNewTab: string; fullscreen: string; exitFullscreen: string; credit: string }
   footer: { note: string }
 }

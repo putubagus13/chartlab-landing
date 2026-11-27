@@ -240,6 +240,8 @@ export const siteEn: SiteContent = {
     loading: "Loading ChartLab…",
     fallback: "ChartLab could not load on this page. Open it in a new tab to use it directly.",
     openNewTab: "Open in a new tab",
+    fullscreen: "Full screen",
+    exitFullscreen: "Exit full screen",
     credit: "Chart by Vela (LuxAlgo)",
   },
   footer: { note: "© Disatu. Educational content, not financial advice." },
